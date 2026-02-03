@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import WhySoftware from './components/WhySoftware';
+import Education from './components/Education';
 import Terminal from './components/Terminal';
 import DevMetrics from './components/DevMetrics';
 import Process from './components/Process';
@@ -22,6 +23,7 @@ const App: React.FC = () => {
       <main>
         <Hero />
         <WhySoftware />
+        <Education />
         <Terminal />
         <DevMetrics />
         <Process />
