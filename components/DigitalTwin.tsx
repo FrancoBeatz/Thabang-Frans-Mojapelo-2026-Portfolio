@@ -3,18 +3,28 @@ import React, { useState } from 'react';
 import { Bot, User, Send, BrainCircuit } from 'lucide-react';
 
 const DigitalTwin: React.FC = () => {
-  const [messages, setMessages] = useState([
-    { role: 'bot', text: "Hi! I'm Thabang's Digital Twin. Ask me something about his work or availability!" }
+  const [messages] = useState([
+    { role: 'bot', text: "Hi! I'm Thabang's Digital Twin. Ask me something about my work or availability by clicking a question below!" }
   ]);
 
   const questions = [
-    { q: "What is your main expertise?", a: "Thabang specializes in Full-Stack Web Architecture, specifically high-performance React applications with robust Node.js backends." },
-    { q: "Are you open for freelance?", a: "Yes! Thabang is currently open to high-impact projects and full-time senior roles." },
-    { q: "Tell me about your tech stack.", a: "He masters React, TypeScript, Node.js, and MongoDB, with deep experience in Supabase and cloud optimization." }
+    { 
+      q: "What is your main expertise?", 
+      msg: "Hi Thabang, I'm interested in your main expertise. Can you tell me more about your full-stack web architecture skills?" 
+    },
+    { 
+      q: "Are you open for freelance?", 
+      msg: "Hi Thabang, I have a project in mind and wanted to check if you are currently open for freelance opportunities." 
+    },
+    { 
+      q: "Tell me about your tech stack.", 
+      msg: "Hi Thabang, I'd like to know more about your tech stack (React, Node, etc.) for a potential collaboration." 
+    }
   ];
 
-  const ask = (q: string, a: string) => {
-    setMessages([...messages, { role: 'user', text: q }, { role: 'bot', text: a }]);
+  const handleAsk = (msg: string) => {
+    const encodedMsg = encodeURIComponent(msg);
+    window.open(`https://wa.me/27723481158?text=${encodedMsg}`, '_blank');
   };
 
   return (
@@ -29,15 +39,15 @@ const DigitalTwin: React.FC = () => {
               Instant Answers from my <span className="text-electric-orange">Digital Twin</span>.
             </h2>
             <p className="text-gray-400 text-lg">
-              Don't have time to wait for an email? Chat with the virtual version of Thabang to get instant insights into his process, stack, and availability.
+              Don't have time to wait for an email? Clicking these questions will connect you directly to Thabang's WhatsApp for an immediate response.
             </p>
             
             <div className="flex flex-wrap gap-3">
               {questions.map((item, idx) => (
                 <button 
                   key={idx}
-                  onClick={() => ask(item.q, item.a)}
-                  className="px-6 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-electric-orange/50 hover:bg-electric-orange/5 transition-all text-sm font-medium"
+                  onClick={() => handleAsk(item.msg)}
+                  className="px-6 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-electric-orange/50 hover:bg-electric-orange/5 transition-all text-sm font-medium text-white text-left"
                 >
                   {item.q}
                 </button>
@@ -53,7 +63,7 @@ const DigitalTwin: React.FC = () => {
                  </div>
                  <div>
                    <div className="text-white font-bold">Thabang Bot v1.0</div>
-                   <div className="text-xs text-green-500">Online & Ready to Help</div>
+                   <div className="text-xs text-green-500">Redirecting to Live Chat...</div>
                  </div>
               </div>
               
@@ -68,7 +78,7 @@ const DigitalTwin: React.FC = () => {
               </div>
               
               <div className="p-6 border-t border-white/5 flex gap-4">
-                <input type="text" readOnly placeholder="Select a question above..." className="flex-1 bg-white/5 rounded-xl px-6 py-3 border border-white/5 text-gray-500 cursor-not-allowed outline-none" />
+                <input type="text" readOnly placeholder="Click a question to chat..." className="flex-1 bg-white/5 rounded-xl px-6 py-3 border border-white/5 text-gray-500 cursor-not-allowed outline-none" />
                 <button className="w-12 h-12 rounded-xl bg-electric-orange flex items-center justify-center text-white cursor-not-allowed opacity-50">
                   <Send size={20} />
                 </button>
