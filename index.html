@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thabang Frans Mojapelo | Pro Software Developer</title>
+    <script>
+      // Polyfill 'process' for browser environment to support SDK environment variable access
+      window.process = window.process || { env: {} };
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,7 +54,6 @@
         font-family: 'Inter', sans-serif;
         overflow-x: hidden;
       }
-      /* Fix for fixed header overlapping sections */
       [id] {
         scroll-margin-top: 100px;
       }

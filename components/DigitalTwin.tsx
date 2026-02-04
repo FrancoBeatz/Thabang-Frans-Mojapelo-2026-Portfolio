@@ -53,18 +53,27 @@ const DigitalTwin: React.FC = () => {
     const query = customMsg || input;
     if (!query.trim() || isTyping) return;
 
+    if (!process.env.API_KEY) {
+      setMessages(prev => [...prev, { role: 'user', text: query }, { role: 'bot', text: "Engineering Error: API configuration missing. Please ensure the API_KEY environment variable is set in the Netlify dashboard." }]);
+      setInput('');
+      return;
+    }
+
     const userMessage: Message = { role: 'user', text: query };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsTyping(true);
 
     try {
-      // Use the environment variable directly as per standard SDK practices
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      const chatHistory = messages.map(m => ({
-        role: m.role === 'user' ? 'user' : 'model',
-        parts: [{ text: m.text }]
-      }));
+      
+      // Filter out the initial bot greeting for the first API call to ensure valid role sequence (user must start)
+      const chatHistory = messages
+        .filter((_, idx) => idx > 0 || messages[0].role === 'user') 
+        .map(m => ({
+          role: m.role === 'user' ? 'user' : 'model',
+          parts: [{ text: m.text }]
+        }));
 
       const streamResponse = await ai.models.generateContentStream({
         model: 'gemini-3-flash-preview',
@@ -95,13 +104,13 @@ const DigitalTwin: React.FC = () => {
       setMessages(prev => {
         const newMessages = [...prev];
         const lastIndex = newMessages.length - 1;
-        newMessages[lastIndex] = { role: 'bot', text: fullResponse || "I processed your request, but let me know if you need more details on my specific projects.", isStreaming: false };
+        newMessages[lastIndex] = { role: 'bot', text: fullResponse || "Understood. Is there anything else about my architecture or projects you'd like to dive into?", isStreaming: false };
         return newMessages;
       });
 
     } catch (error) {
       console.error("AI Error:", error);
-      setMessages(prev => [...prev, { role: 'bot', text: "I'm experiencing a high volume of requests. Please contact Thabang directly via WhatsApp for a priority engineering consultation." }]);
+      setMessages(prev => [...prev, { role: 'bot', text: "My neural link is currently unstable. Please reach out to Thabang directly via WhatsApp for urgent technical consultation." }]);
     } finally {
       setIsTyping(false);
     }
@@ -143,7 +152,7 @@ const DigitalTwin: React.FC = () => {
                       <div className="text-[10px] text-electric-orange font-mono uppercase">Online</div>
                     </div>
                  </div>
-                 <button onClick={clearChat} className="p-3 text-gray-500 hover:text-red-400 transition-all">
+                 <button onClick={clearChat} className="p-3 text-gray-500 hover:text-red-400 transition-all" aria-label="Clear chat">
                    <Trash2 size={20} />
                  </button>
               </div>
@@ -165,6 +174,13 @@ const DigitalTwin: React.FC = () => {
                     </div>
                   </div>
                 ))}
+                {isTyping && (
+                  <div className="flex justify-start">
+                    <div className="flex items-center gap-2 text-gray-500 text-xs font-mono animate-pulse">
+                      <Terminal size={12} /> Architect is thinking...
+                    </div>
+                  </div>
+                )}
               </div>
               
               <div className="p-8 border-t border-white/5 bg-black/20">
@@ -174,9 +190,9 @@ const DigitalTwin: React.FC = () => {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     placeholder="Ask about my projects..." 
-                    className="w-full bg-white/[0.05] rounded-2xl pl-6 pr-16 py-5 border border-white/10 text-white focus:border-electric-orange outline-none"
+                    className="w-full bg-white/[0.05] rounded-2xl pl-6 pr-16 py-5 border border-white/10 text-white focus:border-electric-orange outline-none transition-all"
                   />
-                  <button type="submit" className="absolute right-3 top-3 w-12 h-12 rounded-xl bg-electric-orange text-white flex items-center justify-center">
+                  <button type="submit" className="absolute right-3 top-3 w-12 h-12 rounded-xl bg-electric-orange text-white flex items-center justify-center hover:bg-orange-600 transition-colors shadow-lg shadow-electric-orange/20">
                     <Send size={20} />
                   </button>
                 </form>
