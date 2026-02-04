@@ -2,6 +2,7 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import About from './components/About';
 import WhySoftware from './components/WhySoftware';
 import Education from './components/Education';
 import Terminal from './components/Terminal';
@@ -22,6 +23,8 @@ const App: React.FC = () => {
       <Navbar />
       <main>
         <Hero />
+        {/* Section ID: #about */}
+        <About />
         <WhySoftware />
         <Education />
         <Terminal />
@@ -30,8 +33,11 @@ const App: React.FC = () => {
         <WhatIBuild />
         <DigitalTwin />
         <Philosophy />
+        {/* Section ID: #skills */}
         <Skills />
+        {/* Section ID: #projects */}
         <Projects />
+        {/* Section ID: #testimonials */}
         <Testimonials />
         
         {/* Strong CTA Section */}
@@ -63,6 +69,7 @@ const App: React.FC = () => {
           </div>
         </section>
 
+        {/* Section ID: #contact */}
         <Contact />
       </main>
       <Footer />

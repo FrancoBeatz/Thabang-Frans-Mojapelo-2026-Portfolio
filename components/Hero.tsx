@@ -4,7 +4,7 @@ import { ChevronRight, Sparkles } from 'lucide-react';
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative min-h-screen flex items-center pt-16 lg:pt-20 overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center pt-16 lg:pt-20 overflow-hidden">
       {/* Background elements */}
       <div className="absolute top-[10%] right-[-5%] -z-10 w-[50%] h-[50%] bg-electric-orange/10 blur-[150px] rounded-full animate-pulse-slow"></div>
       <div className="absolute bottom-[10%] left-[-5%] -z-10 w-[30%] h-[40%] bg-white/5 blur-[120px] rounded-full"></div>
@@ -38,8 +38,8 @@ const Hero: React.FC = () => {
             </a>
             <a 
               href="https://wa.me/27723481158" 
-              target="_blank"
-              rel="noopener noreferrer"
+              target="_blank" 
+              rel="noopener noreferrer" 
               className="flex items-center justify-center px-8 py-4 bg-transparent border border-white/10 text-white font-bold rounded-xl hover:border-electric-orange hover:text-electric-orange transition-all duration-300 backdrop-blur-sm"
             >
               📩 Hire Me

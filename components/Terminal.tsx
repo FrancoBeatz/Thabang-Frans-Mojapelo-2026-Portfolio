@@ -16,7 +16,7 @@ const Terminal: React.FC = () => {
     bio: "Pro Software Developer with 6+ years experience. Expert in turning coffee into scalable systems.",
     stack: "Frontend: React, Next.js. Backend: Node, Express, MongoDB, Supabase. Tools: Git, CI/CD.",
     values: "1. Performance is not a feature, it's a requirement. 2. Scalability over complexity. 3. Clean code saves lives.",
-    contact: "Email: thabang@mojapelo.dev | WhatsApp: +27 72 348 1158 | GitHub: FrancoBeatz"
+    contact: "Email: mojapelot2@gmail.com | WhatsApp: 0723481158 | GitHub: FrancoBeatz"
   };
 
   const handleCommand = (e: React.FormEvent) => {

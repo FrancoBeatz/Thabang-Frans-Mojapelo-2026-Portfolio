@@ -12,7 +12,7 @@ const categories = [
 
 const WhatIBuild: React.FC = () => {
   return (
-    <section className="py-32 bg-[#080808]">
+    <section id="services" className="py-32 bg-[#080808]">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row gap-12 mb-20">
           <div className="lg:w-1/3">

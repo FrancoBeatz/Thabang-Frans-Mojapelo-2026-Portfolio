@@ -31,10 +31,7 @@ const About: React.FC = () => {
                 I’m <span className="text-white font-medium">Thabang Frans Mojapelo</span>, a Pro Software Developer with 6 years of real-world experience turning complex ideas into smooth, reliable digital products.
               </p>
               <p>
-                I write clean code, fix messy code, and occasionally argue with bugs — and I always win (eventually).
-              </p>
-              <p>
-                I specialize in building modern web applications that are fast, secure, and scalable. If it loads fast, looks clean, and just works… yeah, I probably built it.
+                I specializes in building modern web applications that are fast, secure, and scalable. If it loads fast, looks clean, and just works… yeah, I probably built it.
               </p>
             </div>
 
@@ -65,12 +62,6 @@ const About: React.FC = () => {
                 </div>
               </div>
             ))}
-            
-            <div className="sm:col-span-2 p-8 rounded-2xl border border-dashed border-white/10 bg-transparent flex items-center justify-center">
-                <p className="text-gray-500 italic text-center">
-                  "Thabang doesn't just code — he thinks."
-                </p>
-            </div>
           </div>
         </div>
       </div>
