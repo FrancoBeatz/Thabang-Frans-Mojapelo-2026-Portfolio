@@ -6,6 +6,14 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const navLinks = [
+    { name: 'Home', href: '#home' },
+    { name: 'About', href: '#about' },
+    { name: 'Services', href: '#services' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Contact', href: '#contact' },
+  ];
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -27,8 +35,19 @@ const Navbar: React.FC = () => {
           THABANG<span className="text-electric-orange transition-all duration-300 group-hover:tracking-normal">.DEV</span>
         </a>
 
-        {/* Desktop CTA only for a premium, focused experience */}
-        <div className="hidden md:flex items-center">
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-10">
+          <div className="flex gap-8">
+            {navLinks.map((link) => (
+              <a 
+                key={link.name}
+                href={link.href}
+                className="text-[10px] uppercase tracking-[0.3em] font-black text-gray-400 hover:text-electric-orange transition-colors"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
           <a 
             href="https://wa.me/27723481158" 
             target="_blank"
@@ -39,7 +58,7 @@ const Navbar: React.FC = () => {
           </a>
         </div>
 
-        {/* Mobile Toggle - Kept for accessibility and potential future utility */}
+        {/* Mobile Toggle */}
         <button 
           className="md:hidden text-white p-2 hover:bg-white/5 rounded-lg transition-colors z-[110] outline-none" 
           onClick={() => setIsOpen(!isOpen)}
@@ -51,12 +70,22 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu Overlay */}
       <div className={`md:hidden fixed inset-0 bg-dark-bg/98 backdrop-blur-2xl transition-all duration-500 z-[105] ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'}`}>
-        <div className="flex flex-col items-center justify-center h-full space-y-8 px-6">
-           <a 
+        <div className="flex flex-col items-center justify-center h-full space-y-10 px-6">
+          {navLinks.map((link) => (
+            <a 
+              key={link.name}
+              href={link.href}
+              onClick={closeMenu}
+              className="text-4xl font-display font-bold text-white hover:text-electric-orange transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
+          <a 
             href="https://wa.me/27723481158" 
             target="_blank"
             rel="noopener noreferrer"
-            className="px-12 py-5 bg-electric-orange text-white font-bold rounded-2xl text-xl text-center orange-glow focus:ring-2 focus:ring-electric-orange outline-none block transform active:scale-95 transition-transform"
+            className="w-full px-12 py-5 bg-electric-orange text-white font-bold rounded-2xl text-xl text-center orange-glow focus:ring-2 focus:ring-electric-orange outline-none block transform active:scale-95 transition-transform"
             onClick={closeMenu}
           >
             Hire Me

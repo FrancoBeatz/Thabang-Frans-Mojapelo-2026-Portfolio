@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thabang Frans Mojapelo | Pro Software Developer</title>
+    <title>Thabang Frans Mojapelo | Pro Software Developer & Architect</title>
+    <meta name="description" content="Professional portfolio of Thabang Frans Mojapelo. Expert in high-performance React architectures, Node.js systems, and enterprise-grade software engineering.">
     <script>
-      // Polyfill 'process' for browser environment to support SDK environment variable access
+      // Polyfill 'process' for browser environment
       window.process = window.process || { env: {} };
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -97,9 +98,6 @@
         width: 0%;
         transition: width 0.1s ease-out;
       }
-      .mask-radial {
-        mask-image: radial-gradient(circle, black, transparent 80%);
-      }
     </style>
 <script type="importmap">
 {
@@ -118,6 +116,8 @@
 <body>
     <div id="scroll-progress"></div>
     <div id="root"></div>
+    <!-- Entry point for the application -->
+    <script type="module" src="index.tsx"></script>
     <script>
       window.addEventListener('scroll', () => {
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;

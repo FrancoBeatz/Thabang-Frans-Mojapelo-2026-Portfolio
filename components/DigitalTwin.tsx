@@ -27,38 +27,33 @@ const DigitalTwin: React.FC = () => {
   }, [messages, isTyping]);
 
   const portfolioContext = `
-    You are Thabang Frans Mojapelo's Digital Twin, a world-class software architect.
+    You are Thabang Frans Mojapelo's Digital Twin, a world-class senior software architect.
     CONTEXT:
     - Name: Thabang Frans Mojapelo
-    - Role: Pro Software Developer / Software Architect.
-    - Experience: 6+ years in full-stack engineering.
+    - Role: Pro Software Developer / Lead Systems Architect.
+    - Experience: 6+ years in high-performance full-stack engineering.
     - Tech Stack: React, TypeScript, Node.js, Express, MongoDB, Supabase, Socket.io, Tailwind CSS, Canvas API.
-    - Primary Projects: 
+    - Key Projects: 
         1. Galaxy Defender: High-performance space shooter built with pure Canvas API (60FPS).
         2. Nexus Chat Live: Real-time messaging suite using Socket.io and Redis-like state management.
         3. Child Care Africa: Social impact portal optimized for performance (99/100 score).
         4. Kolas Supply Chain: Cloud-based inventory management dashboard.
-    - Philosophy: Performance is a requirement, not a feature. Clean code over complexity.
+        5. Mkhonto Global: Enterprise human capital consultancy hub.
+    - Philosophy: Performance is a hard requirement. Clean code saves lives. Scalability over complexity.
     - Contact: mojapelot2@gmail.com, 0723481158.
     
     GUIDELINES:
-    - Be professional, concise, and highly technical.
-    - Use code blocks for technical explanations.
-    - If asked about availability, provide his contact details.
-    - Use formatting like bold text for clarity.
+    - Maintain a professional, concise, and highly technical tone.
+    - When asked about technical details, use markdown for code snippets.
+    - If asked for availability, redirect to Thabang's WhatsApp (+27723481158).
+    - Always highlight 'Problem-Solution' narratives when discussing projects.
   `;
 
-  const handleSendMessage = async (e?: React.FormEvent, customMsg?: string) => {
+  const handleSendMessage = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    const query = customMsg || input;
-    if (!query.trim() || isTyping) return;
+    if (!input.trim() || isTyping) return;
 
-    if (!process.env.API_KEY) {
-      setMessages(prev => [...prev, { role: 'user', text: query }, { role: 'bot', text: "Engineering Error: API configuration missing. Please ensure the API_KEY environment variable is set in the Netlify dashboard." }]);
-      setInput('');
-      return;
-    }
-
+    const query = input;
     const userMessage: Message = { role: 'user', text: query };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
@@ -67,7 +62,6 @@ const DigitalTwin: React.FC = () => {
     try {
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       
-      // Filter out the initial bot greeting for the first API call to ensure valid role sequence (user must start)
       const chatHistory = messages
         .filter((_, idx) => idx > 0 || messages[0].role === 'user') 
         .map(m => ({
@@ -104,20 +98,20 @@ const DigitalTwin: React.FC = () => {
       setMessages(prev => {
         const newMessages = [...prev];
         const lastIndex = newMessages.length - 1;
-        newMessages[lastIndex] = { role: 'bot', text: fullResponse || "Understood. Is there anything else about my architecture or projects you'd like to dive into?", isStreaming: false };
+        newMessages[lastIndex] = { role: 'bot', text: fullResponse || "Engineering logic complete. Ready for next query.", isStreaming: false };
         return newMessages;
       });
 
     } catch (error) {
       console.error("AI Error:", error);
-      setMessages(prev => [...prev, { role: 'bot', text: "My neural link is currently unstable. Please reach out to Thabang directly via WhatsApp for urgent technical consultation." }]);
+      setMessages(prev => [...prev, { role: 'bot', text: "System Interrupt: Neural link currently unavailable. Please reach out to Thabang directly via WhatsApp for urgent consultation." }]);
     } finally {
       setIsTyping(false);
     }
   };
 
   const clearChat = () => {
-    setMessages([{ role: 'bot', text: "History cleared. Systems reset. How can I help you build today?" }]);
+    setMessages([{ role: 'bot', text: "History purged. System environment reset. How can I help you architect your next solution?" }]);
   };
 
   return (
@@ -129,13 +123,13 @@ const DigitalTwin: React.FC = () => {
           <div className="lg:w-1/2 space-y-10 flex flex-col justify-center">
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-electric-orange/10 border border-electric-orange/20 rounded-full text-electric-orange text-xs font-bold uppercase tracking-widest">
-                <BrainCircuit size={14} className="animate-pulse" /> Live Neural Network
+                <BrainCircuit size={14} className="animate-pulse" /> Neural Proxy
               </div>
               <h2 className="text-6xl md:text-7xl font-display font-bold leading-tight text-white">
-                The <span className="text-electric-orange">Digital</span> Architect.
+                The <span className="text-electric-orange">Digital</span> Twin.
               </h2>
               <p className="text-gray-400 text-xl leading-relaxed max-w-lg">
-                I've trained this AI on my exact engineering methodologies. It can explain my code choices, project architectures, and business logic in real-time.
+                Query my engineering logic in real-time. This AI is trained on my specific architectural patterns, codebase philosophies, and professional project history.
               </p>
             </div>
           </div>
@@ -148,8 +142,8 @@ const DigitalTwin: React.FC = () => {
                       <Bot className="text-white" size={24} />
                     </div>
                     <div>
-                      <div className="text-white font-bold text-lg">Thabang.AI</div>
-                      <div className="text-[10px] text-electric-orange font-mono uppercase">Online</div>
+                      <div className="text-white font-bold text-lg">Thabang_Twin.OS</div>
+                      <div className="text-[10px] text-electric-orange font-mono uppercase">Neural Stream Active</div>
                     </div>
                  </div>
                  <button onClick={clearChat} className="p-3 text-gray-500 hover:text-red-400 transition-all" aria-label="Clear chat">
@@ -166,7 +160,7 @@ const DigitalTwin: React.FC = () => {
                       </div>
                       <div className={`p-5 rounded-2xl text-sm leading-relaxed ${
                         m.role === 'user' 
-                          ? 'bg-white text-black font-semibold rounded-tr-none' 
+                          ? 'bg-white text-black font-semibold rounded-tr-none shadow-xl' 
                           : 'bg-white/[0.03] text-gray-200 border border-white/5 rounded-tl-none whitespace-pre-wrap'
                       }`}>
                         {m.text}
@@ -177,7 +171,7 @@ const DigitalTwin: React.FC = () => {
                 {isTyping && (
                   <div className="flex justify-start">
                     <div className="flex items-center gap-2 text-gray-500 text-xs font-mono animate-pulse">
-                      <Terminal size={12} /> Architect is thinking...
+                      <Terminal size={12} /> Syncing neural weights...
                     </div>
                   </div>
                 )}
@@ -189,7 +183,7 @@ const DigitalTwin: React.FC = () => {
                     type="text" 
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    placeholder="Ask about my projects..." 
+                    placeholder="Ask about my architecture choices..." 
                     className="w-full bg-white/[0.05] rounded-2xl pl-6 pr-16 py-5 border border-white/10 text-white focus:border-electric-orange outline-none transition-all"
                   />
                   <button type="submit" className="absolute right-3 top-3 w-12 h-12 rounded-xl bg-electric-orange text-white flex items-center justify-center hover:bg-orange-600 transition-colors shadow-lg shadow-electric-orange/20">

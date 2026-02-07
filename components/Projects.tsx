@@ -80,20 +80,20 @@ const Projects: React.FC = () => {
   const architectures: Project[] = [
     {
       title: "SyncFlow Data Engine",
-      problem: "Enterprise workflows were crippled by 'Latent Fragmentation'—where data synchronization between legacy SQL databases and modern cloud interfaces took upwards of 5 seconds.",
-      solution: "Engineered a high-performance event-driven orchestration layer. It utilizes an atomic state management system and asynchronous worker threads to reduce data latency to sub-100ms.",
-      description: "A professional-grade real-time data engine providing millisecond consistency for high-throughput business logic.",
+      problem: "Enterprise environments suffered from 'Data Latency Fragmentation' where synchronization between legacy SQL cores and modern interfaces took 5s+.",
+      solution: "Engineered a high-performance event-driven orchestration layer using atomic state management and async worker threads, slashing latency to sub-100ms.",
+      description: "A professional-grade real-time engine providing absolute data consistency for mission-critical business logic.",
       image: "https://i.ibb.co/zW2mkhYw/localhost-3000.png",
-      tech: ["React", "TypeScript", "Worker Threads", "Orchestration"],
+      tech: ["React", "TypeScript", "Worker Threads", "Data Orchestration"],
       perf: 100,
       liveLink: "https://syncflow-data.netlify.app/",
       githubLink: "https://github.com/FrancoBeatz"
     },
     {
       title: "Galaxy Defender: Canvas Engine",
-      problem: "Traditional browser games hit severe performance bottlenecks due to DOM manipulation overhead, causing frame drops below 30FPS on standard mobile hardware.",
-      solution: "Developed a custom graphics pipeline from the ground up using the HTML5 Canvas API and mathematical vector logic, bypassing the DOM entirely to lock at a consistent 60FPS.",
-      description: "A math-intensive arcade engine that serves as a benchmark for high-performance browser rendering.",
+      problem: "Standard browser rendering engines hit severe DOM bottlenecks during high-density object tracking, causing fatal frame drops on mobile hardware.",
+      solution: "Architected a custom graphics pipeline from zero using HTML5 Canvas and vector physics, bypassing the DOM entirely to lock a fluid 60FPS across all devices.",
+      description: "A high-octane math-intensive arcade engine that serves as a performance benchmark for browser-based systems.",
       image: "https://i.ibb.co/qF2wKHgh/2.jpg",
       tech: ["Canvas API", "Vector Physics", "OOP Architecture"],
       perf: 100,
@@ -105,9 +105,9 @@ const Projects: React.FC = () => {
   const websites: Project[] = [
     {
       title: "Mkhonto Global Capital",
-      problem: "A major human capital firm lacked a scalable digital interface to manage high-level executive consultancy and recruitment at an enterprise level.",
-      solution: "Architected a secure, high-conversion recruitment portal featuring complex filtering logic, optimized SEO headers, and a lightning-fast responsive UI.",
-      description: "A premium corporate portal designed for high-end human capital consultancy and business management.",
+      problem: "A premier human capital firm required a high-performance digital hub capable of managing executive-level consultancy and global recruitment visibility.",
+      solution: "Developed a secure, optimized enterprise portal with advanced filtering logic, deep-linked SEO headers, and a rapid-response responsive UI.",
+      description: "A premium corporate portal designed for world-class human capital consultancy and business management.",
       image: "https://i.ibb.co/8grqP05h/Capture.jpg",
       tech: ["Enterprise UI", "Business Logic", "Next-Gen UX"],
       perf: 100,
@@ -116,9 +116,9 @@ const Projects: React.FC = () => {
     },
     {
       title: "Kolas Supply Chain",
-      problem: "Global logistics visibility was obscured by siloed data sources, making real-time inventory tracking impossible for warehouse operators.",
-      solution: "Built a cloud-native supply chain dashboard that aggregates disparate data streams into a single source of truth with real-time analytics and predictive alerts.",
-      description: "Industrial-grade supply chain interface providing deep operational visibility across multiple logistics nodes.",
+      problem: "Logistics visibility was blinded by disparate, siloed data sources, making real-time inventory tracking impossible for warehouse operators.",
+      solution: "Built a cloud-native logistics dashboard that aggregates fragmented data into a single source of truth with real-time predictive analytics.",
+      description: "Industrial-grade supply chain interface providing deep operational visibility across multiple international logistics nodes.",
       image: "https://i.ibb.co/pB6LDjZh/1.jpg",
       tech: ["Cloud Data", "Node.js", "Predictive Analytics"],
       perf: 98,
@@ -127,9 +127,9 @@ const Projects: React.FC = () => {
     },
     {
       title: "Child Care Africa",
-      problem: "Social impact initiatives often fail due to poor digital accessibility in low-bandwidth regions of Africa, resulting in a 70% bounce rate on legacy platforms.",
-      solution: "Implemented a 'Performance-First' architecture, optimizing asset delivery and reducing initial bundle sizes by 60% to ensure 99/100 performance scores even on 3G networks.",
-      description: "A social impact portal engineered for maximum digital accessibility and high-bandwidth efficiency.",
+      problem: "Social initiatives in low-bandwidth regions failed due to poor digital accessibility, resulting in a 70% bounce rate on legacy donation platforms.",
+      solution: "Engineered a 'Performance-First' architecture, optimizing asset delivery and bundle sizes to ensure 99/100 performance scores on 3G networks.",
+      description: "A social impact portal built for maximum accessibility and high-bandwidth efficiency across the continent.",
       image: "https://i.ibb.co/7dM7xMWX/child-care-africa-netlify-app.png",
       tech: ["Perf Optimization", "Mobile-First", "Impact Design"],
       perf: 99,
@@ -154,7 +154,7 @@ const Projects: React.FC = () => {
                </h3>
             </div>
             <p className="text-gray-500 max-w-sm text-lg leading-relaxed text-right md:text-left">
-              Advanced logic builds that solve high-complexity technical problems.
+              Advanced logic builds that solve high-complexity technical bottlenecks for modern business.
             </p>
           </div>
           <div className="grid lg:grid-cols-2 gap-12">
@@ -169,14 +169,14 @@ const Projects: React.FC = () => {
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
             <div className="space-y-4 text-right md:text-left w-full md:w-auto">
                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/20 bg-blue-500/5 text-[10px] font-black text-blue-400 uppercase tracking-[0.2em]">
-                 Strategic Enterprise Solutions
+                 Strategic Business Hubs
                </div>
                <h3 className="text-5xl md:text-7xl font-display font-bold leading-tight">
                  Production <span className="text-white">Portals</span>
                </h3>
             </div>
             <p className="text-gray-400 max-w-sm text-lg leading-relaxed text-right md:text-left">
-              Scalable, high-conversion platforms engineered for professional enterprise standards.
+              Scalable, high-conversion platforms engineered for professional enterprise growth.
             </p>
           </div>
           <div className="grid lg:grid-cols-3 gap-12">
