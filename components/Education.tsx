@@ -1,86 +1,74 @@
 
 import React from 'react';
-import { GraduationCap, BookOpen, Award, Zap } from 'lucide-react';
+import { GraduationCap, BookOpen, Award, ShieldCheck, Milestone, Cpu, Database } from 'lucide-react';
 
 const Education: React.FC = () => {
   const academicItems = [
     {
-      title: "Foundational Logic",
-      description: "Mastering the mathematical principles and algorithmic thinking that separate great engineers from average ones.",
-      icon: <BookOpen size={24} />,
-      year: "The Beginning"
+      title: "Advanced Software Engineering",
+      description: "Comprehensive mastery of algorithmic complexity and high-performance computing. Focused on building unbreakable logic for mission-critical enterprise systems.",
+      icon: <Cpu size={24} />,
+      year: "Logic Core"
     },
     {
-      title: "Full-Stack Specialization",
-      description: "Intensive training in modern architectural patterns, distributed systems, and real-time data handling.",
-      icon: <GraduationCap size={24} />,
-      year: "The Build"
+      title: "Systems Architecture & Design",
+      description: "Specialized focus on distributed cloud-native orchestration and scalability patterns. Designing architectures capable of supporting millions of concurrent operations.",
+      icon: <Database size={24} />,
+      year: "Architectural Lead"
     }
   ];
 
   return (
     <section id="education" className="py-32 bg-dark-bg relative overflow-hidden">
-      {/* Visual Decoration */}
-      <div className="absolute -top-24 -right-24 w-96 h-96 bg-electric-orange/10 blur-[120px] rounded-full"></div>
+      {/* Dynamic Background elements */}
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-electric-orange/10 blur-[150px] rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+      <div className="absolute top-1/2 right-0 w-96 h-96 bg-blue-600/10 blur-[150px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
       
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid lg:grid-cols-[1fr_1.5fr_1fr] gap-12 items-center">
           
-          {/* Creative Image Side */}
-          <div className="lg:w-1/2 relative group">
-            <div className="absolute inset-0 bg-electric-orange/20 blur-[60px] rounded-full scale-75 group-hover:scale-100 transition-transform duration-700"></div>
-            
-            <div className="relative rounded-[3rem] overflow-hidden border border-white/10 orange-glow transition-all duration-700 hover:rotate-2">
+          {/* Left Column: Image 1 */}
+          <div className="hidden lg:block group">
+            <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl transition-all duration-700 group-hover:-translate-x-2 group-hover:rotate-[-1deg]">
               <img 
-                src="https://i.ibb.co/VYz1WK9s/9a9db522-37fe-4342-a3c7-13e6fbdb611d.png" 
-                alt="Thabang Professional Setup" 
-                className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                src="https://i.ibb.co/KxfPj1hJ/9a9db522-37fe-4342-a3c7-13e6fbdb611d.png" 
+                alt="Theoretical Engineering Excellence" 
+                className="w-full h-auto object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
-              
-              <div className="absolute bottom-8 left-8 right-8 p-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl">
-                 <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-electric-orange rounded-xl flex items-center justify-center text-white shadow-lg">
-                      <Award size={24} />
-                    </div>
-                    <div>
-                      <p className="text-white font-bold">Always Learning</p>
-                      <p className="text-xs text-gray-400">Education is a continuous sprint, not a destination.</p>
-                    </div>
-                 </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
+              <div className="absolute bottom-6 left-6 p-4 bg-black/40 backdrop-blur-md rounded-2xl border border-white/5">
+                <Milestone className="text-electric-orange mb-2" size={20} />
+                <p className="text-[10px] font-black text-white uppercase tracking-widest">Theoretical Base</p>
               </div>
-            </div>
-            
-            {/* Floating Decorative Elements */}
-            <div className="absolute -top-6 -left-6 p-4 bg-dark-bg border border-white/10 rounded-2xl animate-float">
-               <Zap className="text-electric-orange" size={24} />
             </div>
           </div>
 
-          {/* Text Content Side */}
-          <div className="lg:w-1/2 space-y-12">
-            <div className="space-y-4">
-              <h2 className="text-xs font-bold text-electric-orange uppercase tracking-[0.4em]">The Academic Blueprint</h2>
-              <h3 className="text-5xl md:text-6xl font-display font-bold leading-tight">
-                Engineering <span className="text-electric-orange italic">Mindset</span>.
+          {/* Middle Column: Centered Content */}
+          <div className="text-center space-y-12">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-black text-electric-orange uppercase tracking-[0.3em]">
+                Academic Infrastructure
+              </div>
+              <h3 className="text-5xl md:text-7xl font-display font-bold leading-tight">
+                Architecting <br /> <span className="text-electric-orange italic">The Future</span>
               </h3>
-              <p className="text-gray-400 text-lg leading-relaxed max-w-xl">
-                My education wasn't just about obtaining a piece of paper; it was about building a framework for solving impossible problems. I combine traditional computer science principles with the rapid evolution of modern tech.
+              <p className="text-gray-400 text-lg leading-relaxed max-w-lg mx-auto font-light">
+                I bridge the gap between classical computer science discipline and the relentless speed of modern full-stack development. My education is the blueprint for every line of production code I ship.
               </p>
             </div>
 
-            <div className="space-y-8">
+            <div className="space-y-8 text-left max-w-xl mx-auto">
               {academicItems.map((item, idx) => (
-                <div key={idx} className="flex gap-6 group">
-                   <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-electric-orange group-hover:bg-electric-orange group-hover:text-white transition-all duration-500">
+                <div key={idx} className="flex gap-6 p-6 rounded-3xl bg-white/[0.02] border border-white/5 group hover:border-electric-orange/30 transition-all duration-500">
+                   <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-electric-orange/10 flex items-center justify-center text-electric-orange group-hover:bg-electric-orange group-hover:text-white transition-all duration-500">
                      {item.icon}
                    </div>
-                   <div className="space-y-2">
+                   <div className="space-y-1">
                       <div className="flex items-center gap-3">
-                         <h4 className="text-2xl font-display font-bold text-white">{item.title}</h4>
-                         <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest bg-white/5 px-2 py-1 rounded-md">{item.year}</span>
+                         <h4 className="text-xl font-display font-bold text-white group-hover:text-electric-orange transition-colors">{item.title}</h4>
+                         <span className="text-[8px] font-bold text-gray-500 uppercase tracking-widest bg-white/5 px-2 py-1 rounded-md">{item.year}</span>
                       </div>
-                      <p className="text-gray-500 leading-relaxed max-w-md">
+                      <p className="text-sm text-gray-500 leading-relaxed group-hover:text-gray-300 transition-colors">
                         {item.description}
                       </p>
                    </div>
@@ -88,14 +76,43 @@ const Education: React.FC = () => {
               ))}
             </div>
 
-            <div className="pt-4">
-              <div className="inline-flex items-center gap-3 p-1 pr-6 bg-white/5 border border-white/5 rounded-full hover:border-electric-orange/30 transition-colors cursor-default">
-                 <div className="w-10 h-10 rounded-full bg-electric-orange/10 flex items-center justify-center text-electric-orange">
-                   <Zap size={18} />
-                 </div>
-                 <span className="text-sm font-medium text-gray-300">Continuous Professional Development via Real-World Application</span>
+            <div className="flex justify-center pt-4">
+               <div className="inline-flex items-center gap-4 p-4 bg-white/[0.03] border border-white/5 rounded-3xl group hover:border-electric-orange/30 transition-all cursor-default">
+                  <div className="w-12 h-12 rounded-xl bg-electric-orange flex items-center justify-center text-white shadow-[0_0_20px_rgba(249,115,22,0.4)]">
+                    <ShieldCheck size={24} />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-white font-bold text-sm">Pro Standards Verified</p>
+                    <p className="text-[9px] text-gray-500 uppercase tracking-widest font-mono">Senior Engineering Grade</p>
+                  </div>
+               </div>
+            </div>
+          </div>
+
+          {/* Right Column: Image 2 */}
+          <div className="hidden lg:block group">
+            <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl transition-all duration-700 group-hover:translate-x-2 group-hover:rotate-[1deg]">
+              <img 
+                src="https://i.ibb.co/CppwZBPS/Chat-GPT-Image-Feb-5-2026-08-32-50-AM.png" 
+                alt="Industrial Engineering Application" 
+                className="w-full h-auto object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-l from-black/60 to-transparent"></div>
+              <div className="absolute bottom-6 right-6 p-4 bg-black/40 backdrop-blur-md rounded-2xl border border-white/5 text-right">
+                <Award className="text-electric-orange mb-2 ml-auto" size={20} />
+                <p className="text-[10px] font-black text-white uppercase tracking-widest">Industrial Focus</p>
               </div>
             </div>
+          </div>
+
+          {/* Mobile Images (Stacked below content on mobile) */}
+          <div className="lg:hidden grid grid-cols-2 gap-4 mt-8">
+             <div className="rounded-2xl overflow-hidden border border-white/10 aspect-square">
+                <img src="https://i.ibb.co/KxfPj1hJ/9a9db522-37fe-4342-a3c7-13e6fbdb611d.png" className="w-full h-full object-cover" alt="Edu 1" />
+             </div>
+             <div className="rounded-2xl overflow-hidden border border-white/10 aspect-square">
+                <img src="https://i.ibb.co/CppwZBPS/Chat-GPT-Image-Feb-5-2026-08-32-50-AM.png" className="w-full h-full object-cover" alt="Edu 2" />
+             </div>
           </div>
 
         </div>
