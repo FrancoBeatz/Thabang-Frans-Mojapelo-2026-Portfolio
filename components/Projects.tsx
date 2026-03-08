@@ -79,21 +79,10 @@ const ProjectCard: React.FC<{ project: Project; type: 'architecture' | 'website'
 const Projects: React.FC = () => {
   const architectures: Project[] = [
     {
-      title: "SyncFlow Data Engine",
-      problem: "Enterprise environments suffered from 'Data Latency Fragmentation' where synchronization between legacy SQL cores and modern interfaces took 5s+.",
-      solution: "Engineered a high-performance event-driven orchestration layer using atomic state management and async worker threads, slashing latency to sub-100ms.",
-      description: "A professional-grade real-time engine providing absolute data consistency for mission-critical business logic.",
-      image: "https://i.ibb.co/zW2mkhYw/localhost-3000.png",
-      tech: ["React", "TypeScript", "Worker Threads", "Data Orchestration"],
-      perf: 100,
-      liveLink: "https://syncflow-data.netlify.app/",
-      githubLink: "https://github.com/FrancoBeatz"
-    },
-    {
       title: "Galaxy Defender: Canvas Engine",
-      problem: "Standard browser rendering engines hit severe DOM bottlenecks during high-density object tracking, causing fatal frame drops on mobile hardware.",
-      solution: "Architected a custom graphics pipeline from zero using HTML5 Canvas and vector physics, bypassing the DOM entirely to lock a fluid 60FPS across all devices.",
-      description: "A high-octane math-intensive arcade engine that serves as a performance benchmark for browser-based systems.",
+      problem: "Web browsers were too slow to handle many moving objects at once, especially on phones.",
+      solution: "I built a custom drawing system that works directly with the graphics hardware to keep everything smooth.",
+      description: "A fast-paced space game that shows how powerful a web browser can be when programmed correctly.",
       image: "https://i.ibb.co/qF2wKHgh/2.jpg",
       tech: ["Canvas API", "Vector Physics", "OOP Architecture"],
       perf: 100,
@@ -105,9 +94,9 @@ const Projects: React.FC = () => {
   const websites: Project[] = [
     {
       title: "Mkhonto Global Capital",
-      problem: "A premier human capital firm required a high-performance digital hub capable of managing executive-level consultancy and global recruitment visibility.",
-      solution: "Developed a secure, optimized enterprise portal with advanced filtering logic, deep-linked SEO headers, and a rapid-response responsive UI.",
-      description: "A premium corporate portal designed for world-class human capital consultancy and business management.",
+      problem: "A big business needed a professional website to manage their global hiring and consulting services.",
+      solution: "I created a secure and fast portal that works perfectly on all devices and is easy to find on Google.",
+      description: "A high-quality business website built for a global consulting firm.",
       image: "https://i.ibb.co/8grqP05h/Capture.jpg",
       tech: ["Enterprise UI", "Business Logic", "Next-Gen UX"],
       perf: 100,
@@ -116,9 +105,9 @@ const Projects: React.FC = () => {
     },
     {
       title: "Kolas Supply Chain",
-      problem: "Logistics visibility was blinded by disparate, siloed data sources, making real-time inventory tracking impossible for warehouse operators.",
-      solution: "Built a cloud-native logistics dashboard that aggregates fragmented data into a single source of truth with real-time predictive analytics.",
-      description: "Industrial-grade supply chain interface providing deep operational visibility across multiple international logistics nodes.",
+      problem: "It was hard for warehouse workers to track inventory because information was scattered in different places.",
+      solution: "I built a simple dashboard that brings all the data together in real-time to help them manage stock better.",
+      description: "A professional tool for tracking goods and supplies across different countries.",
       image: "https://i.ibb.co/pB6LDjZh/1.jpg",
       tech: ["Cloud Data", "Node.js", "Predictive Analytics"],
       perf: 98,
@@ -127,9 +116,9 @@ const Projects: React.FC = () => {
     },
     {
       title: "Child Care Africa",
-      problem: "Social initiatives in low-bandwidth regions failed due to poor digital accessibility, resulting in a 70% bounce rate on legacy donation platforms.",
-      solution: "Engineered a 'Performance-First' architecture, optimizing asset delivery and bundle sizes to ensure 99/100 performance scores on 3G networks.",
-      description: "A social impact portal built for maximum accessibility and high-bandwidth efficiency across the continent.",
+      problem: "People in areas with slow internet couldn't access the donation website, so they stopped trying to help.",
+      solution: "I rebuilt the site to be extremely lightweight so it loads instantly even on the slowest mobile connections.",
+      description: "A fast and easy-to-use website designed to help children across Africa.",
       image: "https://i.ibb.co/7dM7xMWX/child-care-africa-netlify-app.png",
       tech: ["Perf Optimization", "Mobile-First", "Impact Design"],
       perf: 99,
