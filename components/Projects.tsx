@@ -136,14 +136,14 @@ const Projects: React.FC = () => {
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
             <div className="space-y-4">
                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-electric-orange/20 bg-electric-orange/5 text-[10px] font-black text-electric-orange uppercase tracking-[0.2em]">
-                 Core Systems Engineering
+                 Systems Engineering
                </div>
                <h3 className="text-5xl md:text-7xl font-display font-bold leading-tight">
-                 Primary <span className="text-electric-orange">Architectures</span>
+                 Main <span className="text-electric-orange">Projects</span>
                </h3>
             </div>
             <p className="text-gray-500 max-w-sm text-lg leading-relaxed text-right md:text-left">
-              Advanced logic builds that solve high-complexity technical bottlenecks for modern business.
+              Complex apps built to solve difficult technical problems.
             </p>
           </div>
           <div className="grid lg:grid-cols-2 gap-12">
@@ -158,14 +158,14 @@ const Projects: React.FC = () => {
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
             <div className="space-y-4 text-right md:text-left w-full md:w-auto">
                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/20 bg-blue-500/5 text-[10px] font-black text-blue-400 uppercase tracking-[0.2em]">
-                 Strategic Business Hubs
+                 Business Websites
                </div>
                <h3 className="text-5xl md:text-7xl font-display font-bold leading-tight">
-                 Production <span className="text-white">Portals</span>
+                 Professional <span className="text-white">Websites</span>
                </h3>
             </div>
             <p className="text-gray-400 max-w-sm text-lg leading-relaxed text-right md:text-left">
-              Scalable, high-conversion platforms engineered for professional enterprise growth.
+              Fast and reliable websites built to help businesses grow.
             </p>
           </div>
           <div className="grid lg:grid-cols-3 gap-12">

@@ -20,12 +20,12 @@ const Hero: React.FC = () => {
           </div>
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold leading-[1.1] tracking-tighter">
-            Software <span className="text-electric-orange">Developer</span> by Choice. <br className="hidden md:block" />
-            Problem Solver by Nature.
+            I Build <span className="text-electric-orange">Software</span> That Works. <br className="hidden md:block" />
+            Simple. Fast. Reliable.
           </h1>
           
           <p className="text-lg md:text-xl text-gray-400 max-w-xl leading-relaxed font-light">
-            I’m <span className="text-white font-semibold">Thabang Frans Mojapelo</span>, a professional software developer with <span className="text-electric-orange font-bold">6+ years</span> of experience building modern, scalable, and high-performance applications that don’t just look good — they work flawlessly.
+            I’m <span className="text-white font-semibold">Thabang Frans Mojapelo</span>. I have <span className="text-electric-orange font-bold">6+ years</span> of experience building websites and apps that are easy to use and run perfectly.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-2">

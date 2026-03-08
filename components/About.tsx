@@ -10,11 +10,11 @@ const About: React.FC = () => {
   ];
 
   const differentiators = [
-    "6+ Years of Hands-On Experience",
-    "Clean, Maintainable, Production-Ready Code",
-    "Strong UI/UX + Solid Backend Logic",
-    "Problem Solver (Not a “copy-paste developer”)",
-    "I Build for Users, Not Just Screens"
+    "6+ Years of Experience",
+    "Clean and Easy-to-Read Code",
+    "Great Design + Strong Logic",
+    "I Solve Real Problems",
+    "I Build for People, Not Just Screens"
   ];
 
   return (
@@ -24,19 +24,19 @@ const About: React.FC = () => {
           <div className="md:w-1/2 space-y-6">
             <h2 className="text-xs font-bold text-electric-orange uppercase tracking-[0.3em] mb-2">About Me</h2>
             <h3 className="text-4xl md:text-5xl font-heading font-bold leading-tight">
-              The Dev Behind the <span className="text-electric-orange">Magic</span>
+              The Developer Behind the <span className="text-electric-orange">Work</span>
             </h3>
             <div className="space-y-4 text-gray-400 text-lg leading-relaxed">
               <p>
-                I’m <span className="text-white font-medium">Thabang Frans Mojapelo</span>, a Pro Software Developer with 6 years of real-world experience turning complex ideas into smooth, reliable digital products.
+                I’m <span className="text-white font-medium">Thabang Frans Mojapelo</span>. I have spent 6 years turning ideas into smooth and reliable apps.
               </p>
               <p>
-                I specializes in building modern web applications that are fast, secure, and scalable. If it loads fast, looks clean, and just works… yeah, I probably built it.
+                I build modern websites that are fast, safe, and easy to grow. If it works well and looks good, I probably built it.
               </p>
             </div>
 
             <div className="pt-8">
-              <h4 className="text-xl font-heading font-bold mb-6 text-white">What Makes Me Different</h4>
+              <h4 className="text-xl font-heading font-bold mb-6 text-white">Why Work With Me</h4>
               <ul className="space-y-4">
                 {differentiators.map((item, idx) => (
                   <li key={idx} className="flex items-center gap-3 text-gray-300">

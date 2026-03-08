@@ -5,31 +5,31 @@ import { Search, PencilRuler, Code, ShieldCheck, Rocket } from 'lucide-react';
 const steps = [
   {
     title: "Understand the Problem",
-    description: "Business first, code second. I dive deep into requirements and user needs. I don't just build what you ask for; I build what you actually need to grow.",
+    description: "I start by learning exactly what you need. I build software that helps your business grow.",
     icon: <Search size={32} />,
     color: "from-blue-500 to-cyan-500"
   },
   {
-    title: "Design the Experience",
-    description: "Clean UI, smooth UX. Bridging the gap between design and functionality. I create blueprints that ensure a seamless journey for every user.",
+    title: "Design the Plan",
+    description: "I create a clear plan for how the app will look and work. This ensures everything is easy for users.",
     icon: <PencilRuler size={32} />,
     color: "from-purple-500 to-pink-500"
   },
   {
     title: "Build & Optimize",
-    description: "Fast, scalable, secure. Writing production-grade code that performs. Utilizing modern stacks like React and Node to ensure long-term stability.",
+    description: "I write fast and secure code. I use modern tools to make sure your app is stable and works well.",
     icon: <Code size={32} />,
     color: "from-orange-500 to-electric-orange"
   },
   {
     title: "Test & Polish",
-    description: "No shortcuts. Rigorous testing for edge cases and accessibility. I break things so your users don't have to.",
+    description: "I test everything carefully to find and fix any bugs. I make sure the app is ready for everyone to use.",
     icon: <ShieldCheck size={32} />,
     color: "from-green-500 to-emerald-500"
   },
   {
     title: "Launch & Improve",
-    description: "Software is never “done”. Continuous integration and enhancement. I stay on board to ensure the product evolves with your business.",
+    description: "I help you launch the app and keep it running smoothly. I stay around to help it get even better over time.",
     icon: <Rocket size={32} />,
     color: "from-white to-gray-400"
   }
@@ -42,7 +42,7 @@ const Process: React.FC = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-electric-orange/5 blur-[120px] rounded-full -z-10"></div>
       
       <div className="container mx-auto px-6 text-center mb-24">
-        <h2 className="text-xs font-bold text-electric-orange uppercase tracking-[0.4em] mb-4">The Methodology</h2>
+        <h2 className="text-xs font-bold text-electric-orange uppercase tracking-[0.4em] mb-4">My Process</h2>
         <h3 className="text-5xl md:text-7xl font-display font-bold">How I Build <span className="text-electric-orange">Software</span></h3>
       </div>
       

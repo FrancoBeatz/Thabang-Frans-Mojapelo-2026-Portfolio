@@ -53,10 +53,10 @@ const Contact: React.FC = () => {
         <div className="grid lg:grid-cols-2 gap-20 items-start">
           <div className="space-y-12">
             <div className="space-y-4">
-              <h2 className="text-xs font-bold text-electric-orange uppercase tracking-[0.4em]">Start a Conversation</h2>
-              <h3 className="text-5xl font-display font-bold">Let’s talk <span className="text-electric-orange">Serious</span> Business</h3>
+              <h2 className="text-xs font-bold text-electric-orange uppercase tracking-[0.4em]">Get In Touch</h2>
+              <h3 className="text-5xl font-display font-bold">Let’s talk <span className="text-electric-orange">Business</span></h3>
               <p className="text-gray-400 text-lg max-w-md leading-relaxed">
-                Let’s talk ideas, roadmaps, or that app you’ve been thinking about for months. I turn concepts into engineering realities.
+                Have an idea for an app or website? Let's talk about how I can help you build it.
               </p>
             </div>
             

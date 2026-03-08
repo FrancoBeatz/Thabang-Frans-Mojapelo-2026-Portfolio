@@ -24,10 +24,10 @@ const Skills: React.FC = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
            <div className="space-y-4">
-              <h2 className="text-xs font-bold text-electric-orange uppercase tracking-[0.4em]">Modern Tech Stack</h2>
-              <h3 className="text-4xl md:text-6xl font-display font-bold leading-tight">My <span className="text-electric-orange">Lethal</span> Tools</h3>
+              <h2 className="text-xs font-bold text-electric-orange uppercase tracking-[0.4em]">My Skills</h2>
+              <h3 className="text-4xl md:text-6xl font-display font-bold leading-tight">My <span className="text-electric-orange">Favorite</span> Tools</h3>
            </div>
-           <p className="text-gray-500 max-w-sm">I don't just use tools; I master them to deliver peak performance and unbreakable stability.</p>
+           <p className="text-gray-500 max-w-sm">I use the best modern tools to build fast and reliable software for you.</p>
         </div>
         
         <div className="grid md:grid-cols-3 gap-8">

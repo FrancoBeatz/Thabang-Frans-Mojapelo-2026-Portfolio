@@ -15,9 +15,9 @@ const DevMetrics: React.FC = () => {
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-6">
           <div className="md:col-span-2 p-10 rounded-[2rem] bg-card-bg border border-white/5 flex flex-col justify-between">
-            <h3 className="text-3xl font-display font-bold mb-4">Engineering for <span className="text-electric-orange">Excellence</span>.</h3>
+            <h3 className="text-3xl font-display font-bold mb-4">Built for <span className="text-electric-orange">Speed</span>.</h3>
             <p className="text-gray-500 leading-relaxed">
-              Every line of code I write is optimized for maximum efficiency. My builds consistently rank in the top percentile of Google Lighthouse scores.
+              Every app I build is made to be fast and easy to use. I make sure your users have a great experience.
             </p>
           </div>
           

@@ -13,13 +13,13 @@ const Philosophy: React.FC = () => {
           
           <div className="space-y-8">
             <p className="text-4xl md:text-6xl lg:text-7xl font-display font-medium tracking-tight leading-[1.1]">
-              My code is so <span className="text-electric-orange font-bold">clean</span>, it makes a fresh install of VS Code look like a junk drawer. 
+              I write <span className="text-electric-orange font-bold">clean code</span> that is easy to read and maintain.
             </p>
             <p className="text-4xl md:text-6xl lg:text-7xl font-display font-medium tracking-tight leading-[1.1]">
-              I build systems so <span className="italic">stable</span>, they’re the only thing in your life that won’t give you commitment issues.
+              I build <span className="italic">stable systems</span> that you can always rely on.
             </p>
             <p className="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-white/40 tracking-tight leading-tight">
-              If my software were any more <span className="text-white/60">efficient</span>, it would have predicted you were going to <span className="text-electric-orange/80">hire me</span>.
+              I focus on <span className="text-white/60">efficiency</span> so your app runs as fast as possible.
             </p>
           </div>
 

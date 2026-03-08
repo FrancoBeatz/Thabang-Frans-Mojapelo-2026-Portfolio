@@ -39,14 +39,14 @@ const WhySoftware: React.FC = () => {
               The Mission
             </div>
             <h2 className="text-5xl md:text-6xl font-display font-bold leading-tight text-white">
-              Why Software <br /> <span className="text-electric-orange">Development?</span>
+              Why I Build <br /> <span className="text-electric-orange">Software</span>
             </h2>
             <div className="space-y-6 text-gray-400 text-lg leading-relaxed max-w-xl">
               <p>
-                I didn’t choose software development because it was trending — I chose it because I enjoy <span className="text-white font-medium">solving problems, breaking systems, rebuilding them better,</span> and watching ideas turn into real products.
+                I build software because I love <span className="text-white font-medium">solving problems and making things work better.</span>
               </p>
               <p>
-                For me, coding isn’t just about writing lines of code. It’s about logic, creativity, performance, and impact. That’s why I build software that lasts.
+                To me, coding is about logic and creativity. I build software that is made to last.
               </p>
             </div>
           </div>

@@ -5,16 +5,16 @@ import { GraduationCap, BookOpen, Award, ShieldCheck, Milestone, Cpu, Database }
 const Education: React.FC = () => {
   const academicItems = [
     {
-      title: "Advanced Software Engineering",
-      description: "Comprehensive mastery of algorithmic complexity and high-performance computing. Focused on building unbreakable logic for mission-critical enterprise systems.",
+      title: "Software Engineering",
+      description: "Learning how to build strong and fast software. Focused on solving complex problems with clean logic.",
       icon: <Cpu size={24} />,
-      year: "Logic Core"
+      year: "Core Logic"
     },
     {
-      title: "Systems Architecture & Design",
-      description: "Specialized focus on distributed cloud-native orchestration and scalability patterns. Designing architectures capable of supporting millions of concurrent operations.",
+      title: "System Design",
+      description: "Learning how to design large systems that can handle many users at once. Focused on reliability and growth.",
       icon: <Database size={24} />,
-      year: "Architectural Lead"
+      year: "Architecture"
     }
   ];
 
@@ -32,13 +32,13 @@ const Education: React.FC = () => {
             <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl transition-all duration-700 group-hover:-translate-x-2 group-hover:rotate-[-1deg]">
               <img 
                 src="https://i.ibb.co/KxfPj1hJ/9a9db522-37fe-4342-a3c7-13e6fbdb611d.png" 
-                alt="Theoretical Engineering Excellence" 
+                alt="Engineering Excellence" 
                 className="w-full h-auto object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
               <div className="absolute bottom-6 left-6 p-4 bg-black/40 backdrop-blur-md rounded-2xl border border-white/5">
                 <Milestone className="text-electric-orange mb-2" size={20} />
-                <p className="text-[10px] font-black text-white uppercase tracking-widest">Theoretical Base</p>
+                <p className="text-[10px] font-black text-white uppercase tracking-widest">The Foundation</p>
               </div>
             </div>
           </div>
@@ -47,13 +47,13 @@ const Education: React.FC = () => {
           <div className="text-center space-y-12">
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-black text-electric-orange uppercase tracking-[0.3em]">
-                Academic Infrastructure
+                Learning & Growth
               </div>
               <h3 className="text-5xl md:text-7xl font-display font-bold leading-tight">
-                Architecting <br /> <span className="text-electric-orange italic">The Future</span>
+                Building <br /> <span className="text-electric-orange italic">The Future</span>
               </h3>
               <p className="text-gray-400 text-lg leading-relaxed max-w-lg mx-auto font-light">
-                I bridge the gap between classical computer science discipline and the relentless speed of modern full-stack development. My education is the blueprint for every line of production code I ship.
+                I combine deep technical knowledge with modern development skills. My education helps me write better code every day.
               </p>
             </div>
 

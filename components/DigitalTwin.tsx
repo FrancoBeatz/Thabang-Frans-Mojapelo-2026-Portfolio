@@ -11,7 +11,7 @@ interface Message {
 
 const DigitalTwin: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'bot', text: "Systems online. I am Thabang's Digital Twin. I have access to his full project history, technical stack, and engineering philosophy. How can I assist you today?" }
+    { role: 'bot', text: "Hello! I am Thabang's Digital Twin. I know all about his projects and how he builds software. How can I help you today?" }
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -27,26 +27,26 @@ const DigitalTwin: React.FC = () => {
   }, [messages, isTyping]);
 
   const portfolioContext = `
-    You are Thabang Frans Mojapelo's Digital Twin, a world-class senior software architect.
+    You are Thabang Frans Mojapelo's Digital Twin.
     CONTEXT:
     - Name: Thabang Frans Mojapelo
-    - Role: Pro Software Developer / Lead Systems Architect.
-    - Experience: 6+ years in high-performance full-stack engineering.
-    - Tech Stack: React, TypeScript, Node.js, Express, MongoDB, Supabase, Socket.io, Tailwind CSS, Canvas API.
+    - Role: Software Developer.
+    - Experience: 6+ years building apps and websites.
+    - Tech Stack: React, TypeScript, Node.js, Express, MongoDB, Tailwind CSS.
     - Key Projects: 
-        1. Galaxy Defender: High-performance space shooter built with pure Canvas API (60FPS).
-        2. Nexus Chat Live: Real-time messaging suite using Socket.io and Redis-like state management.
-        3. Child Care Africa: Social impact portal optimized for performance (99/100 score).
-        4. Kolas Supply Chain: Cloud-based inventory management dashboard.
-        5. Mkhonto Global: Enterprise human capital consultancy hub.
-    - Philosophy: Performance is a hard requirement. Clean code saves lives. Scalability over complexity.
+        1. Galaxy Defender: A fast space game.
+        2. Nexus Chat Live: A real-time chat app.
+        3. Child Care Africa: A fast website for a good cause.
+        4. Kolas Supply Chain: A tool for tracking inventory.
+        5. Mkhonto Global: A professional business website.
+    - Philosophy: Speed is key. Clean code is better. Keep it simple.
     - Contact: mojapelot2@gmail.com, 0723481158.
     
     GUIDELINES:
-    - Maintain a professional, concise, and highly technical tone.
-    - When asked about technical details, use markdown for code snippets.
-    - If asked for availability, redirect to Thabang's WhatsApp (+27723481158).
-    - Always highlight 'Problem-Solution' narratives when discussing projects.
+    - Be professional and helpful.
+    - Use simple English.
+    - If asked for code, use markdown.
+    - If asked about hiring, tell them to message Thabang on WhatsApp (+27723481158).
   `;
 
   const handleSendMessage = async (e?: React.FormEvent) => {
@@ -98,20 +98,20 @@ const DigitalTwin: React.FC = () => {
       setMessages(prev => {
         const newMessages = [...prev];
         const lastIndex = newMessages.length - 1;
-        newMessages[lastIndex] = { role: 'bot', text: fullResponse || "Engineering logic complete. Ready for next query.", isStreaming: false };
+        newMessages[lastIndex] = { role: 'bot', text: fullResponse || "I'm ready for your next question.", isStreaming: false };
         return newMessages;
       });
 
     } catch (error) {
       console.error("AI Error:", error);
-      setMessages(prev => [...prev, { role: 'bot', text: "System Interrupt: Neural link currently unavailable. Please reach out to Thabang directly via WhatsApp for urgent consultation." }]);
+      setMessages(prev => [...prev, { role: 'bot', text: "Sorry, I'm having trouble connecting. Please message Thabang on WhatsApp." }]);
     } finally {
       setIsTyping(false);
     }
   };
 
   const clearChat = () => {
-    setMessages([{ role: 'bot', text: "History purged. System environment reset. How can I help you architect your next solution?" }]);
+    setMessages([{ role: 'bot', text: "Chat cleared. How can I help you today?" }]);
   };
 
   return (
@@ -123,13 +123,13 @@ const DigitalTwin: React.FC = () => {
           <div className="lg:w-1/2 space-y-10 flex flex-col justify-center">
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-electric-orange/10 border border-electric-orange/20 rounded-full text-electric-orange text-xs font-bold uppercase tracking-widest">
-                <BrainCircuit size={14} className="animate-pulse" /> Neural Proxy
+                <BrainCircuit size={14} className="animate-pulse" /> AI Assistant
               </div>
               <h2 className="text-6xl md:text-7xl font-display font-bold leading-tight text-white">
                 The <span className="text-electric-orange">Digital</span> Twin.
               </h2>
               <p className="text-gray-400 text-xl leading-relaxed max-w-lg">
-                Query my engineering logic in real-time. This AI is trained on my specific architectural patterns, codebase philosophies, and professional project history.
+                Ask me anything about Thabang's work. This AI knows all about his projects and how he builds software.
               </p>
             </div>
           </div>
@@ -142,8 +142,8 @@ const DigitalTwin: React.FC = () => {
                       <Bot className="text-white" size={24} />
                     </div>
                     <div>
-                      <div className="text-white font-bold text-lg">Thabang_Twin.OS</div>
-                      <div className="text-[10px] text-electric-orange font-mono uppercase">Neural Stream Active</div>
+                      <div className="text-white font-bold text-lg">Thabang_Twin</div>
+                      <div className="text-[10px] text-electric-orange font-mono uppercase">Online</div>
                     </div>
                  </div>
                  <button onClick={clearChat} className="p-3 text-gray-500 hover:text-red-400 transition-all" aria-label="Clear chat">
@@ -171,7 +171,7 @@ const DigitalTwin: React.FC = () => {
                 {isTyping && (
                   <div className="flex justify-start">
                     <div className="flex items-center gap-2 text-gray-500 text-xs font-mono animate-pulse">
-                      <Terminal size={12} /> Syncing neural weights...
+                      <Terminal size={12} /> Thinking...
                     </div>
                   </div>
                 )}
@@ -183,7 +183,7 @@ const DigitalTwin: React.FC = () => {
                     type="text" 
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    placeholder="Ask about my architecture choices..." 
+                    placeholder="Ask me a question..." 
                     className="w-full bg-white/[0.05] rounded-2xl pl-6 pr-16 py-5 border border-white/10 text-white focus:border-electric-orange outline-none transition-all"
                   />
                   <button type="submit" className="absolute right-3 top-3 w-12 h-12 rounded-xl bg-electric-orange text-white flex items-center justify-center hover:bg-orange-600 transition-colors shadow-lg shadow-electric-orange/20">

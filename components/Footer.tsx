@@ -11,13 +11,13 @@ const Footer: React.FC = () => {
               THABANG<span className="text-electric-orange">.DEV</span>
             </div>
             <p className="text-gray-500 max-w-xs text-sm">
-              Pro Software Developer | 6+ Years Experience | Clean Code Enthusiast
+              Software Developer | 6+ Years Experience | Building Great Apps
             </p>
           </div>
           
           <div className="flex flex-col items-center md:items-end gap-2">
-            <div className="text-sm font-medium text-gray-400">Built with passion, logic, and a lot of coffee ☕</div>
-            <div className="text-xs text-gray-600">© {new Date().getFullYear()} Thabang Frans Mojapelo — Software Developer</div>
+            <div className="text-sm font-medium text-gray-400">Built with passion and hard work ☕</div>
+            <div className="text-xs text-gray-600">© {new Date().getFullYear()} Thabang Frans Mojapelo</div>
           </div>
         </div>
         

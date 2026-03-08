@@ -12,11 +12,11 @@ const Terminal: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const commands: Record<string, string> = {
-    help: "Available commands: bio, stack, values, clear, contact",
-    bio: "Pro Software Developer with 6+ years experience. Expert in turning coffee into scalable systems.",
-    stack: "Frontend: React, Next.js. Backend: Node, Express, MongoDB, Supabase. Tools: Git, CI/CD.",
-    values: "1. Performance is not a feature, it's a requirement. 2. Scalability over complexity. 3. Clean code saves lives.",
-    contact: "Email: mojapelot2@gmail.com | WhatsApp: 0723481158 | GitHub: FrancoBeatz"
+    help: "Commands: bio, stack, values, clear, contact",
+    bio: "Software Developer with 6+ years experience. I build apps that work.",
+    stack: "Frontend: React, Next.js. Backend: Node, Express, MongoDB. Tools: Git.",
+    values: "1. Speed is key. 2. Keep it simple. 3. Clean code is better.",
+    contact: "Email: mojapelot2@gmail.com | WhatsApp: 0723481158"
   };
 
   const handleCommand = (e: React.FormEvent) => {

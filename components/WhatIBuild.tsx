@@ -3,11 +3,11 @@ import React from 'react';
 import { Globe, Gamepad2, Layers, Monitor, Settings } from 'lucide-react';
 
 const categories = [
-  { title: "Full-Stack Web Apps", icon: <Globe />, desc: "Complete end-to-end solutions with robust backends." },
-  { title: "Interactive Tools", icon: <Gamepad2 />, desc: "Fast browser-based tools and game engines." },
-  { title: "APIs & Systems", icon: <Layers />, desc: "Secure, performant microservices and integrations." },
-  { title: "Responsive Frontends", icon: <Monitor />, desc: "Pixel-perfect, high-performance user interfaces." },
-  { title: "Admin Dashboards", icon: <Settings />, desc: "Complex data-heavy interfaces made simple." }
+  { title: "Full-Stack Web Apps", icon: <Globe />, desc: "Complete websites with powerful backends." },
+  { title: "Interactive Tools", icon: <Gamepad2 />, desc: "Fast tools and engines that run in your browser." },
+  { title: "APIs & Systems", icon: <Layers />, desc: "Secure and fast systems that connect different apps." },
+  { title: "Modern Frontends", icon: <Monitor />, desc: "Beautiful and fast designs that work on all screens." },
+  { title: "Admin Dashboards", icon: <Settings />, desc: "Easy-to-use tools for managing your business data." }
 ];
 
 const WhatIBuild: React.FC = () => {
@@ -16,9 +16,9 @@ const WhatIBuild: React.FC = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row gap-12 mb-20">
           <div className="lg:w-1/3">
-             <h2 className="text-xs font-bold text-electric-orange uppercase tracking-[0.3em] mb-4">Capabilities</h2>
+             <h2 className="text-xs font-bold text-electric-orange uppercase tracking-[0.3em] mb-4">What I Do</h2>
              <h3 className="text-5xl font-display font-bold mb-6">What I <span className="text-electric-orange">Build</span></h3>
-             <p className="text-gray-400">Custom software engineered for durability and user satisfaction.</p>
+             <p className="text-gray-400">Custom software built to last and help your users.</p>
           </div>
           <div className="lg:w-2/3 grid sm:grid-cols-2 gap-6">
             {categories.map((cat, idx) => (
