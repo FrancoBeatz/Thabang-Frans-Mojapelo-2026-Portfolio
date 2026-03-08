@@ -86,7 +86,7 @@ const Projects: React.FC = () => {
       image: "https://i.ibb.co/qF2wKHgh/2.jpg",
       tech: ["Canvas API", "Vector Physics", "OOP Architecture"],
       perf: 100,
-      liveLink: "https://galaxy-defender-game.netlify.app/",
+      liveLink: "https://galaxy-defender-2-d-game.vercel.app/",
       githubLink: "https://github.com/FrancoBeatz"
     }
   ];
@@ -100,7 +100,7 @@ const Projects: React.FC = () => {
       image: "https://i.ibb.co/8grqP05h/Capture.jpg",
       tech: ["Enterprise UI", "Business Logic", "Next-Gen UX"],
       perf: 100,
-      liveLink: "https://mkhonto-global-human-capital-ent.netlify.app/",
+      liveLink: "https://linda-mkhonto-global-human-capital.vercel.app/",
       githubLink: "https://github.com/FrancoBeatz"
     },
     {
@@ -111,7 +111,7 @@ const Projects: React.FC = () => {
       image: "https://i.ibb.co/pB6LDjZh/1.jpg",
       tech: ["Cloud Data", "Node.js", "Predictive Analytics"],
       perf: 98,
-      liveLink: "http://kolas-p-supply.netlify.app/",
+      liveLink: "https://kola-s-rat-p-supply.vercel.app/",
       githubLink: "https://github.com/FrancoBeatz"
     },
     {
@@ -122,7 +122,7 @@ const Projects: React.FC = () => {
       image: "https://i.ibb.co/7dM7xMWX/child-care-africa-netlify-app.png",
       tech: ["Perf Optimization", "Mobile-First", "Impact Design"],
       perf: 99,
-      liveLink: "https://child-care-africa.netlify.app/",
+      liveLink: "https://child-care-africa.vercel.app/",
       githubLink: "https://github.com/FrancoBeatz"
     }
   ];
