@@ -88,6 +88,17 @@ const Projects: React.FC = () => {
       perf: 100,
       liveLink: "https://galaxy-defender-2-d-game.vercel.app/",
       githubLink: "https://github.com/FrancoBeatz"
+    },
+    {
+      title: "Nexus Chat: Real-Time Messaging",
+      problem: "It was hard to send messages instantly without the app slowing down or losing data.",
+      solution: "I used modern web technology to make sure messages are sent and received in less than a second.",
+      description: "A fast and secure chat app that lets people talk to each other instantly.",
+      image: "https://i.ibb.co/JRSTXGCN/kind.jpg",
+      tech: ["Socket.io", "React", "Node.js"],
+      perf: 99,
+      liveLink: "https://nexus-chat-two.vercel.app/",
+      githubLink: "https://github.com/FrancoBeatz"
     }
   ];
 
