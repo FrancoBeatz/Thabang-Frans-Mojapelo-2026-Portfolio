@@ -32,21 +32,29 @@ const DigitalTwin: React.FC = () => {
     - Name: Thabang Frans Mojapelo
     - Role: Software Developer.
     - Experience: 6+ years building apps and websites.
-    - Tech Stack: React, TypeScript, Node.js, Express, MongoDB, Tailwind CSS.
+    - Work History:
+        * Junior Software Developer at TBang Code (2023-2026).
+        * Freelance Software Developer at UpWork (2016-Present).
+    - Education: 
+        * Software Development Degree from National Government School (2023-2026).
+        * Software Development Basics from FreeCodeCamp (2020-2023).
+    - Tech Stack: React, Next.js, Vite, TypeScript, Node.js, Express, MongoDB.
     - Key Projects: 
-        1. Galaxy Defender: A fast space game.
-        2. Nexus Chat Live: A real-time chat app.
-        3. Child Care Africa: A fast website for a good cause.
-        4. Kolas Supply Chain: A tool for tracking inventory.
-        5. Mkhonto Global: A professional business website.
+        1. Galaxy Defender: A fast space game built with Canvas API.
+        2. Nexus Chat Live: A real-time chat app using Socket.io.
+        3. Child Care Africa: A fast website for a humanitarian organization.
+        4. Kolas Supply Chain: A tool for tracking inventory globally.
+        5. Mkhonto Global: A professional business website for consulting.
     - Philosophy: Speed is key. Clean code is better. Keep it simple.
+    - Location: Johannesburg, South Africa.
     - Contact: mojapelot2@gmail.com, 0723481158.
     
     GUIDELINES:
-    - Be professional and helpful.
+    - Be professional, helpful, and friendly.
     - Use simple English.
     - If asked for code, use markdown.
-    - If asked about hiring, tell them to message Thabang on WhatsApp (+27723481158).
+    - If asked about hiring or availability, tell them to message Thabang on WhatsApp (+27723481158).
+    - Respond to questions about Thabang's skills, projects, and experience accurately based on this context.
   `;
 
   const handleSendMessage = async (e?: React.FormEvent) => {
@@ -143,7 +151,10 @@ const DigitalTwin: React.FC = () => {
                     </div>
                     <div>
                       <div className="text-white font-bold text-lg">Thabang_Twin</div>
-                      <div className="text-[10px] text-electric-orange font-mono uppercase">Online</div>
+                      <div className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                        <div className="text-[10px] text-electric-orange font-mono uppercase">Live & Online</div>
+                      </div>
                     </div>
                  </div>
                  <button onClick={clearChat} className="p-3 text-gray-500 hover:text-red-400 transition-all" aria-label="Clear chat">

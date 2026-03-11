@@ -44,6 +44,18 @@ const Hero: React.FC = () => {
             >
               📩 Hire Me
             </a>
+            <a 
+              href="#" 
+              onClick={(e) => {
+                e.preventDefault();
+                alert("Resume download starting...");
+                // In a real app, this would be a link to the PDF file
+                window.open("https://thabang-frans-mojapelo-2026-portfol.vercel.app/resume.pdf", "_blank");
+              }}
+              className="flex items-center justify-center px-8 py-4 bg-white/5 border border-white/10 text-gray-300 font-bold rounded-xl hover:bg-white/10 transition-all duration-300"
+            >
+              📄 Download Resume
+            </a>
           </div>
         </div>
 
@@ -52,7 +64,7 @@ const Hero: React.FC = () => {
             <img 
               src="https://i.ibb.co/4wHq6WdP/IMG-20251221-WA0002.jpg" 
               alt="Thabang Frans Mojapelo" 
-              className="w-full h-full object-cover opacity-90 transition-all duration-1000 grayscale group-hover:grayscale-0"
+              className="w-full h-full object-cover opacity-90 transition-all duration-1000 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-transparent to-transparent opacity-60"></div>
             

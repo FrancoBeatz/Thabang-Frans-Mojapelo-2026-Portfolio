@@ -17,7 +17,7 @@ interface Project {
 const ProjectCard: React.FC<{ project: Project; type: 'architecture' | 'website' }> = ({ project, type }) => (
   <div className={`group relative bg-card-bg rounded-[2.5rem] overflow-hidden border border-white/5 hover:border-electric-orange/40 transition-all duration-700 h-full flex flex-col hover:scale-[1.02] hover:shadow-[0_0_50px_rgba(249,115,22,0.1)]`}>
     <div className="aspect-[16/10] overflow-hidden relative">
-      <img src={project.image} alt={project.title} className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000" />
+      <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000" />
       
       {/* Performance Badge */}
       <div className="absolute top-6 left-6 flex items-center gap-2 px-3 py-1.5 bg-black/60 backdrop-blur-md rounded-xl border border-white/10 z-10">

@@ -34,12 +34,23 @@ const Contact: React.FC = () => {
     e.preventDefault();
     if (!validate()) return;
     setIsSubmitting(true);
+    
+    // Construct WhatsApp message
+    const whatsappNumber = "27723481158";
+    const text = `Hello Thabang, my name is ${formData.name}. ${formData.message} (Email: ${formData.email})`;
+    const encodedText = encodeURIComponent(text);
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedText}`;
+    
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSuccess(true);
       setFormData({ name: '', email: '', message: '' });
+      
+      // Open WhatsApp in a new tab
+      window.open(whatsappUrl, '_blank');
+      
       setTimeout(() => setIsSuccess(false), 5000);
-    }, 1500);
+    }, 1000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -70,6 +81,20 @@ const Contact: React.FC = () => {
                   <div className="text-2xl font-display font-bold">mojapelot2@gmail.com</div>
                 </div>
               </a>
+              
+              <div className="pt-4">
+                <a 
+                  href="#" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    alert("Resume download starting...");
+                    window.open("https://thabang-frans-mojapelo-2026-portfol.vercel.app/resume.pdf", "_blank");
+                  }}
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-2xl hover:bg-white/10 transition-all"
+                >
+                  📄 Download My Resume (PDF)
+                </a>
+              </div>
             </div>
           </div>
           
