@@ -41,7 +41,7 @@ const DigitalTwin: React.FC = () => {
     - Tech Stack: React, Next.js, Vite, TypeScript, Node.js, Express, MongoDB.
     - Key Projects: 
         1. Galaxy Defender: A fast space game built with Canvas API.
-        2. Nexus Chat Live: A real-time chat app using Socket.io.
+        2. Daily Bloom: A minimalist habit tracker lifestyle app.
         3. Child Care Africa: A fast website for a humanitarian organization.
         4. Kolas Supply Chain: A tool for tracking inventory globally.
         5. Mkhonto Global: A professional business website for consulting.

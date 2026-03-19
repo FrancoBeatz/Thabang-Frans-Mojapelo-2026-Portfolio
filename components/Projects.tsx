@@ -90,14 +90,14 @@ const Projects: React.FC = () => {
       githubLink: "https://github.com/FrancoBeatz"
     },
     {
-      title: "Nexus Chat: Real-Time Messaging",
-      problem: "It was hard to send messages instantly without the app slowing down or losing data.",
-      solution: "I used modern web technology to make sure messages are sent and received in less than a second.",
-      description: "A fast and secure chat app that lets people talk to each other instantly.",
-      image: "https://i.ibb.co/JRSTXGCN/kind.jpg",
-      tech: ["Socket.io", "React", "Node.js"],
-      perf: 99,
-      liveLink: "https://nexus-chat-two.vercel.app/",
+      title: "Daily Bloom",
+      problem: "It was difficult for users to track their daily habits and personal growth in a simple, visual way.",
+      solution: "I built a minimalist habit tracker that uses beautiful visuals and simple interactions to keep users motivated.",
+      description: "A lifestyle app designed to help users bloom into their best selves through daily habit tracking.",
+      image: "https://i.ibb.co/rGrxkDGx/d-AILY.jpg",
+      tech: ["React", "Tailwind CSS", "Framer Motion"],
+      perf: 100,
+      liveLink: "https://daily-bloom-pi.vercel.app/",
       githubLink: "https://github.com/FrancoBeatz"
     }
   ];
