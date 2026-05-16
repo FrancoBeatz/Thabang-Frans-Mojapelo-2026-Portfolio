@@ -105,6 +105,17 @@ const Projects: React.FC = () => {
 
   const websites: Project[] = [
     {
+      title: "Mkhonto Global Capital",
+      problem: "A big business needed a professional website to manage their global hiring and consulting services.",
+      solution: "I created a secure and fast portal that works perfectly on all devices and is easy to find on Google.",
+      description: "A high-quality business website built for a global consulting firm.",
+      image: "https://i.ibb.co/8grqP05h/Capture.jpg",
+      tech: ["Enterprise UI", "Business Logic", "Next-Gen UX"],
+      perf: 100,
+      liveLink: "https://linda-mkhonto-global-human-capital.vercel.app/",
+      githubLink: "https://github.com/FrancoBeatz"
+    },
+    {
       title: "Tracy Mashishi Portfolio",
       problem: "A client needed a high-performance, elegant portfolio website to showcase their professional services in a saturated market.",
       solution: "I engineered a custom responsive architecture with ultra-fast load times and cinematic visual interactions.",
