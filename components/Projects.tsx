@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { ExternalLink, Github, Layout, Cpu, Zap, Code2 } from 'lucide-react';
+import { motion } from 'motion/react';
 
 interface Project {
   title: string;
@@ -104,14 +105,14 @@ const Projects: React.FC = () => {
 
   const websites: Project[] = [
     {
-      title: "Mkhonto Global Capital",
-      problem: "A big business needed a professional website to manage their global hiring and consulting services.",
-      solution: "I created a secure and fast portal that works perfectly on all devices and is easy to find on Google.",
-      description: "A high-quality business website built for a global consulting firm.",
-      image: "https://i.ibb.co/8grqP05h/Capture.jpg",
-      tech: ["Enterprise UI", "Business Logic", "Next-Gen UX"],
+      title: "Tracy Mashishi Portfolio",
+      problem: "A client needed a high-performance, elegant portfolio website to showcase their professional services in a saturated market.",
+      solution: "I engineered a custom responsive architecture with ultra-fast load times and cinematic visual interactions.",
+      description: "A premium business portfolio built with modern web standards for a seamless user experience.",
+      image: "https://i.ibb.co/9kjtMfCG/tracy.jpg",
+      tech: ["UX Engineering", "Performance", "Business Branding"],
       perf: 100,
-      liveLink: "https://linda-mkhonto-global-human-capital.vercel.app/",
+      liveLink: "https://tracymashishi.co.za/",
       githubLink: "https://github.com/FrancoBeatz"
     },
     {
@@ -162,8 +163,8 @@ const Projects: React.FC = () => {
           </div>
         </div>
 
-        {/* Websites Section */}
-        <div className="relative pt-24 border-t border-white/5">
+        {/* Websites Section - Animated Marquee */}
+        <div className="relative pt-24 border-t border-white/5 overflow-hidden">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-electric-orange/20 to-transparent"></div>
           
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
@@ -179,8 +180,32 @@ const Projects: React.FC = () => {
               Fast and reliable websites built to help businesses grow.
             </p>
           </div>
-          <div className="grid lg:grid-cols-3 gap-12">
-            {websites.map((p, idx) => <ProjectCard key={idx} project={p} type="website" />)}
+
+          <div className="relative">
+            {/* Gradient Fades for Smooth Edges */}
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
+
+            <motion.div 
+              className="flex gap-12 w-max whitespace-nowrap py-10"
+              animate={{
+                x: [0, "-50%"]
+              }}
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 25,
+                  ease: "linear",
+                },
+              }}
+            >
+              {[...websites, ...websites].map((p, idx) => (
+                <div key={idx} className="w-[450px] whitespace-normal">
+                  <ProjectCard project={p} type="website" />
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
 
