@@ -60,13 +60,35 @@ const Hero: React.FC = () => {
         </div>
 
         <div className="relative animate-in fade-in zoom-in duration-1000 delay-300 group max-w-sm lg:max-w-none mx-auto lg:mx-0">
-          <div className="relative z-10 w-full aspect-square md:aspect-[4/5] rounded-[1.5rem] overflow-hidden bg-card-bg border border-white/10 orange-glow transform transition-transform duration-700 group-hover:scale-[1.01]">
+          <div className="relative z-10 w-full aspect-square md:aspect-[4/5] rounded-[1.5rem] overflow-hidden bg-black border border-white/10 orange-glow transform transition-transform duration-700 group-hover:scale-[1.01]">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-electric-orange/10 via-transparent to-transparent opacity-50"></div>
             <img 
-              src="https://i.ibb.co/4wHq6WdP/IMG-20251221-WA0002.jpg" 
+              src="https://i.ibb.co/MxMdkkqf/71fbabe1-d110-4701-81d9-f7062408f93f.png" 
               alt="Thabang Frans Mojapelo" 
-              className="w-full h-full object-cover opacity-90 transition-all duration-1000 group-hover:scale-105"
+              className="relative z-10 w-full h-full object-cover opacity-100 transition-all duration-1000 group-hover:scale-105 drop-shadow-[0_0_25px_rgba(255,87,34,0.3)]"
+              referrerPolicy="no-referrer"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-transparent to-transparent opacity-60"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-20"></div>
+            
+            {/* Surprise: Floating Animated Code Elements */}
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute top-1/4 right-1/4 w-12 h-12 bg-electric-orange/20 rounded-lg backdrop-blur-sm border border-electric-orange/30 flex items-center justify-center animate-bounce duration-[3000ms]">
+                <span className="text-electric-orange font-mono text-xs font-bold">{"{}"}</span>
+              </div>
+              <div className="absolute bottom-1/3 left-1/4 w-10 h-10 bg-blue-500/20 rounded-full backdrop-blur-sm border border-blue-500/30 flex items-center justify-center animate-pulse duration-[2000ms]">
+                <span className="text-blue-400 font-mono text-[10px] font-bold">JS</span>
+              </div>
+            </div>
+
+            {/* Surprise: Animated Robot Companion */}
+            <div className="absolute bottom-4 right-4 w-20 h-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+               <img 
+                 src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1eDlrcWp1eDlrcWp1eDlrcWp1eDlrcWp1eDlrcWp1eDlrcWp1eDAmZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/26tn33aiTi1jkl6H6/giphy.gif" 
+                 alt="Robot Companion" 
+                 className="w-full h-full object-contain"
+                 referrerPolicy="no-referrer"
+               />
+            </div>
             
             {/* Overlay Info Card */}
             <div className="absolute bottom-6 left-6 right-6 p-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl transform translate-y-2 group-hover:translate-y-0 transition-all duration-500 opacity-0 group-hover:opacity-100">

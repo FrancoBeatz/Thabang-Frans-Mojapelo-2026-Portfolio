@@ -43,7 +43,7 @@ const Terminal: React.FC = () => {
   }, [history]);
 
   return (
-    <section className="py-24 bg-dark-bg">
+    <section className="py-24 relative z-10">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-[#0c0c0c]">
           {/* Terminal Header */}

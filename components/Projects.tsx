@@ -139,7 +139,7 @@ const Projects: React.FC = () => {
   ];
 
   return (
-    <section id="projects" className="py-32 bg-dark-bg">
+    <section id="projects" className="py-32 relative z-10">
       <div className="container mx-auto px-6 space-y-32">
         
         {/* Architectures Section */}

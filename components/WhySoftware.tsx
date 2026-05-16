@@ -31,7 +31,7 @@ const WhySoftware: React.FC = () => {
   ];
 
   return (
-    <section id="why" ref={sectionRef} className="py-32 bg-[#050505] relative overflow-hidden">
+    <section id="why" ref={sectionRef} className="py-32 relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           <div className={`space-y-8 transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>

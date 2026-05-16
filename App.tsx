@@ -1,6 +1,7 @@
 
 import React from 'react';
 import Navbar from './components/Navbar';
+import VideoBackground from './components/VideoBackground';
 import Hero from './components/Hero';
 import About from './components/About';
 import WhySoftware from './components/WhySoftware';
@@ -19,9 +20,10 @@ import Footer from './components/Footer';
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-dark-bg text-white selection:bg-electric-orange selection:text-white overflow-hidden">
+    <div className="min-h-screen text-white selection:bg-electric-orange selection:text-white overflow-hidden relative">
+      <VideoBackground />
       <Navbar />
-      <main>
+      <main className="relative z-10">
         <Hero />
         {/* Section ID: #about */}
         <About />
@@ -41,7 +43,7 @@ const App: React.FC = () => {
         <Testimonials />
         
         {/* Strong CTA Section */}
-        <section className="py-32 relative overflow-hidden bg-black">
+        <section className="py-32 relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-electric-orange/20 via-transparent to-transparent"></div>
           </div>

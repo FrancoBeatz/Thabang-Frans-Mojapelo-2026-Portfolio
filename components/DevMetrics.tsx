@@ -11,7 +11,7 @@ const DevMetrics: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 bg-[#050505]">
+    <section className="py-24 relative z-10">
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-6">
           <div className="md:col-span-2 p-10 rounded-[2rem] bg-card-bg border border-white/5 flex flex-col justify-between">

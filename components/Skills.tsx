@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Database, Layout, Search, Command, Layers } from 'lucide-react';
+import { Database, Layout, Layers } from 'lucide-react';
 
 const SkillGroup: React.FC<{ title: string; skills: string[]; icon: React.ReactNode }> = ({ title, skills, icon }) => (
   <div className="p-10 rounded-[2.5rem] bg-card-bg border border-white/5 group hover:bg-white/[0.02] transition-all duration-700 relative overflow-hidden">
@@ -20,7 +20,7 @@ const SkillGroup: React.FC<{ title: string; skills: string[]; icon: React.ReactN
 
 const Skills: React.FC = () => {
   return (
-    <section id="skills" className="py-32 bg-[#050505]">
+    <section id="skills" className="py-32 relative z-10">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
            <div className="space-y-4">

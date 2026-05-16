@@ -18,7 +18,7 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="py-24 bg-[#0a0a0a]">
+    <section id="about" className="py-24 relative z-10">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row gap-16 items-start">
           <div className="md:w-1/2 space-y-6">

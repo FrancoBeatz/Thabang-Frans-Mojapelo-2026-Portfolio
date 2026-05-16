@@ -123,7 +123,7 @@ const DigitalTwin: React.FC = () => {
   };
 
   return (
-    <section id="ai-assistant" className="py-32 bg-dark-bg relative overflow-hidden">
+    <section id="ai-assistant" className="py-32 relative overflow-hidden z-10">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-electric-orange/5 blur-[150px] rounded-full -z-0 pointer-events-none"></div>
       
       <div className="container mx-auto px-6">

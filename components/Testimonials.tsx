@@ -19,7 +19,7 @@ const Testimonials: React.FC = () => {
   ];
 
   return (
-    <section id="testimonials" className="py-24 bg-[#0c0c0c] border-y border-white/5">
+    <section id="testimonials" className="py-24 border-y border-white/5 relative z-10">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-xs font-bold text-electric-orange uppercase tracking-[0.3em] mb-4">Trust</h2>

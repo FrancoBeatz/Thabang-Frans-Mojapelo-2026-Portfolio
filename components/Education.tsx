@@ -19,7 +19,7 @@ const Education: React.FC = () => {
   ];
 
   return (
-    <section id="education" className="py-32 bg-dark-bg relative overflow-hidden">
+    <section id="education" className="py-32 relative overflow-hidden z-10">
       {/* Dynamic Background elements */}
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-electric-orange/10 blur-[150px] rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
       <div className="absolute top-1/2 right-0 w-96 h-96 bg-blue-600/10 blur-[150px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
