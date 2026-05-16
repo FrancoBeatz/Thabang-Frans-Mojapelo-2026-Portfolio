@@ -31,8 +31,18 @@ const Navbar: React.FC = () => {
   return (
     <nav className={`fixed top-0 w-full z-[100] transition-all duration-500 ${scrolled ? 'glass-nav py-4 shadow-lg' : 'bg-transparent py-8'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <a href="#home" onClick={closeMenu} className="text-2xl font-display font-black tracking-tighter group outline-none focus:ring-2 focus:ring-electric-orange rounded-lg">
-          THABANG<span className="text-electric-orange transition-all duration-300 group-hover:tracking-normal">.DEV</span>
+        <a href="#home" onClick={closeMenu} className="flex items-center gap-3 text-2xl font-display font-black tracking-tighter group outline-none focus:ring-2 focus:ring-electric-orange rounded-lg">
+          <div className="relative w-10 h-10 overflow-hidden rounded-xl border border-white/10 group-hover:border-electric-orange/50 transition-colors bg-[#080808] flex items-center justify-center p-1.5">
+            <img 
+              src="https://i.ibb.co/Vc26YYXx/71fbabe1-d110-4701-81d9-f7062408f93f.png" 
+              alt="Logo" 
+              className="w-full h-full object-contain"
+              referrerPolicy="no-referrer"
+            />
+          </div>
+          <span className="hidden sm:inline">
+            THABANG<span className="text-electric-orange transition-all duration-300 group-hover:tracking-normal">.DEV</span>
+          </span>
         </a>
 
         {/* Desktop Navigation */}
