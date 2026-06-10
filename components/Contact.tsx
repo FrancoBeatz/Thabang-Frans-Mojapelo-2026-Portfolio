@@ -83,17 +83,14 @@ const Contact: React.FC = () => {
               </a>
               
               <div className="pt-4">
-                <a 
-                  href="#" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    alert("Resume download starting...");
-                    window.open("https://thabang-frans-mojapelo-2026-portfol.vercel.app/resume.pdf", "_blank");
+                <button 
+                  onClick={() => {
+                    window.dispatchEvent(new CustomEvent('open-resume-modal'));
                   }}
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-2xl hover:bg-white/10 transition-all"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-2xl hover:bg-white/10 transition-all cursor-pointer"
                 >
-                  📄 Download My Resume (PDF)
-                </a>
+                  📄 Interactive CV & Certificate
+                </button>
               </div>
             </div>
           </div>

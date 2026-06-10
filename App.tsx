@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import VideoBackground from './components/VideoBackground';
 import Hero from './components/Hero';
@@ -17,8 +17,17 @@ import Projects from './components/Projects';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import InteractiveResume from './components/InteractiveResume';
 
 const App: React.FC = () => {
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
+
+  useEffect(() => {
+    const handleOpen = () => setIsResumeOpen(true);
+    window.addEventListener('open-resume-modal', handleOpen);
+    return () => window.removeEventListener('open-resume-modal', handleOpen);
+  }, []);
+
   return (
     <div className="min-h-screen text-white selection:bg-electric-orange selection:text-white overflow-hidden relative">
       <VideoBackground />
@@ -61,12 +70,12 @@ const App: React.FC = () => {
               >
                 Let’s Build Something Serious
               </a>
-              <a 
-                href="#" 
+              <button 
+                onClick={() => setIsResumeOpen(true)}
                 className="inline-block px-12 py-6 bg-white/5 border border-white/10 text-white font-bold text-xl rounded-2xl hover:bg-white/10 transition-all duration-300"
               >
                 Download Resume
-              </a>
+              </button>
             </div>
           </div>
         </section>
@@ -75,6 +84,9 @@ const App: React.FC = () => {
         <Contact />
       </main>
       <Footer />
+      
+      {/* Dynamic CV Modal Overlay */}
+      <InteractiveResume isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
     </div>
   );
 };

@@ -5,16 +5,16 @@ import { GraduationCap, BookOpen, Award, ShieldCheck, Milestone, Cpu, Database }
 const Education: React.FC = () => {
   const academicItems = [
     {
-      title: "Software Engineering",
-      description: "Learning how to build strong and fast software. Focused on solving complex problems with clean logic.",
+      title: "Scrimba AS",
+      description: "Software Development Programme. Focus on Frontend and Backend engineering logic, specializing in JavaScript, TypeScript Deep Dive, React, Node.js and systems architecture.",
       icon: <Cpu size={24} />,
-      year: "Core Logic"
+      year: "2023 – 2026"
     },
     {
-      title: "System Design",
-      description: "Learning how to design large systems that can handle many users at once. Focused on reliability and growth.",
+      title: "freeCodeCamp",
+      description: "Software Development Basics. Rigorous hands-on curriculum representing core algorithms, responsive layout systems, data structures, and native web standards.",
       icon: <Database size={24} />,
-      year: "Architecture"
+      year: "2020 – 2023"
     }
   ];
 

@@ -44,18 +44,14 @@ const Hero: React.FC = () => {
             >
               📩 Hire Me
             </a>
-            <a 
-              href="#" 
-              onClick={(e) => {
-                e.preventDefault();
-                alert("Resume download starting...");
-                // In a real app, this would be a link to the PDF file
-                window.open("https://thabang-frans-mojapelo-2026-portfol.vercel.app/resume.pdf", "_blank");
+            <button 
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('open-resume-modal'));
               }}
               className="flex items-center justify-center px-8 py-4 bg-white/5 border border-white/10 text-gray-300 font-bold rounded-xl hover:bg-white/10 transition-all duration-300"
             >
-              📄 Download Resume
-            </a>
+              📄 View/Download CV
+            </button>
           </div>
         </div>
 
