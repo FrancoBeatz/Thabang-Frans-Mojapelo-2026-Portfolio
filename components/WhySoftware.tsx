@@ -24,7 +24,7 @@ const WhySoftware: React.FC = () => {
   }, []);
 
   const stats = [
-    { label: 'Years Experience', value: '6+', icon: <Target size={24} /> },
+    { label: 'Active Since', value: '2023', icon: <Target size={24} /> },
     { label: 'Projects Built', value: '30+', icon: <Rocket size={24} /> },
     { label: 'Bugs Defeated', value: '1,000+', icon: <Bug size={24} /> },
     { label: 'Perf Optimized', value: '100%', icon: <Zap size={24} /> },

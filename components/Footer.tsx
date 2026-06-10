@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
               THABANG<span className="text-electric-orange">.DEV</span>
             </div>
             <p className="text-gray-500 max-w-xs text-sm">
-              Software Developer | 6+ Years Experience | Building Great Apps
+              Junior Full-Stack Developer | Independent Projects | Active Since 2023
             </p>
           </div>
           

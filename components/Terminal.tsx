@@ -13,7 +13,7 @@ const Terminal: React.FC = () => {
 
   const commands: Record<string, string> = {
     help: "Commands: bio, stack, values, clear, contact",
-    bio: "Software Developer with 6+ years experience. I build apps that work.",
+    bio: "Passionate Full-Stack Developer with hands-on experience building modern web applications. Active since 2023.",
     stack: "Frontend: React, Next.js. Backend: Node, Express, MongoDB. Tools: Git.",
     values: "1. Speed is key. 2. Keep it simple. 3. Clean code is better.",
     contact: "Email: mojapelot2@gmail.com | WhatsApp: 0723481158"

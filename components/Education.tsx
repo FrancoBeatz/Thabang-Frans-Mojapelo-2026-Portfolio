@@ -83,7 +83,7 @@ const Education: React.FC = () => {
                   </div>
                   <div className="text-left">
                     <p className="text-white font-bold text-sm">Pro Standards Verified</p>
-                    <p className="text-[9px] text-gray-500 uppercase tracking-widest font-mono">Senior Engineering Grade</p>
+                    <p className="text-[9px] text-gray-500 uppercase tracking-widest font-mono">Verified Full-Stack Grade</p>
                   </div>
                </div>
             </div>

@@ -31,9 +31,9 @@ const Skills: React.FC = () => {
         </div>
         
         <div className="grid md:grid-cols-3 gap-8">
-           <SkillGroup title="Frontend" icon={<Layout size={80}/>} skills={['React', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind', 'Next.js']} />
-           <SkillGroup title="Backend" icon={<Database size={80}/>} skills={['Node.js', 'Express', 'MongoDB', 'Supabase', 'REST APIs', 'SQL']} />
-           <SkillGroup title="The Expert Set" icon={<Layers size={80}/>} skills={['Git', 'Netlify', 'Performance Opt.', 'Authentication', 'Advanced Debugging']} />
+           <SkillGroup title="Frontend" icon={<Layout size={80}/>} skills={['React', 'JavaScript (ES6+)', 'HTML5', 'CSS3', 'Bootstrap', 'Tailwind CSS']} />
+           <SkillGroup title="Backend & DB" icon={<Database size={80}/>} skills={['Node.js', 'Express.js', 'MongoDB', 'REST APIs']} />
+           <SkillGroup title="Tools & Practices" icon={<Layers size={80}/>} skills={['Git', 'GitHub', 'VS Code', 'Responsive Design', 'UI/UX Principles', 'Website Deployment', 'Domain & Hosting']} />
         </div>
       </div>
     </section>

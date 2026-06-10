@@ -25,7 +25,7 @@ const Hero: React.FC = () => {
           </h1>
           
           <p className="text-lg md:text-xl text-gray-400 max-w-xl leading-relaxed font-light">
-            I’m <span className="text-white font-semibold">Thabang Frans Mojapelo</span>. I have <span className="text-electric-orange font-bold">6+ years</span> of experience building websites and apps that are easy to use and run perfectly.
+            I’m <span className="text-white font-semibold">Thabang Frans Mojapelo</span>. I'm a passionate <span className="text-electric-orange font-semibold">Full-Stack Developer</span> specializing in building high-performance websites and modern web applications that run perfectly since 2023.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-2">
