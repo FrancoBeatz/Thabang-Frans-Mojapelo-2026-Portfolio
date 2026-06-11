@@ -7,7 +7,7 @@ interface InteractiveResumeProps {
 }
 
 const InteractiveResume: React.FC<InteractiveResumeProps> = ({ isOpen, onClose }) => {
-  const [activeTab, setActiveTab] = useState<'cv' | 'credentials'>('cv');
+  const [activeTab, setActiveTab] = useState<'cv' | 'scrimba' | 'fcc'>('cv');
 
   // Lock body scroll when resume is open
   useEffect(() => {
@@ -54,19 +54,25 @@ const InteractiveResume: React.FC<InteractiveResumeProps> = ({ isOpen, onClose }
         {/* Ambient Top Glow (Hidden in Print) */}
         <div className="absolute top-0 left-1/4 right-1/4 h-[2px] bg-gradient-to-r from-transparent via-electric-orange to-transparent opacity-60 print:hidden"></div>
         
-        {/* Interactive Tabs for switching between CV details and Scrimba certificate */}
-        <div className="flex border-b border-white/5 bg-[#0e0e0e] px-8 py-4 gap-4 print:hidden">
+        {/* Interactive Tabs for switching between CV details and Certificates */}
+        <div className="flex flex-wrap border-b border-white/5 bg-[#0e0e0e] px-6 py-4 gap-3 print:hidden">
           <button 
             onClick={() => setActiveTab('cv')}
-            className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${activeTab === 'cv' ? 'bg-electric-orange text-white' : 'text-gray-400 hover:text-white bg-white/5'}`}
+            className={`px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all ${activeTab === 'cv' ? 'bg-electric-orange text-white' : 'text-gray-400 hover:text-white bg-white/5'}`}
           >
             📄 Professional CV
           </button>
           <button 
-            onClick={() => setActiveTab('credentials')}
-            className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'credentials' ? 'bg-electric-orange text-white' : 'text-gray-400 hover:text-white bg-white/5'}`}
+            onClick={() => setActiveTab('scrimba')}
+            className={`px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-1.5 ${activeTab === 'scrimba' ? 'bg-electric-orange text-white' : 'text-gray-400 hover:text-white bg-white/5'}`}
           >
-            <Award size={16} /> Verified Scrimba Certificate
+            <Award size={15} /> Scrimba AS
+          </button>
+          <button 
+            onClick={() => setActiveTab('fcc')}
+            className={`px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-1.5 ${activeTab === 'fcc' ? 'bg-electric-orange text-white' : 'text-gray-400 hover:text-white bg-white/5'}`}
+          >
+            <Award size={15} /> freeCodeCamp (1800h)
           </button>
         </div>
 
@@ -260,7 +266,7 @@ const InteractiveResume: React.FC<InteractiveResumeProps> = ({ isOpen, onClose }
             </div>
 
           </div>
-        ) : (
+        ) : activeTab === 'scrimba' ? (
           /* VERIFIED SCRIMBA CERTIFICATE VIEW */
           <div className="p-8 md:p-16 flex flex-col items-center justify-center bg-[#070707] min-h-[700px]">
             
@@ -280,7 +286,7 @@ const InteractiveResume: React.FC<InteractiveResumeProps> = ({ isOpen, onClose }
                 <h4 className="text-xs font-black uppercase tracking-[0.4em] text-gray-500">Certificate of Completion</h4>
                 <p className="text-sm text-gray-600 font-light">presented to</p>
                 
-                <h3 className="text-3xl md:text-4xl font-display font-black text-black tracking-tight my-4">
+                <h3 className="text-3xl md:text-4xl font-display font-black text-black tracking-tight my-4 font-sans">
                   Thabang Frans Mojapelo
                 </h3>
 
@@ -318,7 +324,88 @@ const InteractiveResume: React.FC<InteractiveResumeProps> = ({ isOpen, onClose }
 
             {/* Information note */}
             <p className="text-xs text-gray-500 max-w-md text-center mt-6">
-              This certificate corresponds directly to the official credential on page 2 of Thabang Frans Mojapelo's professional portfolio files.
+              This certificate corresponds directly to the official Scrimba credential on page 2 of Thabang Frans Mojapelo's professional portfolio files.
+            </p>
+
+          </div>
+        ) : (
+          /* VERIFIED FREECODECAMP CERTIFICATE VIEW */
+          <div className="p-8 md:p-16 flex flex-col items-center justify-center bg-[#070707] min-h-[700px]">
+            
+            {/* Elegant freeCodeCamp Verified frame wrapper */}
+            <div className="w-full max-w-3xl bg-white p-6 md:p-12 rounded-2xl border-4 border-[#0a0a23] text-black shadow-2xl relative">
+              
+              {/* freeCodeCamp official logo look & feel header */}
+              <div className="flex justify-between items-center border-b border-gray-200 pb-4 mb-8">
+                <div className="flex items-center gap-1 text-xl md:text-2xl font-bold tracking-tight text-[#0a0a23]">
+                  {/* Fire/Flame replica design with raw styling */}
+                  <span className="text-2xl">🔥</span>
+                  <span className="font-sans font-black">freeCodeCamp(<span className="text-green-800">🔥</span>)</span>
+                </div>
+                <div className="text-xs font-mono font-bold text-gray-500">
+                  Issued 2023
+                </div>
+              </div>
+
+              {/* Certificate content */}
+              <div className="text-center space-y-6">
+                <p className="text-sm text-gray-600 font-light italic">This certifies that</p>
+                
+                <h3 className="text-3xl md:text-5xl font-display font-black text-[#0a0a23] tracking-tight my-4">
+                  Thabang Frans Mojapelo
+                </h3>
+
+                <p className="text-sm text-gray-600 max-w-md mx-auto">
+                  has successfully completed the freeCodeCamp.org
+                </p>
+
+                <div className="my-6 inline-block py-4 px-10 bg-[#0a0a23]/5 text-2xl md:text-3xl font-black text-[#0a0a23] rounded-xl border border-[#0a0a23]/20 tracking-tight font-sans">
+                  Legacy Full Stack
+                </div>
+
+                <p className="text-sm text-gray-600 max-w-lg mx-auto leading-relaxed">
+                  Developer Certification, representing approximately <span className="font-bold">1800 hours</span> of rigorous software engineering coursework.
+                </p>
+
+                {/* Quincy Larson Signature / Seal block */}
+                <div className="grid sm:grid-cols-2 gap-8 pt-10 max-w-xl mx-auto items-center">
+                  <div className="space-y-2 border-t border-gray-200 pt-4">
+                    <div className="font-serif italic text-2xl text-[#0a0a23] leading-none">Quincy Larson</div>
+                    <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Quincy Larson</div>
+                    <div className="text-[9px] text-gray-400">Executive Director, freeCodeCamp.org</div>
+                  </div>
+                  <div className="flex justify-center">
+                    <div className="flex flex-col items-center gap-1.5">
+                      <div className="flex items-center gap-2 p-2.5 bg-green-500/15 border border-green-500/35 rounded-xl text-green-800">
+                        <ShieldCheck size={26} />
+                        <div className="text-left leading-none">
+                          <div className="text-[9px] font-black uppercase tracking-wider">Officially Verified</div>
+                          <div className="text-[8px] text-gray-500 font-mono">Hours: 1,800+</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Live verification action */}
+                <div className="pt-8 border-t border-gray-100">
+                  <a 
+                    href="https://www.freecodecamp.org/certification/frans1987/full-stack"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 py-2 px-4 bg-[#0a0a23] hover:bg-green-700 text-white font-bold rounded-xl transition-all text-xs"
+                  >
+                    🔍 Verify Credentials Online <ExternalLink size={12} />
+                  </a>
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* Information note */}
+            <p className="text-xs text-gray-500 max-w-md text-center mt-6">
+              This certificate corresponds directly to page 2 (freeCodeCamp credential) of Thabang Frans Mojapelo's professional portfolio files.
             </p>
 
           </div>
