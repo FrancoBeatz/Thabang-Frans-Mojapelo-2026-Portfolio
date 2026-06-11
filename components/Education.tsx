@@ -93,7 +93,7 @@ const Education: React.FC = () => {
           <div className="hidden lg:block group">
             <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl transition-all duration-700 group-hover:translate-x-2 group-hover:rotate-[1deg]">
               <img 
-                src="https://i.ibb.co/CppwZBPS/Chat-GPT-Image-Feb-5-2026-08-32-50-AM.png" 
+                src="https://i.ibb.co/vC2gd3mp/ac7b9098-4c27-42c1-ae36-dffa74b1a54b.png" 
                 alt="Industrial Engineering Application" 
                 className="w-full h-auto object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-110"
               />
@@ -111,7 +111,7 @@ const Education: React.FC = () => {
                 <img src="https://i.ibb.co/KxfPj1hJ/9a9db522-37fe-4342-a3c7-13e6fbdb611d.png" className="w-full h-full object-cover" alt="Edu 1" />
              </div>
              <div className="rounded-2xl overflow-hidden border border-white/10 aspect-square">
-                <img src="https://i.ibb.co/CppwZBPS/Chat-GPT-Image-Feb-5-2026-08-32-50-AM.png" className="w-full h-full object-cover" alt="Edu 2" />
+                <img src="https://i.ibb.co/vC2gd3mp/ac7b9098-4c27-42c1-ae36-dffa74b1a54b.png" className="w-full h-full object-cover" alt="Edu 2" />
              </div>
           </div>
 
