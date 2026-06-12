@@ -41,7 +41,7 @@ const DigitalTwin: React.FC = () => {
     - Key Projects: 
         1. Tracy Mashishi Portfolio: Premium responsive high-performance portfolio website.
         2. Galaxy Defender: A fast space game built with Canvas API.
-        3. Daily Bloom: A minimalist habit tracker lifestyle app.
+        3. CreamFlow: A premium, ultra-fluid digital showroom with high-end transition effects.
         4. Child Care Africa: A fast website for a humanitarian organization.
         5. Kolas Supply Chain: A tool for tracking inventory globally.
         6. Mkhonto Global: A professional business website for human capital consulting.

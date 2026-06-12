@@ -91,14 +91,14 @@ const Projects: React.FC = () => {
       githubLink: "https://github.com/FrancoBeatz"
     },
     {
-      title: "Daily Bloom",
-      problem: "It was difficult for users to track their daily habits and personal growth in a simple, visual way.",
-      solution: "I built a minimalist habit tracker that uses beautiful visuals and simple interactions to keep users motivated.",
-      description: "A lifestyle app designed to help users bloom into their best selves through daily habit tracking.",
-      image: "https://i.ibb.co/rGrxkDGx/d-AILY.jpg",
-      tech: ["React", "Tailwind CSS", "Framer Motion"],
+      title: "CreamFlow",
+      problem: "A luxury skincare and product service needed an immersive digital showroom with flawless transitions to captivate customers.",
+      solution: "I engineered a high-performance interactive brand platform featuring cream-themed, ultra-fluid aesthetic layouts and sensory motion designs.",
+      description: "A premium e-commerce design and fluid digital showroom built with modern responsive elements and high-contrast motion physics.",
+      image: "https://i.ibb.co/KjGcwFR4/creamflow.jpg",
+      tech: ["Aesthetic UI", "Motion Physics", "Tailwind CSS"],
       perf: 100,
-      liveLink: "https://daily-bloom-pi.vercel.app/",
+      liveLink: "https://creamflow.vercel.app/",
       githubLink: "https://github.com/FrancoBeatz"
     }
   ];
