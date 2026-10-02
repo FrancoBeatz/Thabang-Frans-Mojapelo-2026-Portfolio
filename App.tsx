@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, User, Cpu, FolderGit2, Mail, FileText, Send, Sparkles } from 'lucide-react';
+import { Home, User, Cpu, Layers, Award, Rocket, Bot, Mail, FileText } from 'lucide-react';
 import Navbar from './components/Navbar';
 import VideoBackground from './components/VideoBackground';
 import Hero from './components/Hero';
@@ -19,14 +19,15 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import InteractiveResume from './components/InteractiveResume';
 import SplashCursor from './components/effects/SplashCursor';
-import Dock, { DockItemData } from './components/effects/Dock';
+import StarBorder from './components/effects/StarBorder';
 import Magnetic from './components/effects/Magnetic';
 import ClickSpark from './components/effects/ClickSpark';
-import StarBorder from './components/effects/StarBorder';
+import DecryptedText from './components/effects/DecryptedText';
+import Dock, { DockItemData } from './components/effects/Dock';
 
 const App: React.FC = () => {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeNav, setActiveNav] = useState('home');
 
   useEffect(() => {
     const handleOpen = () => setIsResumeOpen(true);
@@ -34,145 +35,149 @@ const App: React.FC = () => {
     return () => window.removeEventListener('open-resume-modal', handleOpen);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['home', 'about', 'skills', 'projects', 'education', 'process', 'ai-assistant', 'contact'];
+      for (const s of sections) {
+        const el = document.getElementById(s);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 300 && rect.bottom >= 300) {
+            setActiveNav(s);
+            break;
+          }
+        }
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const dockItems: DockItemData[] = [
-    {
-      icon: <Home className="w-4 h-4" />,
-      label: 'Home',
-      onClick: () => {
-        setActiveSection('home');
-        document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
-      },
-      active: activeSection === 'home',
-    },
-    {
-      icon: <User className="w-4 h-4" />,
-      label: 'About',
-      onClick: () => {
-        setActiveSection('about');
-        document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-      },
-      active: activeSection === 'about',
-    },
-    {
-      icon: <Cpu className="w-4 h-4" />,
-      label: 'Skills',
-      onClick: () => {
-        setActiveSection('skills');
-        document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
-      },
-      active: activeSection === 'skills',
-    },
-    {
-      icon: <FolderGit2 className="w-4 h-4" />,
-      label: 'Projects',
-      onClick: () => {
-        setActiveSection('projects');
-        document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-      },
-      active: activeSection === 'projects',
-    },
-    {
-      icon: <Mail className="w-4 h-4" />,
-      label: 'Contact',
-      onClick: () => {
-        setActiveSection('contact');
-        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-      },
-      active: activeSection === 'contact',
-    },
-    {
-      icon: <FileText className="w-4 h-4 text-electric-orange" />,
-      label: 'Inspect CV',
-      onClick: () => setIsResumeOpen(true),
-    },
+    { icon: <Home size={18} />, label: 'Home', onClick: () => scrollTo('home'), active: activeNav === 'home' },
+    { icon: <User size={18} />, label: 'About', onClick: () => scrollTo('about'), active: activeNav === 'about' },
+    { icon: <Cpu size={18} />, label: 'Skills', onClick: () => scrollTo('skills'), active: activeNav === 'skills' },
+    { icon: <Layers size={18} />, label: 'Projects', onClick: () => scrollTo('projects'), active: activeNav === 'projects' },
+    { icon: <Award size={18} />, label: 'Education', onClick: () => scrollTo('education'), active: activeNav === 'education' },
+    { icon: <Rocket size={18} />, label: 'Process', onClick: () => scrollTo('process'), active: activeNav === 'process' },
+    { icon: <Bot size={18} />, label: 'AI Twin', onClick: () => scrollTo('ai-assistant'), active: activeNav === 'ai-assistant' },
+    { icon: <Mail size={18} />, label: 'Contact', onClick: () => scrollTo('contact'), active: activeNav === 'contact' },
+    { icon: <FileText size={18} className="text-purple-400" />, label: 'Resume', onClick: () => setIsResumeOpen(true) },
   ];
 
   return (
-    <div className="min-h-screen text-white selection:bg-electric-orange selection:text-white overflow-hidden relative bg-[#070709]">
-      {/* Ambient Mouse Particle Trail */}
+    <div className="min-h-screen text-white selection:bg-electric-orange selection:text-white overflow-x-hidden relative bg-[#050608]">
+      {/* Interactive Liquid / Splash Cursor */}
       <SplashCursor colorPalette={['#f97316', '#fb923c', '#fdba74', '#38bdf8', '#ffffff']} />
-
-      {/* Layered Cinematic Video Background */}
-      <VideoBackground />
       
-      {/* Fixed Header */}
+      <VideoBackground />
       <Navbar />
-
+      
       <main className="relative z-10">
         <Hero />
+        
+        {/* Section: #about */}
         <About />
+        
+        {/* Section: #why */}
         <WhySoftware />
+
+        {/* Section: #skills */}
+        <Skills />
+
+        {/* Section: #projects */}
+        <Projects />
+
+        {/* Section: #education */}
         <Education />
+
+        {/* Section: #process */}
+        <Process />
+
+        {/* Section: #services */}
+        <WhatIBuild />
+
+        {/* Section: #ai-assistant */}
+        <DigitalTwin />
+
+        {/* Terminal & Core Web Vitals */}
         <Terminal />
         <DevMetrics />
-        <Process />
-        <WhatIBuild />
-        <DigitalTwin />
+
+        {/* Philosophy */}
         <Philosophy />
-        <Skills />
-        <Projects />
+
+        {/* Section: #testimonials */}
         <Testimonials />
         
-        {/* Strong Direct Action CTA Section */}
-        <section className="py-28 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-20 pointer-events-none">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-electric-orange/20 blur-[180px] rounded-full" />
+        {/* Strong Final Call to Action */}
+        <section className="py-32 relative overflow-hidden border-t border-white/5">
+          <div className="absolute inset-0 opacity-15 pointer-events-none">
+            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-electric-orange/20 via-transparent to-transparent" />
           </div>
           
-          <div className="container mx-auto px-6 text-center relative z-10 space-y-8">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-electric-orange/10 border border-electric-orange/30 text-xs font-mono text-electric-orange">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>READY TO COLLABORATE</span>
+          <div className="container mx-auto px-6 text-center relative z-10 space-y-10 max-w-4xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-electric-orange/10 border border-electric-orange/20 text-electric-orange text-xs font-bold uppercase tracking-[0.2em]">
+              <span>Let's Collaborate</span>
             </div>
 
-            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-display font-extrabold leading-tight text-white max-w-4xl mx-auto">
-              Have a Project in Mind? <br />
-              Let’s <span className="text-electric-orange">Engineer</span> It Together.
+            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-display font-extrabold leading-[1.1] text-white">
+              Have an Idea? <br /> I’ll <span className="text-electric-orange">Engineer</span> It Into Reality.
             </h2>
 
-            <p className="text-gray-400 max-w-xl mx-auto text-base sm:text-lg font-light leading-relaxed">
-              Whether you are hiring for a full-time software developer role or need a high-performance web application built from scratch, I'm ready to ship.
+            <p className="text-gray-400 text-base sm:text-lg max-w-xl mx-auto leading-relaxed font-light">
+              Available for junior software developer opportunities, contract engagements, and custom full-stack solutions.
             </p>
 
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-5 pt-4">
-              <Magnetic strength={0.3}>
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-5 pt-2">
+              <Magnetic strength={0.35}>
                 <ClickSpark sparkColor="#f97316">
-                  <a 
-                    href="https://wa.me/27723481158"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 px-10 py-5 bg-electric-orange hover:bg-orange-600 text-white font-bold text-lg rounded-2xl shadow-xl shadow-electric-orange/30 hover:scale-105 transition-all duration-300"
-                  >
-                    <Send className="w-5 h-5" />
-                    <span>Let’s Build Something Serious</span>
-                  </a>
+                  <StarBorder speed="4s" color="#f97316" className="rounded-2xl">
+                    <a 
+                      href="https://wa.me/27723481158"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block px-10 py-5 bg-electric-orange text-white font-extrabold text-base rounded-2xl hover:bg-orange-600 transition-all duration-300 shadow-xl shadow-electric-orange/30"
+                    >
+                      <DecryptedText text="Let’s Build Something Serious" animateOn="hover" />
+                    </a>
+                  </StarBorder>
                 </ClickSpark>
               </Magnetic>
 
-              <Magnetic strength={0.3}>
-                <button 
-                  onClick={() => setIsResumeOpen(true)}
-                  className="inline-flex items-center gap-2.5 px-8 py-5 bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold text-lg rounded-2xl backdrop-blur-md transition-all duration-300"
-                >
-                  <FileText className="w-5 h-5 text-electric-orange" />
-                  <span>Download CV</span>
-                </button>
+              <Magnetic strength={0.35}>
+                <ClickSpark sparkColor="#38bdf8">
+                  <button 
+                    onClick={() => setIsResumeOpen(true)}
+                    className="inline-block px-10 py-5 bg-white/5 border border-white/10 text-white font-bold text-base rounded-2xl hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+                  >
+                    Download Resume
+                  </button>
+                </ClickSpark>
               </Magnetic>
             </div>
           </div>
         </section>
 
+        {/* Section: #contact */}
         <Contact />
       </main>
 
       <Footer />
-
-      {/* Floating HUD Quick-Access Dock */}
-      <div className="hidden sm:block">
+      
+      {/* Floating Interactive Dock (Desktop / Tablet) */}
+      <div className="hidden md:block">
         <Dock items={dockItems} />
       </div>
-      
-      {/* Dynamic CV Modal Overlay */}
+
+      {/* Dynamic CV & Credentials Modal Overlay */}
       <InteractiveResume isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
     </div>
   );
