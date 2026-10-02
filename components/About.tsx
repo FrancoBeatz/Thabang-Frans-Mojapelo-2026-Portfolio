@@ -1,190 +1,205 @@
-
 import React from 'react';
-import { CheckCircle2, Briefcase, Target, Layers, Laptop, Globe, Server } from 'lucide-react';
+import { CheckCircle2, Briefcase, Target, Layers, Globe, Server, User, Award, ShieldCheck, Sparkles, Terminal } from 'lucide-react';
+import SpotlightCard from './effects/SpotlightCard';
+import DecryptedText from './effects/DecryptedText';
 
 const About: React.FC = () => {
   const stats = [
-    { label: 'Projects Completed', value: '25+' },
-    { label: 'Active Since', value: '2023' },
-    { label: 'Client Satisfaction', value: '100%' },
+    { label: 'Projects & Implementations', value: '25+' },
+    { label: 'Independent Engineering', value: '2023–Now' },
+    { label: 'Client Delivery Satisfaction', value: '100%' },
   ];
 
   const experienceBullets = [
-    "Designed and developed responsive websites and web applications using HTML, CSS, JavaScript, React, Node.js, Express.js, and MongoDB.",
-    "Built custom business websites for clients across various industries, enhancing their brand presence.",
-    "Developed front-end interfaces focused on performance, user experience, and mobile responsiveness.",
-    "Implemented back-end systems, APIs, database integration, and authentication features.",
-    "Collaborated with clients to gather requirements, deliver tailored solutions, and provide ongoing maintenance.",
-    "Managed project deployment, hosting, domain configuration, and website optimization.",
-    "Utilized Git, GitHub, and modern development workflows for version control and project-management reliability."
+    'Engineered modern, responsive web applications and business websites using React, TypeScript, JavaScript (ES6+), Node.js, Express.js, and MongoDB.',
+    'Built custom digital solutions for clients across commercial sectors, strengthening their web footprint, lead generation, and user retention.',
+    'Developed modular frontend components with strict focus on high-speed performance, sub-second load times, and cross-device responsiveness.',
+    'Designed and implemented secure RESTful API architectures, database models, session handling, and environment-isolated security configs.',
+    'Collaborated directly with stakeholders to gather domain requirements, scope architectures, deliver production iterations, and provide support.',
+    'Managed deployment pipelines across Vercel, Netlify, and Render including custom DNS setup, SSL encryption, and caching policies.',
+    'Maintained Git version control, semantic release tracking, and modular clean-code standards across all projects.',
   ];
 
   const businessWebOutcomes = [
-    "Improved online visibility and professional credibility of client businesses.",
-    "Created fully responsive experiences across desktop, tablet, and mobile devices.",
-    "Optimized page speed and overall website performance to guarantee excellent UX.",
-    "Integrated contact forms and lead-generation features to drive customer connection.",
-    "Delivered modern, user-friendly interfaces that substantially improved user engagement."
+    'Elevated digital credibility and conversion rates for corporate clients.',
+    'Guaranteed 100% fluid responsiveness across mobile, tablet, and widescreen viewports.',
+    'Engineered lightweight asset bundles for fast loading even on constrained mobile networks.',
+    'Integrated lead-generation forms, direct WhatsApp routing, and transactional workflows.',
   ];
 
   const fullStackAchievements = [
-    "Built secure authentication and user management systems.",
-    "Developed robust REST APIs and smooth database integrations.",
-    "Implemented scalable, clean backend architectures using Node.js and MongoDB.",
-    "Enhanced user experience through high-fidelity intuitive UI/UX design.",
-    "Achieved significant gains in system performance and screen responsiveness."
+    'Engineered secure authentication, password encryption, and JWT token sessions.',
+    'Developed scalable Node.js/Express API routing with unified error handling structures.',
+    'Designed flexible MongoDB database schemas with automated indexing and aggregation.',
+    'Optimized state management and client-side caching to reduce redundant network overhead.',
   ];
 
   return (
-    <section id="about" className="py-32 relative z-10 overflow-hidden">
-      {/* Decorative localized glow */}
-      <div className="absolute top-[30%] right-[-10%] w-[300px] h-[300px] bg-electric-orange/5 blur-[100px] rounded-full pointer-events-none"></div>
-
-      <div className="container mx-auto px-6">
-        <div className="space-y-16">
-          
-          {/* Header */}
-          <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <h2 className="text-xs font-bold text-electric-orange uppercase tracking-[0.4em]">Professional Persona</h2>
-            <h3 className="text-4xl md:text-5xl font-display font-black leading-tight text-white">
-              The Developer Behind The <span className="text-electric-orange">Logic</span>
-            </h3>
+    <section id="about" className="py-28 relative z-10 overflow-hidden">
+      <div className="container mx-auto px-6 space-y-16">
+        
+        {/* Section Header */}
+        <div className="text-center space-y-3 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric-orange/10 border border-electric-orange/20 text-xs font-mono text-electric-orange">
+            <User className="w-3.5 h-3.5" />
+            <span>BACKGROUND & EXPERIENCE</span>
           </div>
+          <h3 className="text-3xl md:text-5xl font-display font-bold text-white">
+            Engineering Intentional, <span className="text-electric-orange">Production-Grade</span> Software
+          </h3>
+        </div>
 
-          {/* Top Frame: Career Objective */}
-          <div className="p-8 md:p-12 rounded-[2rem] bg-card-bg border border-white/5 relative overflow-hidden group hover:border-electric-orange/20 transition-all duration-500">
-            <div className="absolute top-0 right-0 p-8 text-white/5 group-hover:text-electric-orange/10 transition-colors">
-              <Target size={110} />
-            </div>
-            <div className="z-10 relative space-y-4 max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-electric-orange/10 border border-electric-orange/20 rounded-full text-electric-orange text-xs font-bold uppercase tracking-widest">
-                <Target size={12} /> Career Objective
+        {/* Career Objective Banner */}
+        <SpotlightCard
+          spotlightColor="rgba(249, 115, 22, 0.15)"
+          tiltIntensity={3}
+          className="p-8 md:p-10 rounded-3xl bg-[#0d0d12]/90 border border-white/10 relative overflow-hidden backdrop-blur-md shadow-xl"
+        >
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="space-y-3 max-w-3xl">
+              <div className="flex items-center gap-2 text-xs font-mono text-electric-orange uppercase tracking-wider">
+                <Target className="w-4 h-4" />
+                <span>Primary Engineering Objective</span>
               </div>
-              <p className="text-lg md:text-2xl text-gray-200 leading-relaxed font-light">
-                Passionate <span className="text-white font-semibold">Full-Stack Developer</span> with hands-on experience building modern web applications and business websites. Seeking an entry-level software development opportunity where I can contribute, learn from experienced professionals, and continue growing within a collaborative development environment.
+              <p className="text-lg md:text-xl text-gray-200 font-light leading-relaxed">
+                Dedicated <span className="text-white font-semibold">Junior Full-Stack Developer</span> with proven hands-on experience designing and deploying scalable web applications and high-conversion business systems. Seeking a full-time software engineering role where I can contribute clean code, collaborate with senior engineering teams, and deliver immediate value.
               </p>
             </div>
+            <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 shrink-0 text-center font-mono">
+              <span className="text-xs text-gray-400 block mb-1">Status</span>
+              <span className="text-sm font-bold text-green-400 flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                Ready to Deploy
+              </span>
+            </div>
           </div>
+        </SpotlightCard>
 
-          {/* Grid section */}
-          <div className="grid lg:grid-cols-[1.4fr_0.8fr] gap-12 items-start">
-            
-            {/* Left Column: Experience */}
-            <div className="p-8 md:p-10 rounded-[2rem] bg-card-bg border border-white/5 space-y-8">
+        {/* Experience & Stats Layout */}
+        <div className="grid lg:grid-cols-[1.4fr_0.8fr] gap-8 items-start">
+          
+          {/* Main Experience Column */}
+          <SpotlightCard
+            spotlightColor="rgba(249, 115, 22, 0.18)"
+            tiltIntensity={4}
+            className="p-8 md:p-10 rounded-3xl bg-[#0d0d12]/90 border border-white/10 space-y-6 backdrop-blur-md shadow-xl"
+          >
+            <div className="flex items-center justify-between border-b border-white/10 pb-5">
               <div className="flex items-center gap-3">
-                <div className="p-3 bg-electric-orange/10 text-electric-orange rounded-xl">
-                  <Briefcase size={24} />
+                <div className="p-3 bg-electric-orange/10 text-electric-orange rounded-2xl border border-electric-orange/20">
+                  <Briefcase className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-2xl font-bold text-white">Professional Experience</h4>
-                  <p className="text-xs text-gray-500 uppercase tracking-widest font-mono">Self-Employed & Projects</p>
+                  <h4 className="text-xl font-bold text-white">Full-Stack Development Experience</h4>
+                  <p className="text-xs text-gray-400 font-mono">Self-Employed / Freelance & Client Systems</p>
                 </div>
               </div>
-
-              <div className="border-t border-white/5 pt-6 space-y-4">
-                <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
-                  <h5 className="text-xl font-bold text-white">Junior Full-Stack Developer</h5>
-                  <span className="px-4 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-electric-orange w-fit">
-                    2023 – Present
-                  </span>
-                </div>
-                <p className="text-sm font-medium text-gray-400">
-                  Self-Employed / Independent Development Projects
-                </p>
-              </div>
-
-              <ul className="space-y-4 pt-2">
-                {experienceBullets.map((bullet, idx) => (
-                  <li key={idx} className="flex items-start gap-3.5 text-gray-300 text-sm md:text-base leading-relaxed">
-                    <CheckCircle2 className="text-electric-orange flex-shrink-0 mt-1" size={18} />
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
+              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-electric-orange">
+                2023 – Present
+              </span>
             </div>
 
-            {/* Right Column: Key Stats & Professional Positioning */}
-            <div className="space-y-8">
-              {/* Stat Cards */}
-              <div className="grid sm:grid-cols-3 lg:grid-cols-1 gap-6">
-                {stats.map((stat, idx) => (
-                  <div key={idx} className="p-8 rounded-2xl border border-white/5 bg-card-bg group hover:border-electric-orange/30 transition-all duration-300">
-                    <div className="text-4xl font-display font-extrabold text-white mb-1 group-hover:text-electric-orange transition-colors">
-                      {stat.value}
-                    </div>
-                    <div className="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">
-                      {stat.label}
-                    </div>
+            <ul className="space-y-4 pt-2">
+              {experienceBullets.map((bullet, idx) => (
+                <li key={idx} className="flex items-start gap-3.5 text-gray-300 text-sm leading-relaxed">
+                  <CheckCircle2 className="w-4 h-4 text-electric-orange shrink-0 mt-1" />
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          </SpotlightCard>
+
+          {/* Key Metrics & Strengths Column */}
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 gap-4">
+              {stats.map((stat, idx) => (
+                <SpotlightCard
+                  key={idx}
+                  spotlightColor="rgba(56, 189, 248, 0.15)"
+                  tiltIntensity={4}
+                  className="p-6 rounded-2xl bg-[#0d0d12]/90 border border-white/10 backdrop-blur-md group hover:border-electric-orange/40 transition-all shadow-lg"
+                >
+                  <div className="text-3xl font-mono font-bold text-white mb-1 group-hover:text-electric-orange transition-colors">
+                    {stat.value}
                   </div>
-                ))}
-              </div>
-
-              {/* Special Achievements/Outcomes Card */}
-              <div className="p-8 rounded-[2rem] bg-card-bg border border-white/5 space-y-6">
-                <div className="flex items-center gap-3">
-                  <div className="p-2.5 bg-blue-500/10 text-blue-400 rounded-lg">
-                    <Layers size={20} />
+                  <div className="text-xs font-mono text-gray-400 uppercase tracking-wide">
+                    {stat.label}
                   </div>
-                  <h4 className="font-bold text-white text-lg">Impact Portfolio Focus</h4>
-                </div>
-                <p className="text-xs text-gray-500">
-                  Demonstrating technical results and client solutions across high-impact business products and full-stack systems.
-                </p>
-              </div>
+                </SpotlightCard>
+              ))}
             </div>
 
-          </div>
-
-          {/* Bottom Grid: Business Websites vs Full-Stack Apps Results */}
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Box 1: Business Website Development */}
-            <div className="p-8 md:p-10 rounded-[2.5rem] bg-card-bg border border-white/5 hover:border-electric-orange/10 transition-all duration-300 space-y-6">
-              <div className="flex items-center gap-4">
-                <div className="p-4 bg-white/5 border border-white/5 rounded-2xl text-electric-orange">
-                  <Globe size={24} />
-                </div>
-                <div>
-                  <h4 className="text-lg font-bold text-white">Business Website Development</h4>
-                  <p className="text-[10px] text-gray-500 uppercase tracking-widest font-mono">Real-World Case Study Solutions</p>
-                </div>
+            <SpotlightCard
+              spotlightColor="rgba(34, 197, 94, 0.15)"
+              tiltIntensity={4}
+              className="p-6 rounded-2xl bg-[#0d0d12]/90 border border-white/10 backdrop-blur-md shadow-lg space-y-3"
+            >
+              <div className="flex items-center gap-2.5 text-green-400 font-bold text-sm">
+                <ShieldCheck className="w-5 h-5" />
+                <span>Core Engineering Standards</span>
               </div>
-              <ul className="space-y-3 pt-2">
-                {businessWebOutcomes.map((bullet, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-gray-400 text-xs md:text-sm leading-relaxed">
-                    <span className="w-1.5 h-1.5 rounded-full bg-electric-orange flex-shrink-0 mt-2"></span>
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Box 2: Full-Stack Web Applications */}
-            <div className="p-8 md:p-10 rounded-[2.5rem] bg-card-bg border border-white/5 hover:border-blue-500/10 transition-all duration-300 space-y-6">
-              <div className="flex items-center gap-4">
-                <div className="p-4 bg-white/5 border border-white/5 rounded-2xl text-blue-400">
-                  <Server size={24} />
-                </div>
-                <div>
-                  <h4 className="text-lg font-bold text-white">Full-Stack Web Applications</h4>
-                  <p className="text-[10px] text-gray-500 uppercase tracking-widest font-mono">Backend Logic & Database Integrations</p>
-                </div>
-              </div>
-              <ul className="space-y-3 pt-2">
-                {fullStackAchievements.map((bullet, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-gray-400 text-xs md:text-sm leading-relaxed">
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0 mt-2"></span>
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+              <p className="text-xs text-gray-400 font-light leading-relaxed">
+                Prioritizing clean code, maintainability, type safety, low latency, and intuitive UI interactions across every build.
+              </p>
+            </SpotlightCard>
           </div>
 
         </div>
+
+        {/* Breakdown: Client Solutions vs Full-Stack Logic */}
+        <div className="grid md:grid-cols-2 gap-8">
+          <SpotlightCard
+            spotlightColor="rgba(249, 115, 22, 0.15)"
+            tiltIntensity={4}
+            className="p-8 rounded-3xl bg-[#0d0d12]/90 border border-white/10 backdrop-blur-md space-y-5 shadow-xl"
+          >
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-electric-orange/10 text-electric-orange rounded-xl border border-electric-orange/20">
+                <Globe className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-lg font-bold text-white">Client Business Solutions</h4>
+                <p className="text-xs text-gray-400 font-mono">Conversion, Speed & Accessibility</p>
+              </div>
+            </div>
+            <ul className="space-y-3">
+              {businessWebOutcomes.map((bullet, idx) => (
+                <li key={idx} className="flex items-start gap-3 text-gray-300 text-xs sm:text-sm leading-relaxed">
+                  <span className="w-1.5 h-1.5 rounded-full bg-electric-orange shrink-0 mt-2" />
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          </SpotlightCard>
+
+          <SpotlightCard
+            spotlightColor="rgba(56, 189, 248, 0.15)"
+            tiltIntensity={4}
+            className="p-8 rounded-3xl bg-[#0d0d12]/90 border border-white/10 backdrop-blur-md space-y-5 shadow-xl"
+          >
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-sky-500/10 text-sky-400 rounded-xl border border-sky-500/20">
+                <Server className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-lg font-bold text-white">Full-Stack Application Architecture</h4>
+                <p className="text-xs text-gray-400 font-mono">Backend Logic, REST APIs & Data Integrity</p>
+              </div>
+            </div>
+            <ul className="space-y-3">
+              {fullStackAchievements.map((bullet, idx) => (
+                <li key={idx} className="flex items-start gap-3 text-gray-300 text-xs sm:text-sm leading-relaxed">
+                  <span className="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0 mt-2" />
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          </SpotlightCard>
+        </div>
+
       </div>
     </section>
   );
 };
 
 export default About;
-

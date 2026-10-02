@@ -1,38 +1,51 @@
-
 import React, { useState, useEffect, useRef } from 'react';
-import { Terminal as TerminalIcon, ChevronRight } from 'lucide-react';
+import { Terminal as TerminalIcon, ChevronRight, CornerDownLeft, Sparkles } from 'lucide-react';
+import DecryptedText from './effects/DecryptedText';
 
 const Terminal: React.FC = () => {
   const [history, setHistory] = useState<string[]>([
-    "Thabang OS v6.2.0 initialized...",
-    "System check: 100% functional.",
-    "Type 'help' to see available commands."
+    "Thabang OS v2026.1 (x86_64-node-production)",
+    "System runtime initialized: 100% functional.",
+    "Type 'help' or click quick commands below to inspect developer profile."
   ]);
   const [input, setInput] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const commands: Record<string, string> = {
-    help: "Commands: bio, stack, values, clear, contact",
-    bio: "Passionate Full-Stack Developer with hands-on experience building modern web applications. Active since 2023.",
-    stack: "Frontend: React, Next.js. Backend: Node, Express, MongoDB. Tools: Git.",
-    values: "1. Speed is key. 2. Keep it simple. 3. Clean code is better.",
-    contact: "Email: mojapelot2@gmail.com | WhatsApp: 0723481158"
+    help: "Available commands: 'bio', 'stack', 'projects', 'values', 'certifications', 'contact', 'cv', 'clear'",
+    bio: "Thabang Frans Mojapelo — Junior Full-Stack Developer specializing in React, Node.js, Express, and MongoDB. Active since 2023 with 25+ deployed web solutions.",
+    stack: "Frontend: HTML5, CSS3, JavaScript (ES6+), React, Bootstrap, Tailwind CSS\nBackend: Node.js, Express.js\nDatabase: MongoDB\nTools: Git, GitHub, VS Code, REST APIs",
+    projects: "Flagship 1: CreamFlow (Sensory Motion & E-Commerce)\nFlagship 2: Galaxy Defender (2D Canvas Game Engine)\nClient 1: Mkhonto Global Capital\nClient 2: Tracy Mashishi Portfolio\nClient 3: Kolas Supply Chain\nClient 4: Child Care Africa",
+    values: "1. Clean, readable code over clever hacks.\n2. 100% mobile-first responsiveness.\n3. Zero layout shift and sub-second load times.",
+    certifications: "1. Scrimba AS — Software Development Programme (Jan 2026)\n2. freeCodeCamp — Legacy Full Stack Developer Certification (1,800+ hours, 2023)",
+    contact: "WhatsApp: (+27) 072 348 1158 | Email: mojapelot2@gmail.com | Location: Johannesburg, South Africa",
+    cv: "Opening Interactive Resume Module...",
+    hire: "Redirecting to WhatsApp (+27 72 348 1158) to discuss your project requirements!"
   };
 
-  const handleCommand = (e: React.FormEvent) => {
-    e.preventDefault();
-    const cmd = input.toLowerCase().trim();
-    let response = "";
-
+  const executeCommand = (cmdStr: string) => {
+    const cmd = cmdStr.toLowerCase().trim();
     if (cmd === "clear") {
-      setHistory(["Terminal cleared."]);
-    } else if (commands[cmd]) {
-      response = commands[cmd];
-      setHistory([...history, `> ${input}`, response]);
-    } else if (cmd !== "") {
-      setHistory([...history, `> ${input}`, `Unknown command: ${cmd}. Type 'help'.`]);
+      setHistory(["Terminal memory reset.", "Type 'help' for command directory."]);
+      return;
     }
 
+    if (cmd === "cv") {
+      window.dispatchEvent(new CustomEvent('open-resume-modal'));
+    }
+
+    if (cmd === "hire") {
+      window.open("https://wa.me/27723481158", "_blank");
+    }
+
+    const response = commands[cmd] || `command not recognized: '${cmd}'. Type 'help' for directory.`;
+    setHistory(prev => [...prev, `> ${cmdStr}`, response]);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+    executeCommand(input);
     setInput("");
   };
 
@@ -42,47 +55,85 @@ const Terminal: React.FC = () => {
     }
   }, [history]);
 
+  const quickPills = ['bio', 'stack', 'projects', 'certifications', 'contact', 'cv', 'clear'];
+
   return (
-    <section className="py-24 relative z-10">
-      <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-[#0c0c0c]">
-          {/* Terminal Header */}
-          <div className="bg-[#1a1a1a] px-6 py-3 flex items-center justify-between border-b border-white/5">
-            <div className="flex items-center gap-2">
+    <section className="py-24 relative z-10 border-t border-white/5 overflow-hidden">
+      <div className="container mx-auto px-6 max-w-4xl space-y-6">
+        
+        {/* Terminal Window */}
+        <div className="rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] bg-[#090b10]">
+          
+          {/* Header Bar */}
+          <div className="bg-[#12151d] px-6 py-4 flex items-center justify-between border-b border-white/5">
+            <div className="flex items-center gap-2.5">
               <TerminalIcon size={16} className="text-electric-orange" />
-              <span className="text-xs font-mono font-bold text-gray-400">thabang_mojapelo — bash — 80x24</span>
+              <span className="text-xs font-mono font-bold text-gray-300">
+                thabang@developer-node: ~/portfolio
+              </span>
             </div>
-            <div className="flex gap-1.5">
-              <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-red-500/60" />
+              <span className="w-3 h-3 rounded-full bg-yellow-500/60" />
+              <span className="w-3 h-3 rounded-full bg-green-500/60" />
             </div>
           </div>
-          
-          {/* Terminal Body */}
-          <div 
+
+          {/* Quick command buttons */}
+          <div className="px-6 py-2.5 bg-[#0e1118] border-b border-white/5 flex flex-wrap items-center gap-2">
+            <span className="text-[10px] font-mono uppercase text-gray-500 font-bold">Quick Run:</span>
+            {quickPills.map((pill) => (
+              <button
+                key={pill}
+                onClick={() => executeCommand(pill)}
+                className="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-electric-orange/20 hover:text-electric-orange hover:border-electric-orange/30 border border-white/5 text-[11px] font-mono text-gray-400 transition-colors cursor-pointer"
+              >
+                ${pill}
+              </button>
+            ))}
+          </div>
+
+          {/* Body Log Output */}
+          <div
             ref={scrollRef}
-            className="p-8 h-[400px] overflow-y-auto font-mono text-sm space-y-2 text-green-400/90"
+            className="p-6 md:p-8 h-72 overflow-y-auto font-mono text-xs md:text-sm space-y-2 text-emerald-400 bg-[#06070a]"
           >
             {history.map((line, i) => (
-              <div key={i} className={line.startsWith('>') ? "text-white" : ""}>
+              <div
+                key={i}
+                className={
+                  line.startsWith('>')
+                    ? 'text-white font-bold'
+                    : line.includes('error') || line.includes('not recognized')
+                    ? 'text-red-400'
+                    : 'text-gray-300 whitespace-pre-wrap leading-relaxed'
+                }
+              >
                 {line}
               </div>
             ))}
-            
-            <form onSubmit={handleCommand} className="flex items-center gap-2">
-              <ChevronRight size={16} className="text-electric-orange" />
-              <input 
-                type="text" 
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                className="bg-transparent border-none outline-none flex-1 text-white placeholder:opacity-20"
-                placeholder="Type a command..."
-                autoFocus
-              />
-            </form>
           </div>
+
+          {/* Input Line */}
+          <form onSubmit={handleSubmit} className="p-4 bg-[#0e1118] border-t border-white/5 flex items-center gap-3">
+            <ChevronRight size={18} className="text-electric-orange shrink-0" />
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Type 'bio', 'stack', 'projects', 'contact'..."
+              className="w-full bg-transparent text-white font-mono text-xs md:text-sm outline-none placeholder:text-gray-600"
+            />
+            <button
+              type="submit"
+              className="px-3 py-1.5 rounded-lg bg-electric-orange text-white text-xs font-bold font-mono hover:bg-orange-600 transition-colors shrink-0"
+            >
+              <CornerDownLeft size={14} />
+            </button>
+          </form>
+
         </div>
+
       </div>
     </section>
   );

@@ -9,12 +9,15 @@ import {
   Terminal, 
   Phone, 
   Mail, 
-  ArrowRight,
   ExternalLink,
   FileText,
-  MousePointer,
-  Sparkle
+  Sparkle,
+  Zap,
+  CornerDownLeft
 } from 'lucide-react';
+import BorderGlow from './effects/BorderGlow';
+import DecryptedText from './effects/DecryptedText';
+import ClickSpark from './effects/ClickSpark';
 
 interface Message {
   role: 'user' | 'bot';
@@ -26,7 +29,7 @@ const DigitalTwin: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
     { 
       role: 'bot', 
-      text: "Hello! I am Thabang's custom AI Digital Twin. I possess real-time knowledge of his projects, skills, history, and certifications. \n\nHow can I help you explore his work or request a full-stack engagement profile today?" 
+      text: "Hello! I am Thabang's AI Digital Twin, powered by Gemini 3.5 Flash. I have full real-time knowledge of his technical skills, MERN stack projects (including CreamFlow & Galaxy Defender), certifications (Scrimba & freeCodeCamp), and professional experience since 2023.\n\nHow can I help you evaluate his work or schedule a development engagement?" 
     }
   ]);
   const [input, setInput] = useState('');
@@ -43,12 +46,12 @@ const DigitalTwin: React.FC = () => {
   }, [messages, isTyping]);
 
   const presetQuestions = [
-    { label: "🧑 Who is Thabang Frans?", query: "Who is Thabang Mojapelo?" },
-    { label: "🛠️ What tech stack do you use?", query: "What technical skills and technologies do you use?" },
-    { label: "🚀 Tell me about the CreamFlow project", query: "Can you tell me about your CreamFlow skincare showroom project?" },
-    { label: "📜 Scrimba & freeCodeCamp certifications?", query: "Tell me about your Scrimba and freeCodeCamp credentials. Are they certified?" },
-    { label: "📂 Can you build full-stack apps?", query: "Do you build full-stack SaaS or business applications?" },
-    { label: "📬 How do I contact you to work together?", query: "How do I get in contact and hire you for freelance work?" }
+    { label: "🧑 Who is Thabang?", query: "Who is Thabang Frans Mojapelo and what is his background?" },
+    { label: "🛠️ What is your tech stack?", query: "What technical skills and technologies do you use as a Full-Stack developer?" },
+    { label: "🚀 Tell me about CreamFlow", query: "Can you tell me about your CreamFlow skincare showroom project?" },
+    { label: "📜 Scrimba & freeCodeCamp creds?", query: "Tell me about your Scrimba and freeCodeCamp credentials and hours completed." },
+    { label: "📂 Can you build full-stack apps?", query: "Do you build full-stack SaaS or business applications from scratch?" },
+    { label: "📬 How do I contact you?", query: "How do I get in contact and hire you for freelance or developer roles?" }
   ];
 
   const handleSendMessage = async (rawQuery: string, e?: React.FormEvent) => {
@@ -62,13 +65,11 @@ const DigitalTwin: React.FC = () => {
     setIsTyping(true);
 
     try {
-      // Clean up messages array for historical context (excluding the latest user message which we send separately)
       const cleanedHistory = messages.map(m => ({
         role: m.role,
         text: m.text
       }));
 
-      // Call streaming SSE backend endpoint
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
@@ -92,7 +93,6 @@ const DigitalTwin: React.FC = () => {
       }
 
       let fullResponse = "";
-      // Initialize an empty bot message which will stream word-by-word
       setMessages(prev => [...prev, { role: 'bot', text: '', isStreaming: true }]);
 
       let buffer = "";
@@ -102,7 +102,7 @@ const DigitalTwin: React.FC = () => {
 
         buffer += decoder.decode(value, { stream: true });
         const lines = buffer.split("\n");
-        buffer = lines.pop() || ""; // hold onto the remaining part of current stream line
+        buffer = lines.pop() || "";
 
         for (const line of lines) {
           const trimmed = line.trim();
@@ -133,11 +133,10 @@ const DigitalTwin: React.FC = () => {
         }
       }
 
-      // Finish streaming and lock response text
       setMessages(prev => {
         const updated = [...prev];
         const lastIndex = updated.length - 1;
-        updated[lastIndex] = { role: 'bot', text: fullResponse || "I'm ready to answer any details about my projects, skills, or service availability.", isStreaming: false };
+        updated[lastIndex] = { role: 'bot', text: fullResponse || "I am ready to answer any questions about Thabang's projects, technical stack, or availability.", isStreaming: false };
         return updated;
       });
 
@@ -145,7 +144,7 @@ const DigitalTwin: React.FC = () => {
       console.error("AI Assistant network failure:", error);
       setMessages(prev => [...prev, { 
         role: 'bot', 
-        text: "I experienced a minor network interruption. Rest assured, you can always contact Thabang directly via WhatsApp at (+27) 072 348 1158 or email me at mojapelot2@gmail.com and we can organize a project session!" 
+        text: "I experienced a minor network interruption. You can always contact Thabang directly via WhatsApp at (+27) 072 348 1158 or email mojapelot2@gmail.com to discuss project requirements directly!" 
       }]);
     } finally {
       setIsTyping(false);
@@ -155,17 +154,14 @@ const DigitalTwin: React.FC = () => {
   const clearChat = () => {
     setMessages([{ 
       role: 'bot', 
-      text: "Memory cleared. Ask me anything about Thabang's professional engineering expertise, his high-end interactive CreamFlow project, or Scrimba qualifications!" 
+      text: "Memory cleared. Ask me anything about Thabang's full-stack development experience, projects, or credentials!" 
     }]);
   };
 
-  // Helper to open the resume overlay (listened to by App.tsx)
   const triggerResumeModal = () => {
-    const event = new CustomEvent('open-resume-modal');
-    window.dispatchEvent(event);
+    window.dispatchEvent(new CustomEvent('open-resume-modal'));
   };
 
-  // Helper to scroll to specific section id
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
@@ -173,7 +169,6 @@ const DigitalTwin: React.FC = () => {
     }
   };
 
-  // Check if speech patterns inside bot message warrant offering click action cards
   const renderActionTriggers = (m: Message) => {
     if (m.role !== 'bot' || m.isStreaming) return null;
 
@@ -185,13 +180,13 @@ const DigitalTwin: React.FC = () => {
     if (!showResumeCTA && !showContactCTA && !showProjectCTA) return null;
 
     return (
-      <div className="flex flex-wrap gap-2.5 mt-4 pt-4 border-t border-white/5">
+      <div className="flex flex-wrap gap-2.5 mt-4 pt-4 border-t border-white/10">
         {showResumeCTA && (
           <button 
             onClick={triggerResumeModal}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-electric-orange/15 border border-electric-orange/30 hover:bg-electric-orange/25 text-electric-orange font-mono text-xs font-semibold transition-all duration-200"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-electric-orange/15 border border-electric-orange/30 hover:bg-electric-orange/25 text-electric-orange font-mono text-xs font-semibold transition-all duration-200"
           >
-            <FileText size={13} /> Open Interactive CV Module
+            <FileText size={13} /> Open Verified CV Modal
           </button>
         )}
         {showContactCTA && (
@@ -199,7 +194,7 @@ const DigitalTwin: React.FC = () => {
             href="https://wa.me/27723481158"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-orange-500/10 border border-orange-500/20 hover:bg-orange-500/20 text-orange-400 font-mono text-xs font-semibold transition-all duration-200"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-green-500/15 border border-green-500/30 hover:bg-green-500/25 text-green-400 font-mono text-xs font-semibold transition-all duration-200"
           >
             <Phone size={13} /> Chat on WhatsApp
           </a>
@@ -207,7 +202,7 @@ const DigitalTwin: React.FC = () => {
         {showProjectCTA && (
           <button 
             onClick={() => scrollToSection('projects')}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-gray-300 font-mono text-xs font-semibold transition-all duration-200"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-gray-300 font-mono text-xs font-semibold transition-all duration-200"
           >
             <ExternalLink size={13} /> View Projects Showcase
           </button>
@@ -217,100 +212,116 @@ const DigitalTwin: React.FC = () => {
   };
 
   return (
-    <section id="ai-assistant" className="py-32 relative overflow-hidden z-10">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-electric-orange/5 blur-[180px] rounded-full -z-0 pointer-events-none"></div>
+    <section id="ai-assistant" className="py-32 relative z-10 border-t border-white/5 overflow-hidden">
       
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col lg:flex-row gap-16 items-stretch min-h-[750px]">
+      {/* Ambient background light */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-electric-orange/5 blur-[180px] rounded-full pointer-events-none" />
+
+      <div className="container mx-auto px-6 space-y-16">
+        
+        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-12 lg:gap-16 items-start">
           
-          {/* Information & Intro panel */}
-          <div className="lg:w-5/12 space-y-10 flex flex-col justify-center">
-            <div className="space-y-6">
-              <div id="ai-assistant-badge" className="inline-flex items-center gap-2 px-4 py-2 bg-electric-orange/10 border border-electric-orange/20 rounded-full text-electric-orange text-xs font-bold uppercase tracking-widest">
-                <BrainCircuit size={14} className="animate-spin-slow text-electric-orange" /> Claude & ChatGPT style Digital twin
+          {/* Left: Information Intro */}
+          <div className="space-y-8">
+            
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-electric-orange/10 border border-electric-orange/20 text-electric-orange text-xs font-bold uppercase tracking-[0.2em]">
+                <BrainCircuit size={14} className="animate-spin-slow" />
+                <span>Context-Aware AI Assistant</span>
               </div>
-              <h2 id="ai-assistant-heading" className="text-5.5xl md:text-7xl font-display font-bold leading-tight text-white">
-                The <span className="text-electric-orange">Digital</span> Twin.
+              
+              <h2 className="text-4xl md:text-6xl font-display font-extrabold leading-tight text-white">
+                Interactive <span className="text-electric-orange">Digital Twin</span>
               </h2>
-              <div className="space-y-4 text-gray-300 text-lg leading-relaxed">
-                <p>
-                  Experience a high-end, real-time context-aware conversation powered by <span className="text-white font-semibold">Gemini 3.5 Flash</span>.
-                </p>
-                <p className="text-gray-400 text-base">
-                  Ask multi-layered questions, explore technical stack highlights (including Scrimba training and 1800+ FCC legacy certification), review CreamFlow showcase animations, or automatically trigger his Interactive CV.
-                </p>
+
+              <p className="text-gray-300 text-base md:text-lg leading-relaxed font-light">
+                Ask multi-layered questions about Thabang’s coding experience, MERN architecture decisions, Scrimba training, and project portfolio. Powered by real-time SSE streaming and Gemini 3.5 Flash.
+              </p>
+            </div>
+
+            {/* Feature Pills */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-5 rounded-2xl bg-[#0c0e14] border border-white/5 space-y-1">
+                <div className="text-electric-orange font-bold text-lg flex items-center gap-1.5">
+                  <Zap size={18} /> Real-Time
+                </div>
+                <div className="text-[11px] font-mono text-gray-400">SSE Word-by-Word Streaming</div>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-[#0c0e14] border border-white/5 space-y-1">
+                <div className="text-white font-bold text-lg flex items-center gap-1.5">
+                  <Sparkles size={18} className="text-yellow-400" /> 100% Context
+                </div>
+                <div className="text-[11px] font-mono text-gray-400">Complete Portfolio Knowledge</div>
               </div>
             </div>
 
-            {/* Micro details cards */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/5">
-                <div className="text-electric-orange font-bold text-2xl mb-1 flex items-center gap-1.5">
-                  <SparklingText text="Realtime" />
-                </div>
-                <div className="text-xs text-gray-400 uppercase font-mono font-bold tracking-wider">SSE Streaming Response</div>
-              </div>
-              <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/5">
-                <div id="ai-intelligence-percent" className="text-white font-bold text-2xl mb-1 flex items-center gap-1">
-                  100% <Sparkles size={16} className="text-yellow-400" />
-                </div>
-                <div className="text-xs text-gray-400 uppercase font-mono font-bold tracking-wider">Context Knowledge Base</div>
-              </div>
+            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-2">
+              <div className="text-xs font-mono uppercase text-gray-400 font-bold">Suggested Inquiries:</div>
+              <ul className="text-xs text-gray-300 space-y-1.5 font-light">
+                <li>• "How was CreamFlow designed and what makes it performant?"</li>
+                <li>• "Explain Thabang's experience with React and Node.js APIs."</li>
+                <li>• "What did he learn during the 1,800+ hours at freeCodeCamp?"</li>
+              </ul>
             </div>
+
           </div>
-          
-          {/* Main interactive AI Workspace */}
-          <div className="lg:w-7/12 w-full flex flex-col">
-            <div className="flex-1 rounded-[2.5rem] bg-card-bg border border-white/10 overflow-hidden shadow-2xl flex flex-col relative min-h-[580px]">
+
+          {/* Right: Chat Terminal Console with BorderGlow */}
+          <BorderGlow
+            borderRadius={32}
+            backgroundColor="#0a0c12"
+            colors={['#f97316', '#38bdf8', '#fb923c']}
+          >
+            <div className="flex flex-col h-[600px] bg-[#0c0e14] rounded-[32px] overflow-hidden">
               
               {/* Header */}
-              <div className="p-5 bg-white/5 border-b border-white/5 flex items-center justify-between backdrop-blur-md sticky top-0 z-20">
-                 <div className="flex items-center gap-4">
-                    <div id="ai-avatar" className="w-12 h-12 rounded-2xl bg-electric-orange flex items-center justify-center relative">
-                      <Bot className="text-white" size={24} />
-                      <span className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-green-500 border-2 border-card-bg animate-pulse"></span>
+              <div className="p-4 px-6 bg-[#12151d] border-b border-white/5 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-2xl bg-electric-orange flex items-center justify-center text-white shadow-lg shadow-electric-orange/30 relative">
+                    <Bot size={20} />
+                    <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#0c0e14] animate-pulse" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-white flex items-center gap-1.5">
+                      Thabang_Twin <Sparkle size={12} className="text-electric-orange fill-electric-orange" />
                     </div>
-                    <div>
-                      <div className="text-white font-bold text-lg flex items-center gap-1.5">
-                        Thabang_Twin <Sparkle size={12} className="text-electric-orange fill-electric-orange animate-spin-slow" />
-                      </div>
-                      <div className="text-[10px] text-gray-400 font-mono uppercase tracking-widest flex items-center gap-1.5">
-                        <span>Autonomous Dev Agent</span>
-                      </div>
+                    <div className="text-[10px] font-mono text-gray-400 uppercase tracking-widest">
+                      Developer Autonomous Agent
                     </div>
-                 </div>
-                 
-                 <div className="flex items-center gap-2">
-                   <button 
-                     onClick={clearChat} 
-                     className="p-3 text-gray-400 hover:text-red-400 hover:bg-white/5 rounded-xl transition-all" 
-                     title="Reset twin memory"
-                     aria-label="Clear chat"
-                   >
-                     <Trash2 size={18} />
-                   </button>
-                 </div>
+                  </div>
+                </div>
+
+                <button
+                  onClick={clearChat}
+                  className="p-2 text-gray-400 hover:text-red-400 hover:bg-white/5 rounded-xl transition-all"
+                  title="Reset Conversation"
+                  aria-label="Clear chat"
+                >
+                  <Trash2 size={16} />
+                </button>
               </div>
-              
-              {/* Message scroll container */}
-              <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 scroll-smooth bg-black/10">
+
+              {/* Messages viewport */}
+              <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-5 bg-[#07080d]">
                 {messages.map((m, i) => (
                   <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`flex items-start gap-4 max-w-[85%] ${m.role === 'user' ? 'flex-row-reverse' : ''}`}>
-                      <div className={`w-9 h-9 rounded-xl flex items-center justify-center mt-1 shrink-0 ${m.role === 'user' ? 'bg-electric-orange/20 text-electric-orange border border-electric-orange/30' : 'bg-white/10 text-white'}`}>
-                        {m.role === 'user' ? <User size={16} /> : <Terminal size={16} />}
+                    <div className={`flex items-start gap-3 max-w-[88%] ${m.role === 'user' ? 'flex-row-reverse' : ''}`}>
+                      <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5 ${
+                        m.role === 'user'
+                          ? 'bg-electric-orange/20 text-electric-orange border border-electric-orange/30'
+                          : 'bg-white/10 text-white'
+                      }`}>
+                        {m.role === 'user' ? <User size={15} /> : <Terminal size={15} />}
                       </div>
-                      <div className="space-y-1">
-                        <div className={`p-4 md:p-5 rounded-2xl text-[14.5px] leading-relaxed shadow-lg ${
-                          m.role === 'user' 
-                            ? 'bg-electric-orange text-white font-medium rounded-tr-none' 
-                            : 'bg-white/[0.03] text-gray-200 border border-white/5 rounded-tl-none whitespace-pre-wrap'
-                        }`}>
-                          {m.text}
 
-                          {/* Render dynamic internal system smart CTA triggers */}
-                          {renderActionTriggers(m)}
-                        </div>
+                      <div className={`p-4 rounded-2xl text-xs md:text-sm leading-relaxed shadow-lg ${
+                        m.role === 'user'
+                          ? 'bg-electric-orange text-white font-medium rounded-tr-none'
+                          : 'bg-white/[0.03] text-gray-200 border border-white/5 rounded-tl-none whitespace-pre-wrap'
+                      }`}>
+                        {m.text}
+                        {renderActionTriggers(m)}
                       </div>
                     </div>
                   </div>
@@ -318,78 +329,65 @@ const DigitalTwin: React.FC = () => {
 
                 {isTyping && (
                   <div className="flex justify-start">
-                    <div className="flex items-start gap-4 max-w-[85%]">
-                      <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-white/10 text-white shrink-0 mt-1">
-                        <Terminal size={16} />
+                    <div className="flex items-start gap-3 max-w-[85%]">
+                      <div className="w-8 h-8 rounded-xl flex items-center justify-center bg-white/10 text-white shrink-0 mt-0.5">
+                        <Terminal size={15} />
                       </div>
-                      <div className="p-4 px-6 rounded-2xl bg-white/[0.01] border border-white/5 text-gray-400 font-mono text-xs flex items-center gap-3">
+                      <div className="p-3.5 px-5 rounded-2xl bg-white/[0.02] border border-white/5 text-gray-400 font-mono text-xs flex items-center gap-3">
                         <div className="flex gap-1">
-                          <span className="w-2 h-2 rounded-full bg-electric-orange animate-bounce"></span>
-                          <span className="w-2 h-2 rounded-full bg-electric-orange animate-bounce [animation-delay:0.2s]"></span>
-                          <span className="w-2 h-2 rounded-full bg-electric-orange animate-bounce [animation-delay:0.4s]"></span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-electric-orange animate-bounce" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-electric-orange animate-bounce [animation-delay:0.2s]" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-electric-orange animate-bounce [animation-delay:0.4s]" />
                         </div>
-                        <span>Interfacing cognitive system logs...</span>
+                        <span>Synthesizing response stream...</span>
                       </div>
                     </div>
                   </div>
                 )}
               </div>
 
-              {/* Dynamic Preset Cards */}
-              <div className="px-6 md:px-8 py-3 border-t border-white/5 bg-black/10 overflow-x-auto whitespace-nowrap scrollbar-none scrollbar-hide flex gap-3">
+              {/* Quick Presets Horizontal Bar */}
+              <div className="px-4 py-2 bg-[#0e1118] border-t border-white/5 flex gap-2 overflow-x-auto whitespace-nowrap scrollbar-none">
                 {presetQuestions.map((q, idx) => (
                   <button
                     key={idx}
                     onClick={() => handleSendMessage(q.query)}
                     disabled={isTyping}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 bg-white/[0.04] border border-white/5 hover:bg-white/10 hover:border-white/10 rounded-xl text-gray-300 text-xs font-medium cursor-pointer transition-all duration-200 disabled:opacity-50 shrink-0"
+                    className="inline-flex items-center px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 text-xs text-gray-300 transition-colors shrink-0 cursor-pointer disabled:opacity-50"
                   >
                     {q.label}
                   </button>
                 ))}
               </div>
-              
-              {/* Footer Prompt Input */}
-              <div className="p-6 md:p-8 border-t border-white/5 bg-black/30 backdrop-blur-md">
+
+              {/* Input bar */}
+              <div className="p-4 bg-[#12151d] border-t border-white/5">
                 <form onSubmit={(e) => handleSendMessage(input, e)} className="relative">
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     disabled={isTyping}
-                    placeholder="Ask standard or multi-part questions..." 
-                    className="w-full bg-white/[0.04] rounded-2xl pl-6 pr-16 py-4 border border-white/10 text-white placeholder-gray-500 focus:border-electric-orange focus:bg-white/[0.08] focus:ring-1 focus:ring-electric-orange outline-none transition-all disabled:opacity-60"
+                    placeholder="Ask about Thabang's projects, React skills, backend, or CV..."
+                    className="w-full bg-white/[0.04] rounded-2xl pl-5 pr-14 py-3.5 border border-white/10 text-white placeholder:text-gray-500 text-xs md:text-sm focus:border-electric-orange outline-none transition-all disabled:opacity-50"
                   />
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     disabled={isTyping || !input.trim()}
-                    className="absolute right-3 top-3 w-10 h-10 rounded-xl bg-electric-orange text-white flex items-center justify-center hover:bg-orange-600 active:scale-95 disabled:opacity-50 disabled:hover:bg-electric-orange disabled:active:scale-100 transition-all shadow-lg shadow-electric-orange/20"
+                    className="absolute right-2 top-2 w-9 h-9 rounded-xl bg-electric-orange text-white flex items-center justify-center hover:bg-orange-600 disabled:opacity-40 transition-colors"
                   >
-                    <Send size={18} />
+                    <CornerDownLeft size={16} />
                   </button>
                 </form>
-                <div className="mt-3 text-center text-[10px] text-gray-500 font-mono uppercase tracking-wider flex items-center justify-center gap-1">
-                  <span>Press Send or click standard cards to compile twin outputs.</span>
-                </div>
               </div>
 
             </div>
-          </div>
-          
+          </BorderGlow>
+
         </div>
+
       </div>
     </section>
-  );
-};
-
-// Help helper for visual text sparkles
-const SparklingText: React.FC<{ text: string }> = ({ text }) => {
-  return (
-    <span className="relative flex items-center gap-1">
-      <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-orange to-amber-400">
-        {text}
-      </span>
-    </span>
   );
 };
 
