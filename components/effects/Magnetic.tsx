@@ -18,7 +18,7 @@ const Magnetic: React.FC<MagneticProps> = ({
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current) return;
     const { clientX, clientY } = e;
-    const { left, top, width, height } = ref.current.getBoundingClientRect();
+    const { height, width, left, top } = ref.current.getBoundingClientRect();
     const middleX = clientX - (left + width / 2);
     const middleY = clientY - (top + height / 2);
     setPosition({ x: middleX * strength, y: middleY * strength });
@@ -34,7 +34,7 @@ const Magnetic: React.FC<MagneticProps> = ({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       animate={{ x: position.x, y: position.y }}
-      transition={{ type: 'spring', stiffness: 200, damping: 15, mass: 0.1 }}
+      transition={{ type: 'spring', stiffness: 250, damping: 18, mass: 0.1 }}
       className={`inline-block ${className}`}
     >
       {children}

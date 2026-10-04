@@ -11,29 +11,30 @@ interface RotatingTextProps {
 const RotatingText: React.FC<RotatingTextProps> = ({
   texts,
   interval = 2800,
-  className = '',
+  className = 'text-electric-orange font-bold inline-block',
   badgeClassName = '',
 }) => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
+    if (!texts || texts.length <= 1) return;
     const timer = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % texts.length);
+      setIndex((prev) => (prev + 1) % texts.length);
     }, interval);
 
     return () => clearInterval(timer);
-  }, [texts.length, interval]);
+  }, [texts, interval]);
 
   return (
-    <span className={`inline-flex items-center justify-start overflow-hidden relative ${className}`}>
+    <span className={`inline-flex items-center overflow-hidden align-baseline ${badgeClassName}`}>
       <AnimatePresence mode="wait">
         <motion.span
           key={index}
-          initial={{ y: 24, opacity: 0, filter: 'blur(4px)' }}
+          initial={{ y: 22, opacity: 0, filter: 'blur(4px)' }}
           animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
-          exit={{ y: -24, opacity: 0, filter: 'blur(4px)' }}
-          transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
-          className={`inline-block ${badgeClassName}`}
+          exit={{ y: -22, opacity: 0, filter: 'blur(4px)' }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          className={className}
         >
           {texts[index]}
         </motion.span>
