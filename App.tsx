@@ -24,7 +24,6 @@ import Magnetic from './components/effects/Magnetic';
 import ClickSpark from './components/effects/ClickSpark';
 import DecryptedText from './components/effects/DecryptedText';
 import Dock, { DockItemData } from './components/effects/Dock';
-import WelcomeLoader from './components/WelcomeLoader';
 
 const App: React.FC = () => {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
@@ -75,9 +74,6 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen text-white selection:bg-electric-orange selection:text-white overflow-x-hidden relative bg-[#050608]">
-      {/* 5-Second Welcome / Loading Experience */}
-      <WelcomeLoader durationMs={5000} />
-
       {/* Interactive Liquid / Splash Cursor */}
       <SplashCursor colorPalette={['#f97316', '#fb923c', '#fdba74', '#38bdf8', '#ffffff']} />
       

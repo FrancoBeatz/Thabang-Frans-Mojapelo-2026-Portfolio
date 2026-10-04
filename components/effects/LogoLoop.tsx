@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { motion } from 'motion/react';
 
 export interface LogoItem {
   node?: React.ReactNode;
@@ -10,9 +11,11 @@ export interface LogoItem {
 
 interface LogoLoopProps {
   logos: LogoItem[];
-  speed?: number;
+  speed?: number; // duration in seconds
   direction?: 'left' | 'right';
   className?: string;
+  gap?: number;
+  scaleOnHover?: boolean;
 }
 
 const LogoLoop: React.FC<LogoLoopProps> = ({
@@ -20,44 +23,58 @@ const LogoLoop: React.FC<LogoLoopProps> = ({
   speed = 28,
   direction = 'left',
   className = '',
+  gap = 24,
+  scaleOnHover = true,
 }) => {
-  // Duplicate array to achieve seamless infinite loop
-  const duplicatedLogos = [...logos, ...logos, ...logos];
+  const [isPaused, setIsPaused] = useState(false);
+
+  const displayList = [...logos, ...logos, ...logos];
 
   return (
-    <div className={`relative w-full overflow-hidden mask-linear-gradient py-4 ${className}`}>
-      {/* Edge Blur Fades */}
-      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r from-[#070709] to-transparent" />
-      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l from-[#070709] to-transparent" />
+    <div
+      className={`relative overflow-hidden w-full select-none py-4 ${className}`}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      {/* Edge Blur Mask */}
+      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#050505] to-transparent z-10" />
+      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#050505] to-transparent z-10" />
 
-      <div
-        className="flex gap-6 w-max"
-        style={{
-          animation: `marquee ${speed}s linear infinite ${direction === 'right' ? 'reverse' : 'normal'}`,
+      <motion.div
+        className="flex items-center w-max"
+        style={{ gap: `${gap}px` }}
+        animate={{
+          x: direction === 'left' ? ['0%', '-33.333%'] : ['-33.333%', '0%'],
+        }}
+        transition={{
+          x: {
+            repeat: Infinity,
+            repeatType: 'loop',
+            duration: speed,
+            ease: 'linear',
+          },
         }}
       >
-        {duplicatedLogos.map((logo, idx) => (
+        {displayList.map((item, idx) => (
           <div
             key={idx}
-            className="flex items-center gap-3 px-5 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.07] hover:border-electric-orange/40 hover:bg-white/[0.06] transition-all duration-300 group cursor-default shadow-sm"
+            className={`flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-[#0e1015]/90 border border-white/5 backdrop-blur-md text-gray-300 font-medium text-xs whitespace-nowrap transition-all duration-300 ${
+              scaleOnHover ? 'hover:scale-105 hover:border-electric-orange/40 hover:text-white hover:bg-[#151922]' : ''
+            }`}
           >
-            {logo.node && <span className="text-electric-orange group-hover:scale-110 transition-transform">{logo.node}</span>}
-            <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">{logo.title}</span>
-            {logo.badge && (
-              <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-electric-orange/10 text-electric-orange border border-electric-orange/20">
-                {logo.badge}
+            {item.node && <span className="text-electric-orange">{item.node}</span>}
+            {item.src && (
+              <img src={item.src} alt={item.alt || item.title} className="w-4 h-4 object-contain" />
+            )}
+            <span className="font-semibold">{item.title}</span>
+            {item.badge && (
+              <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-white/5 text-gray-400 border border-white/5">
+                {item.badge}
               </span>
             )}
           </div>
         ))}
-      </div>
-
-      <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-33.333333%); }
-        }
-      `}</style>
+      </motion.div>
     </div>
   );
 };

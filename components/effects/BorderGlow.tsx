@@ -1,56 +1,73 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 
 interface BorderGlowProps {
   children: React.ReactNode;
   className?: string;
-  glowColor?: string;
+  edgeSensitivity?: number;
+  glowColor?: string; // e.g. "24 100 50" for HSL
   backgroundColor?: string;
   borderRadius?: number;
+  glowRadius?: number;
+  glowIntensity?: number;
+  colors?: string[];
+  onClick?: () => void;
 }
 
 const BorderGlow: React.FC<BorderGlowProps> = ({
   children,
   className = '',
-  glowColor = '#f97316',
-  backgroundColor = '#0b0b0e',
-  borderRadius = 16,
+  backgroundColor = '#0c0d12',
+  borderRadius = 28,
+  glowIntensity = 0.8,
+  colors = ['#f97316', '#38bdf8', '#fb923c'],
+  onClick
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [coords, setCoords] = useState({ x: 0, y: 0, opacity: 0 });
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
+  const handlePointerMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const card = cardRef.current;
+    if (!card) return;
+
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    setCoords({ x, y, opacity: 1 });
+  }, []);
+
+  const handlePointerLeave = useCallback(() => {
+    setCoords(prev => ({ ...prev, opacity: 0 }));
   }, []);
 
   return (
     <div
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{ borderRadius: `${borderRadius}px` }}
-      className={`relative p-[1.5px] overflow-hidden group ${className}`}
+      ref={cardRef}
+      onClick={onClick}
+      onMouseMove={handlePointerMove}
+      onMouseLeave={handlePointerLeave}
+      className={`relative p-[1px] group transition-all duration-500 overflow-hidden ${className}`}
+      style={{
+        borderRadius: `${borderRadius}px`,
+        background: `linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%)`,
+      }}
     >
-      {/* Dynamic Border Gradient Follower */}
+      {/* Interactive Cursor Tracking Radial Glow */}
       <div
-        className="pointer-events-none absolute inset-0 transition-opacity duration-300 z-0"
+        className="pointer-events-none absolute -inset-px transition-opacity duration-300 z-0"
         style={{
-          opacity: isHovered ? 1 : 0.2,
-          background: `radial-gradient(280px circle at ${mousePos.x}px ${mousePos.y}px, ${glowColor}, transparent 60%)`,
+          opacity: coords.opacity * glowIntensity,
+          background: `radial-gradient(450px circle at ${coords.x}px ${coords.y}px, ${colors[0]}, ${colors[1]} 50%, transparent 80%)`,
+          borderRadius: `${borderRadius}px`,
         }}
       />
+      
+      {/* Card Inner Container */}
       <div
+        className="relative z-10 w-full h-full rounded-[inherit] overflow-hidden transition-colors"
         style={{
           backgroundColor,
-          borderRadius: `${borderRadius - 1.5}px`,
         }}
-        className="relative z-10 w-full h-full"
       >
         {children}
       </div>
