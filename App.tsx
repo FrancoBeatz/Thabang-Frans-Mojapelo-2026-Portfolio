@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Home, User, Cpu, Layers, Award, Rocket, Bot, Mail, FileText } from 'lucide-react';
+import { AnimatePresence } from 'motion/react';
+import WelcomeScreen from './components/WelcomeScreen';
 import Navbar from './components/Navbar';
 import VideoBackground from './components/VideoBackground';
 import Hero from './components/Hero';
@@ -26,6 +28,7 @@ import DecryptedText from './components/effects/DecryptedText';
 import Dock, { DockItemData } from './components/effects/Dock';
 
 const App: React.FC = () => {
+  const [showWelcome, setShowWelcome] = useState(true);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const [activeNav, setActiveNav] = useState('home');
 
@@ -74,6 +77,13 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen text-white selection:bg-electric-orange selection:text-white overflow-x-hidden relative bg-[#050608]">
+      {/* 5-Second Warm Welcome / Cinematic Entrance Experience */}
+      <AnimatePresence mode="wait">
+        {showWelcome && (
+          <WelcomeScreen onComplete={() => setShowWelcome(false)} />
+        )}
+      </AnimatePresence>
+
       {/* Interactive Liquid / Splash Cursor */}
       <SplashCursor colorPalette={['#f97316', '#fb923c', '#fdba74', '#38bdf8', '#ffffff']} />
       

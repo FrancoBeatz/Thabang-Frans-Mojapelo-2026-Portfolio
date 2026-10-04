@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-import { ExternalLink, Github, Zap, Code2, Cpu, Layout, ArrowUpRight, CheckCircle, ChevronDown, ChevronUp, Layers, Sparkles } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-import BorderGlow from './effects/BorderGlow';
-import DecryptedText from './effects/DecryptedText';
+import { ExternalLink, Github, Layout, Cpu, Zap, Code2, ArrowUpRight, Sparkles, CheckCircle2 } from 'lucide-react';
+import { motion } from 'motion/react';
 import SpotlightCard from './effects/SpotlightCard';
 import ClickSpark from './effects/ClickSpark';
-import Magnetic from './effects/Magnetic';
+import DecryptedText from './effects/DecryptedText';
 
 interface Project {
   title: string;
-  category: 'architecture' | 'website';
-  categoryLabel: string;
+  category: string;
   problem: string;
   solution: string;
   description: string;
@@ -19,274 +16,244 @@ interface Project {
   perf: number;
   liveLink: string;
   githubLink: string;
-  highlights: string[];
 }
 
-const Projects: React.FC = () => {
-  const [filter, setFilter] = useState<'all' | 'architecture' | 'website'>('all');
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-
-  const projects: Project[] = [
-    {
-      title: "CreamFlow",
-      category: "architecture",
-      categoryLabel: "Flagship Showroom & E-Commerce",
-      problem: "A luxury skincare and product service needed an immersive digital showroom with flawless transitions and high visual contrast to captivate customers without latency.",
-      solution: "Engineered a high-performance interactive brand platform featuring cream-themed, ultra-fluid aesthetic layouts, sensory motion physics, and zero layout shift.",
-      description: "A premium e-commerce design and fluid digital showroom built with modern responsive elements and high-contrast motion physics.",
-      image: "https://i.ibb.co/KjGcwFR4/creamflow.jpg",
-      tech: ["React", "Aesthetic UI", "Motion Physics", "Tailwind CSS"],
-      perf: 100,
-      liveLink: "https://creamflow.vercel.app/",
-      githubLink: "https://github.com/FrancoBeatz",
-      highlights: ["100% Lighthouse Score", "Custom Sensory Transitions", "Responsive Grid Layout"]
-    },
-    {
-      title: "Galaxy Defender: Canvas Engine",
-      category: "architecture",
-      categoryLabel: "Interactive Web Game Engine",
-      problem: "Traditional DOM-based rendering was too slow to handle dozens of moving vector entities simultaneously at 60 FPS across mobile and desktop viewports.",
-      solution: "Constructed a custom 2D canvas drawing system operating directly on hardware-accelerated buffers with vector physics, collision detection, and modular OOP architecture.",
-      description: "A fast-paced space game demonstrating high-speed browser graphics, particle rendering, and object-oriented JavaScript design.",
-      image: "https://i.ibb.co/qF2wKHgh/2.jpg",
-      tech: ["Canvas API", "Vector Physics", "OOP Architecture", "JavaScript ES6+"],
-      perf: 100,
-      liveLink: "https://galaxy-defender-2-d-game.vercel.app/",
-      githubLink: "https://github.com/FrancoBeatz",
-      highlights: ["60 FPS Rendering", "Custom Physics Calculations", "Object-Oriented Design"]
-    },
-    {
-      title: "Mkhonto Global Capital",
-      category: "website",
-      categoryLabel: "Enterprise Commercial Portal",
-      problem: "A premier executive recruitment and human capital consulting firm needed an authoritative digital portal to attract enterprise partners globally.",
-      solution: "Engineered a secure, lightning-fast multi-section corporate portal with optimized SEO metadata, mobile-first touch UX, and direct lead generation pipeline.",
-      description: "A high-quality business website built for a global human capital consulting firm.",
-      image: "https://i.ibb.co/8grqP05h/Capture.jpg",
-      tech: ["Enterprise UI", "Business Logic", "Next-Gen UX", "Tailwind CSS"],
-      perf: 100,
-      liveLink: "https://linda-mkhonto-global-human-capital.vercel.app/",
-      githubLink: "https://github.com/FrancoBeatz",
-      highlights: ["Full Search Optimization", "Lead Pipeline Integration", "Cross-Device Parity"]
-    },
-    {
-      title: "Tracy Mashishi Portfolio",
-      category: "website",
-      categoryLabel: "High-Performance Personal Brand",
-      problem: "A professional client required a distinctive, cinematic personal brand portfolio to stand out in a competitive consulting and speaking market.",
-      solution: "Engineered a custom responsive architecture with ultra-fast initial paint times, high-fidelity visual interactions, and seamless media presentation.",
-      description: "A premium business portfolio built with modern web standards for a seamless user experience.",
-      image: "https://i.ibb.co/9kjtMfCG/tracy.jpg",
-      tech: ["UX Engineering", "Performance", "Business Branding", "React"],
-      perf: 100,
-      liveLink: "https://tracymashishi.co.za/",
-      githubLink: "https://github.com/FrancoBeatz",
-      highlights: ["Sub-second First Paint", "Custom Aesthetic Typography", "Contact Action Flows"]
-    },
-    {
-      title: "Kolas Supply Chain",
-      category: "website",
-      categoryLabel: "Logistics & Real-Time Tracking Dashboard",
-      problem: "Logistics and warehouse workers struggled with fragmented spreadsheets, leading to delayed inventory updates across border transit hubs.",
-      solution: "Built a centralized web interface aggregating inventory status in real time with Node.js backend logic and responsive inventory status metrics.",
-      description: "A professional tool for tracking goods, supplies, and transit logistics across regional checkpoints.",
-      image: "https://i.ibb.co/pB6LDjZh/1.jpg",
-      tech: ["Cloud Data", "Node.js", "Predictive Analytics", "REST API"],
-      perf: 98,
-      liveLink: "https://kola-s-rat-p-supply.vercel.app/",
-      githubLink: "https://github.com/FrancoBeatz",
-      highlights: ["Real-time Status Feed", "Node.js Data Pipeline", "High Data Density UX"]
-    },
-    {
-      title: "Child Care Africa",
-      category: "website",
-      categoryLabel: "Humanitarian Mobile Platform",
-      problem: "Users in remote regions with low-bandwidth 3G connections frequently encountered timeouts when attempting to donate and review child welfare reports.",
-      solution: "Rebuilt the architecture from scratch to be ultra-lightweight, eliminating heavy scripts and prioritizing instant asset delivery on cellular data.",
-      description: "A fast, accessible, and lightweight platform designed to connect donors with community relief initiatives across Africa.",
-      image: "https://i.ibb.co/7dM7xMWX/child-care-africa-netlify-app.png",
-      tech: ["Performance Optimization", "Mobile-First", "Impact Design", "Accessible UI"],
-      perf: 99,
-      liveLink: "https://child-care-africa.vercel.app/",
-      githubLink: "https://github.com/FrancoBeatz",
-      highlights: ["Optimized for 3G Connections", "Accessible Semantic HTML", "Instant Interaction"]
-    }
-  ];
-
-  const filteredProjects = filter === 'all'
-    ? projects
-    : projects.filter(p => p.category === filter);
+const ProjectCard: React.FC<{ project: Project; featured?: boolean }> = ({ project, featured = false }) => {
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <section id="projects" className="py-32 relative z-10 border-t border-white/5 overflow-hidden">
-      
-      {/* Dynamic Lighting */}
-      <div className="absolute top-[30%] left-[-10%] w-[600px] h-[600px] bg-electric-orange/5 blur-[160px] rounded-full pointer-events-none" />
+    <SpotlightCard
+      spotlightColor="rgba(249, 115, 22, 0.22)"
+      tiltIntensity={4}
+      className={`group rounded-3xl bg-[#0d0d12]/95 border border-white/10 hover:border-electric-orange/40 transition-all duration-500 flex flex-col justify-between overflow-hidden shadow-2xl ${
+        featured ? 'lg:col-span-1' : ''
+      }`}
+    >
+      <div>
+        {/* Project Visual Image / Preview */}
+        <div className="relative aspect-[16/10] overflow-hidden bg-black/60 border-b border-white/10">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d12] via-transparent to-black/40" />
 
-      <div className="container mx-auto px-6 space-y-16">
+          {/* Performance optimization badge */}
+          <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 bg-black/70 backdrop-blur-md rounded-xl border border-white/10 z-10">
+            <span className="flex h-2 w-2 rounded-full bg-green-400 animate-ping" />
+            <span className="text-xs font-mono font-bold text-white">{project.perf}% Performance</span>
+          </div>
+
+          {/* Type Badge */}
+          <div className="absolute top-4 right-4 px-3 py-1.5 bg-electric-orange/20 backdrop-blur-md text-electric-orange text-[10px] font-mono font-bold uppercase tracking-wider rounded-lg z-10 border border-electric-orange/30 flex items-center gap-1.5">
+            <Sparkles className="w-3 h-3" />
+            <span>{project.category}</span>
+          </div>
+        </div>
+
+        {/* Card Body */}
+        <div className="p-7 space-y-5">
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <h4 className="text-2xl font-display font-bold text-white group-hover:text-electric-orange transition-colors">
+                {project.title}
+              </h4>
+            </div>
+
+            {/* Tech Tags */}
+            <div className="flex flex-wrap gap-1.5 pt-1">
+              {project.tech.map((t) => (
+                <span
+                  key={t}
+                  className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/5 text-gray-300 group-hover:border-electric-orange/20 group-hover:text-white transition-colors"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Engineering Problem & Solution Box */}
+          <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 space-y-3 font-mono text-xs">
+            <div className="relative pl-3.5 border-l-2 border-electric-orange">
+              <span className="text-[10px] uppercase tracking-wider text-electric-orange font-bold block mb-0.5">
+                The Engineering Challenge
+              </span>
+              <p className="text-gray-300 font-sans text-xs leading-relaxed">{project.problem}</p>
+            </div>
+            <div className="relative pl-3.5 border-l-2 border-green-500">
+              <span className="text-[10px] uppercase tracking-wider text-green-400 font-bold block mb-0.5">
+                The Architectural Solution
+              </span>
+              <p className="text-gray-400 font-sans text-xs leading-relaxed">{project.solution}</p>
+            </div>
+          </div>
+
+          <p className="text-gray-400 text-sm font-light leading-relaxed">{project.description}</p>
+        </div>
+      </div>
+
+      {/* Card Actions */}
+      <div className="p-7 pt-0 flex items-center gap-3">
+        <ClickSpark sparkColor="#f97316" className="flex-1">
+          <a
+            href={project.liveLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full flex items-center justify-center gap-2 px-5 py-3.5 bg-white text-black hover:bg-electric-orange hover:text-white font-bold text-sm rounded-xl transition-all duration-300 shadow-lg"
+          >
+            <Zap className="w-4 h-4" />
+            <span>Launch Live App</span>
+            <ArrowUpRight className="w-4 h-4" />
+          </a>
+        </ClickSpark>
+
+        <a
+          href={project.githubLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          title="View GitHub Source"
+          className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/5 border border-white/10 hover:border-electric-orange/50 hover:bg-white/10 text-gray-300 hover:text-white transition-all"
+        >
+          <Github className="w-5 h-5" />
+        </a>
+      </div>
+    </SpotlightCard>
+  );
+};
+
+const Projects: React.FC = () => {
+  const architectures: Project[] = [
+    {
+      title: 'Galaxy Defender: 2D Canvas Engine',
+      category: 'System Engine',
+      problem: 'Browsers struggled with rendering hundreds of active entities, collisions, and particle vectors at constant 60fps on mobile viewports.',
+      solution: 'Engineered a custom HTML5 Canvas rendering loop with object pooling, mathematical vector physics, and strict state decoupling.',
+      description: 'A responsive space shooter proving high-performance real-time graphics and zero frame-drop game loops in pure vanilla JavaScript.',
+      image: 'https://i.ibb.co/qF2wKHgh/2.jpg',
+      tech: ['Canvas API', 'Vector Physics', 'OOP Architecture', 'State Loop'],
+      perf: 100,
+      liveLink: 'https://galaxy-defender-2-d-game.vercel.app/',
+      githubLink: 'https://github.com/FrancoBeatz',
+    },
+    {
+      title: 'CreamFlow: Sensory E-Commerce',
+      category: 'Digital Showroom',
+      problem: 'Luxury skincare brands need immersive aesthetic experiences that load instantaneously without bulky asset lag.',
+      solution: 'Architected high-contrast layouts, smooth fluid micro-animations, fast component caching, and friction-free conversion workflows.',
+      description: 'A modern e-commerce showroom that balances tactile UI aesthetics with fast responsive rendering.',
+      image: 'https://i.ibb.co/KjGcwFR4/creamflow.jpg',
+      tech: ['React SPA', 'Tailwind CSS', 'Motion Physics', 'Responsive UI'],
+      perf: 100,
+      liveLink: 'https://creamflow.vercel.app/',
+      githubLink: 'https://github.com/FrancoBeatz',
+    },
+  ];
+
+  const clientWebsites: Project[] = [
+    {
+      title: 'Mkhonto Global Capital',
+      category: 'Enterprise Portal',
+      problem: 'Global human capital firm needed an authoritative digital footprint with streamlined consultation discovery and SEO.',
+      solution: 'Designed and deployed a responsive corporate portal with dynamic content sections, optimized assets, and clean accessibility.',
+      description: 'Production enterprise website supporting corporate advisory and human resource consulting operations.',
+      image: 'https://i.ibb.co/8grqP05h/Capture.jpg',
+      tech: ['Enterprise UI', 'Business Logic', 'SEO Optimization'],
+      perf: 100,
+      liveLink: 'https://linda-mkhonto-global-human-capital.vercel.app/',
+      githubLink: 'https://github.com/FrancoBeatz',
+    },
+    {
+      title: 'Tracy Mashishi Portfolio',
+      category: 'Client Branding',
+      problem: 'Client needed an elite personal brand showcase with fast page loads and elegant mobile responsiveness.',
+      solution: 'Engineered bespoke UI typography hierarchy, optimized image delivery, and smooth client inquiry flows.',
+      description: 'A bespoke personal portfolio built for high conversion and professional distinction.',
+      image: 'https://i.ibb.co/9kjtMfCG/tracy.jpg',
+      tech: ['UX Architecture', 'Performance', 'Mobile-First'],
+      perf: 100,
+      liveLink: 'https://tracymashishi.co.za/',
+      githubLink: 'https://github.com/FrancoBeatz',
+    },
+    {
+      title: 'Kolas Supply Chain',
+      category: 'Logistics Portal',
+      problem: 'Logistics operations suffered from fragmented tracking data across cross-border freight channels.',
+      solution: 'Constructed an integrated tracking dashboard interface with streamlined status telemetry and real-time clarity.',
+      description: 'Cross-border supply chain web portal built to give cargo handlers and clients real-time visibility.',
+      image: 'https://i.ibb.co/pB6LDjZh/1.jpg',
+      tech: ['Data Visualization', 'Node.js', 'Clean Architecture'],
+      perf: 98,
+      liveLink: 'https://kola-s-rat-p-supply.vercel.app/',
+      githubLink: 'https://github.com/FrancoBeatz',
+    },
+    {
+      title: 'Child Care Africa',
+      category: 'NGO Platform',
+      problem: 'Low-bandwidth users in rural African communities faced high abandonment due to bloated humanitarian portals.',
+      solution: 'Redesigned the entire web architecture to under 150KB total payload for near-instant rendering on 2G/3G connections.',
+      description: 'Humanitarian web platform dedicated to child welfare support and social initiative outreach.',
+      image: 'https://i.ibb.co/7dM7xMWX/child-care-africa-netlify-app.png',
+      tech: ['Ultra-Lightweight', 'Accessible UX', 'Global Impact'],
+      perf: 99,
+      liveLink: 'https://child-care-africa.vercel.app/',
+      githubLink: 'https://github.com/FrancoBeatz',
+    },
+  ];
+
+  return (
+    <section id="projects" className="py-28 relative z-10 overflow-hidden">
+      <div className="container mx-auto px-6 space-y-24">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <div className="space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-electric-orange/10 border border-electric-orange/20 text-electric-orange text-xs font-bold uppercase tracking-[0.2em]">
-              <Layers size={14} />
-              <span>Selected Works & Case Studies</span>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+          <div className="space-y-3 max-w-xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric-orange/10 border border-electric-orange/20 text-xs font-mono text-electric-orange">
+              <Code2 className="w-3.5 h-3.5" />
+              <span>PROVEN WORK & DEPLOYMENTS</span>
             </div>
-            <h2 className="text-4xl md:text-6xl font-display font-extrabold leading-tight text-white">
-              Featured <span className="text-electric-orange">Projects</span>
-            </h2>
+            <h3 className="text-3xl md:text-5xl lg:text-6xl font-display font-bold leading-tight text-white">
+              Engineered <span className="text-electric-orange">Products</span> & Systems
+            </h3>
           </div>
-          <p className="text-gray-400 max-w-md text-base leading-relaxed">
-            Real-world systems, e-commerce platforms, custom canvas engines, and business portals engineered for performance and reliability.
+          <p className="text-gray-400 max-w-md text-sm sm:text-base font-light leading-relaxed">
+            Real-world applications delivering measurable speed, elegant interfaces, and resilient code architecture.
           </p>
         </div>
 
-        {/* Filter Controls */}
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          {[
-            { id: 'all', label: 'All Projects (6)' },
-            { id: 'architecture', label: 'Flagship Systems & Engines' },
-            { id: 'website', label: 'Business & Commercial Websites' },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setFilter(tab.id as any)}
-              className={`px-5 py-2.5 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
-                filter === tab.id
-                  ? 'bg-electric-orange text-white shadow-lg shadow-electric-orange/30'
-                  : 'bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
+        {/* Flagship Architectures */}
+        <div>
+          <div className="flex items-center gap-3 mb-8">
+            <span className="h-px flex-1 bg-white/10" />
+            <span className="text-xs font-mono text-electric-orange uppercase tracking-widest px-3 py-1 rounded-full bg-white/5 border border-white/5">
+              Featured Flagship Systems
+            </span>
+            <span className="h-px flex-1 bg-white/10" />
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            {architectures.map((project, idx) => (
+              <ProjectCard key={idx} project={project} featured={true} />
+            ))}
+          </div>
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 gap-10">
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, idx) => {
-              const isExpanded = expandedIndex === idx;
-              return (
-                <motion.div
-                  key={project.title}
-                  layout
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <BorderGlow
-                    borderRadius={36}
-                    backgroundColor="#0a0c12"
-                    colors={project.category === 'architecture' ? ['#f97316', '#fb923c', '#ffffff'] : ['#38bdf8', '#818cf8', '#ffffff']}
-                    className="h-full"
-                  >
-                    <div className="flex flex-col h-full overflow-hidden">
-                      
-                      {/* Project Image & Performance Tag */}
-                      <div className="relative aspect-[16/10] overflow-hidden bg-black group/img">
-                        <img
-                          src={project.image}
-                          alt={project.title}
-                          className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0c12] via-transparent to-black/40" />
+        {/* Business Platforms & Client Portals */}
+        <div>
+          <div className="flex items-center gap-3 mb-8">
+            <span className="h-px flex-1 bg-white/10" />
+            <span className="text-xs font-mono text-sky-400 uppercase tracking-widest px-3 py-1 rounded-full bg-white/5 border border-white/5">
+              Client & Enterprise Web Applications
+            </span>
+            <span className="h-px flex-1 bg-white/10" />
+          </div>
 
-                        {/* Top Badges */}
-                        <div className="absolute top-5 left-5 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/70 backdrop-blur-md border border-white/15 text-xs font-bold font-mono text-white">
-                          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                          <span>{project.perf}% Optimization</span>
-                        </div>
-
-                        <div className="absolute top-5 right-5 px-3 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/15 text-[10px] font-mono font-bold uppercase tracking-wider text-white">
-                          {project.categoryLabel}
-                        </div>
-                      </div>
-
-                      {/* Content Card Body */}
-                      <div className="p-8 md:p-10 space-y-6 flex-1 flex flex-col justify-between">
-                        
-                        <div className="space-y-4">
-                          <div>
-                            <h3 className="text-2xl font-display font-bold text-white group-hover:text-electric-orange transition-colors">
-                              <DecryptedText text={project.title} animateOn="hover" />
-                            </h3>
-                            <p className="text-gray-400 text-sm leading-relaxed mt-2">
-                              {project.description}
-                            </p>
-                          </div>
-
-                          {/* Tech Pills */}
-                          <div className="flex flex-wrap gap-2 pt-1">
-                            {project.tech.map((t) => (
-                              <span
-                                key={t}
-                                className="px-3 py-1 rounded-xl bg-white/5 border border-white/10 text-[11px] font-mono text-gray-300 font-semibold"
-                              >
-                                {t}
-                              </span>
-                            ))}
-                          </div>
-
-                          {/* Problem & Solution Accordion */}
-                          <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 space-y-3">
-                            <div>
-                              <span className="text-[10px] font-mono font-black text-electric-orange uppercase tracking-wider block mb-1">
-                                ⚡ Problem Solved
-                              </span>
-                              <p className="text-xs text-gray-300 leading-relaxed font-light">
-                                {project.problem}
-                              </p>
-                            </div>
-
-                            <div className="pt-2 border-t border-white/5">
-                              <span className="text-[10px] font-mono font-black text-green-400 uppercase tracking-wider block mb-1">
-                                🛠️ Architectural Solution
-                              </span>
-                              <p className="text-xs text-gray-400 leading-relaxed font-light">
-                                {project.solution}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Action Buttons */}
-                        <div className="flex items-center gap-3 pt-6 border-t border-white/10">
-                          <ClickSpark sparkColor="#f97316" className="flex-1">
-                            <a
-                              href={project.liveLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-white text-black font-extrabold text-sm hover:bg-electric-orange hover:text-white transition-all shadow-lg group/btn"
-                            >
-                              <Zap size={16} className="group-hover/btn:animate-pulse" />
-                              <span>Live Preview</span>
-                              <ArrowUpRight size={16} />
-                            </a>
-                          </ClickSpark>
-
-                          <Magnetic strength={0.3}>
-                            <a
-                              href={project.githubLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/5 border border-white/10 hover:border-white/30 text-white hover:text-electric-orange hover:bg-white/10 transition-all"
-                              title="Inspect GitHub Repository"
-                            >
-                              <Code2 size={20} />
-                            </a>
-                          </Magnetic>
-                        </div>
-
-                      </div>
-
-                    </div>
-                  </BorderGlow>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
+          <div className="grid md:grid-cols-2 gap-8">
+            {clientWebsites.map((project, idx) => (
+              <ProjectCard key={idx} project={project} />
+            ))}
+          </div>
         </div>
 
       </div>

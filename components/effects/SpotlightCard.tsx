@@ -13,56 +13,47 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
   spotlightColor = 'rgba(249, 115, 22, 0.15)',
   tiltIntensity = 6,
 }) => {
-  const divRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [coords, setCoords] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [transform, setTransform] = useState('perspective(1000px) rotateX(0deg) rotateY(0deg)');
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!divRef.current) return;
-
-    const rect = divRef.current.getBoundingClientRect();
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
+    setCoords({ x, y });
+    setOpacity(1);
 
-    setPosition({ x, y });
-
-    // Calculate subtle 3D tilt
     if (tiltIntensity > 0) {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-      const rotateX = -((y - centerY) / centerY) * tiltIntensity;
+      const rotateX = ((y - centerY) / centerY) * -tiltIntensity;
       const rotateY = ((x - centerX) / centerX) * tiltIntensity;
-      setTilt({ x: rotateX, y: rotateY });
+      setTransform(`perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.01, 1.01, 1.01)`);
     }
-  };
-
-  const handleMouseEnter = () => {
-    setOpacity(1);
   };
 
   const handleMouseLeave = () => {
     setOpacity(0);
-    setTilt({ x: 0, y: 0 });
+    setTransform('perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)');
   };
 
   return (
     <div
-      ref={divRef}
+      ref={cardRef}
       onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={{
-        transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
-        transition: 'transform 0.15s ease-out',
-      }}
-      className={`relative overflow-hidden ${className}`}
+      className={`relative overflow-hidden transition-transform duration-200 ease-out ${className}`}
+      style={{ transform }}
     >
+      {/* Radial Mouse-following Spotlight Glow */}
       <div
-        className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 z-10"
+        className="pointer-events-none absolute -inset-px transition-opacity duration-300 z-10"
         style={{
           opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 40%)`,
+          background: `radial-gradient(600px circle at ${coords.x}px ${coords.y}px, ${spotlightColor}, transparent 45%)`,
         }}
       />
       {children}

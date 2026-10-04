@@ -14,13 +14,15 @@ interface Particle {
 
 const SplashCursor: React.FC<{
   colorPalette?: string[];
-  particleCount?: number;
 }> = ({
   colorPalette = ['#f97316', '#fb923c', '#fdba74', '#38bdf8', '#ffffff'],
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
+    // Disable on touch devices for maximum performance and battery efficiency
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -39,27 +41,27 @@ const SplashCursor: React.FC<{
       height = canvas.height = window.innerHeight;
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
 
     const spawnParticles = (x: number, y: number, count: number, speedMultiplier = 1) => {
       for (let i = 0; i < count; i++) {
-        if (particles.length > 120) {
+        if (particles.length > 80) {
           particles.shift();
         }
         const angle = Math.random() * Math.PI * 2;
-        const speed = (Math.random() * 2 + 0.5) * speedMultiplier;
-        const size = Math.random() * 3 + 1.2;
+        const speed = (Math.random() * 2 + 0.4) * speedMultiplier;
+        const size = Math.random() * 2.5 + 1;
         const color = colorPalette[Math.floor(Math.random() * colorPalette.length)];
-        const maxLife = Math.random() * 35 + 20;
+        const maxLife = Math.random() * 30 + 18;
 
         particles.push({
-          x: x + (Math.random() - 0.5) * 10,
-          y: y + (Math.random() - 0.5) * 10,
-          vx: Math.cos(angle) * speed + (mouse.x - mouse.prevX) * 0.08,
-          vy: Math.sin(angle) * speed + (mouse.y - mouse.prevY) * 0.08,
+          x: x + (Math.random() - 0.5) * 8,
+          y: y + (Math.random() - 0.5) * 8,
+          vx: Math.cos(angle) * speed + (mouse.x - mouse.prevX) * 0.05,
+          vy: Math.sin(angle) * speed + (mouse.y - mouse.prevY) * 0.05,
           size,
           color,
-          alpha: 0.8,
+          alpha: 0.7,
           life: 0,
           maxLife,
         });
@@ -77,13 +79,13 @@ const SplashCursor: React.FC<{
       const dist = Math.sqrt(dx * dx + dy * dy);
       mouse.speed = dist;
 
-      if (dist > 3) {
-        spawnParticles(mouse.x, mouse.y, Math.min(Math.floor(dist / 4), 4), Math.min(dist * 0.05, 2));
+      if (dist > 4) {
+        spawnParticles(mouse.x, mouse.y, Math.min(Math.floor(dist / 6), 3), Math.min(dist * 0.04, 1.8));
       }
     };
 
     const handleClick = (e: MouseEvent) => {
-      spawnParticles(e.clientX, e.clientY, 16, 3);
+      spawnParticles(e.clientX, e.clientY, 12, 2.5);
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
@@ -92,7 +94,6 @@ const SplashCursor: React.FC<{
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Draw subtle glow connecting lines for nearby active particles
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         p.x += p.vx;
@@ -103,17 +104,16 @@ const SplashCursor: React.FC<{
         p.alpha = Math.max(0, 1 - p.life / p.maxLife);
 
         ctx.save();
-        ctx.globalAlpha = p.alpha * 0.8;
+        ctx.globalAlpha = p.alpha * 0.7;
         ctx.fillStyle = p.color;
-        ctx.shadowBlur = 12;
+        ctx.shadowBlur = 10;
         ctx.shadowColor = p.color;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * (1 - p.life / p.maxLife * 0.4), 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, p.size * (1 - p.life / p.maxLife * 0.3), 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       }
 
-      // Filter out dead particles
       for (let i = particles.length - 1; i >= 0; i--) {
         if (particles[i].life >= particles[i].maxLife || particles[i].alpha <= 0) {
           particles.splice(i, 1);

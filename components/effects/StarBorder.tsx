@@ -14,7 +14,7 @@ const StarBorder: React.FC<StarBorderProps> = ({
   as: Component = 'div',
   className = '',
   color = '#f97316',
-  speed = '6s',
+  speed = '5s',
   children,
   style = {},
   onClick,
@@ -22,19 +22,19 @@ const StarBorder: React.FC<StarBorderProps> = ({
 }) => {
   return (
     <Component
-      className={`relative inline-block overflow-hidden rounded-[2rem] p-[1px] ${className}`}
-      onClick={onClick}
+      className={`relative inline-block overflow-hidden rounded-2xl p-[1.5px] ${className}`}
       style={style}
+      onClick={onClick}
       {...rest}
     >
       <div
-        className="absolute inset-[-100%] aspect-square animate-spin"
+        className="absolute inset-[-100%] animate-[spin_5s_linear_infinite]"
         style={{
+          background: `conic-gradient(from 0deg, transparent 0 340deg, ${color} 360deg)`,
           animationDuration: speed,
-          background: `conic-gradient(from 0deg at 50% 50%, transparent 0%, transparent 60%, ${color} 80%, #ffffff 90%, ${color} 95%, transparent 100%)`,
         }}
       />
-      <div className="relative z-10 w-full h-full rounded-[inherit] bg-[#0c0c0c]">
+      <div className="relative z-10 w-full h-full bg-[#0a0a0c] rounded-[calc(1rem-1.5px)]">
         {children}
       </div>
     </Component>
