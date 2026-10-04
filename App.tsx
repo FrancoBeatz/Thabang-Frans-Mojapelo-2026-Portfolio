@@ -3,7 +3,7 @@ import { Home, User, Cpu, Layers, Award, Rocket, Bot, Mail, FileText } from 'luc
 import { AnimatePresence } from 'motion/react';
 import WelcomeScreen from './components/WelcomeScreen';
 import Navbar from './components/Navbar';
-import VideoBackground from './components/VideoBackground';
+import Background from './components/Background';
 import Hero from './components/Hero';
 import About from './components/About';
 import WhySoftware from './components/WhySoftware';
@@ -87,7 +87,7 @@ const App: React.FC = () => {
       {/* Interactive Liquid / Splash Cursor */}
       <SplashCursor colorPalette={['#f97316', '#fb923c', '#fdba74', '#38bdf8', '#ffffff']} />
       
-      <VideoBackground />
+      <Background />
       <Navbar />
       
       <main className="relative z-10">
