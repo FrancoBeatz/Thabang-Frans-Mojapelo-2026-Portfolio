@@ -76,7 +76,7 @@ const App: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen text-white selection:bg-electric-orange selection:text-white overflow-x-hidden relative bg-[#050608]">
+    <div className="min-h-screen text-white selection:bg-electric-orange selection:text-white overflow-x-hidden relative bg-transparent">
       {/* 5-Second Warm Welcome / Cinematic Entrance Experience */}
       <AnimatePresence mode="wait">
         {showWelcome && (
