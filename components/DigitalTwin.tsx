@@ -9,11 +9,11 @@ import {
   Terminal, 
   Phone, 
   Mail, 
-  ExternalLink,
-  FileText,
-  Sparkle,
-  Zap,
-  CornerDownLeft
+  ExternalLink, 
+  FileText, 
+  Sparkle, 
+  Zap, 
+  CornerDownLeft 
 } from 'lucide-react';
 import BorderGlow from './effects/BorderGlow';
 import DecryptedText from './effects/DecryptedText';
@@ -180,13 +180,13 @@ const DigitalTwin: React.FC = () => {
     if (!showResumeCTA && !showContactCTA && !showProjectCTA) return null;
 
     return (
-      <div className="flex flex-wrap gap-2.5 mt-4 pt-4 border-t border-white/10">
+      <div className="flex flex-wrap gap-2 mt-3 pt-3 border-t border-white/10">
         {showResumeCTA && (
           <button 
             onClick={triggerResumeModal}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-electric-orange/15 border border-electric-orange/30 hover:bg-electric-orange/25 text-electric-orange font-mono text-xs font-semibold transition-all duration-200"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-electric-orange/15 border border-electric-orange/30 hover:bg-electric-orange/25 text-electric-orange font-mono text-xs font-semibold transition-all duration-200 cursor-pointer"
           >
-            <FileText size={13} /> Open Verified CV Modal
+            <FileText size={12} /> Open CV Modal
           </button>
         )}
         {showContactCTA && (
@@ -196,15 +196,15 @@ const DigitalTwin: React.FC = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-green-500/15 border border-green-500/30 hover:bg-green-500/25 text-green-400 font-mono text-xs font-semibold transition-all duration-200"
           >
-            <Phone size={13} /> Chat on WhatsApp
+            <Phone size={12} /> Chat on WhatsApp
           </a>
         )}
         {showProjectCTA && (
           <button 
             onClick={() => scrollToSection('projects')}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-gray-300 font-mono text-xs font-semibold transition-all duration-200"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-gray-300 font-mono text-xs font-semibold transition-all duration-200 cursor-pointer"
           >
-            <ExternalLink size={13} /> View Projects Showcase
+            <ExternalLink size={12} /> View Projects
           </button>
         )}
       </div>
@@ -212,51 +212,51 @@ const DigitalTwin: React.FC = () => {
   };
 
   return (
-    <section id="ai-assistant" className="py-32 relative z-10 border-t border-white/5 overflow-hidden">
+    <section id="ai-assistant" className="py-20 sm:py-28 lg:py-32 relative z-10 border-t border-white/5 overflow-hidden">
       
       {/* Ambient background light */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-electric-orange/5 blur-[180px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[800px] h-[600px] sm:h-[800px] bg-electric-orange/5 blur-[160px] rounded-full pointer-events-none" />
 
-      <div className="container mx-auto px-6 space-y-16">
+      <div className="container mx-auto px-4 sm:px-6 space-y-10 sm:space-y-16">
         
-        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-12 lg:gap-16 items-start">
+        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 sm:gap-12 lg:gap-16 items-start">
           
           {/* Left: Information Intro */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-electric-orange/10 border border-electric-orange/20 text-electric-orange text-xs font-bold uppercase tracking-[0.2em]">
                 <BrainCircuit size={14} className="animate-spin-slow" />
                 <span>Context-Aware AI Assistant</span>
               </div>
               
-              <h2 className="text-4xl md:text-6xl font-display font-extrabold leading-tight text-white">
+              <h2 className="text-3xl xs:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold leading-tight text-white">
                 Interactive <span className="text-electric-orange">Digital Twin</span>
               </h2>
 
-              <p className="text-gray-300 text-base md:text-lg leading-relaxed font-light">
+              <p className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed font-light">
                 Ask multi-layered questions about Thabang’s coding experience, MERN architecture decisions, Scrimba training, and project portfolio. Powered by real-time SSE streaming and Gemini 3.5 Flash.
               </p>
             </div>
 
             {/* Feature Pills */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="p-5 rounded-2xl bg-[#0c0e14] border border-white/5 space-y-1">
-                <div className="text-electric-orange font-bold text-lg flex items-center gap-1.5">
-                  <Zap size={18} /> Real-Time
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="p-4 sm:p-5 rounded-2xl bg-[#0c0e14] border border-white/5 space-y-1">
+                <div className="text-electric-orange font-bold text-base sm:text-lg flex items-center gap-1.5">
+                  <Zap size={16} /> Real-Time
                 </div>
-                <div className="text-[11px] font-mono text-gray-400">SSE Word-by-Word Streaming</div>
+                <div className="text-[10px] sm:text-[11px] font-mono text-gray-400">SSE Word-by-Word Stream</div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#0c0e14] border border-white/5 space-y-1">
-                <div className="text-white font-bold text-lg flex items-center gap-1.5">
-                  <Sparkles size={18} className="text-yellow-400" /> 100% Context
+              <div className="p-4 sm:p-5 rounded-2xl bg-[#0c0e14] border border-white/5 space-y-1">
+                <div className="text-white font-bold text-base sm:text-lg flex items-center gap-1.5">
+                  <Sparkles size={16} className="text-yellow-400" /> 100% Context
                 </div>
-                <div className="text-[11px] font-mono text-gray-400">Complete Portfolio Knowledge</div>
+                <div className="text-[10px] sm:text-[11px] font-mono text-gray-400">Complete Portfolio Knowledge</div>
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-2">
+            <div className="p-4 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-2 hidden sm:block">
               <div className="text-xs font-mono uppercase text-gray-400 font-bold">Suggested Inquiries:</div>
               <ul className="text-xs text-gray-300 space-y-1.5 font-light">
                 <li>• "How was CreamFlow designed and what makes it performant?"</li>
@@ -269,24 +269,24 @@ const DigitalTwin: React.FC = () => {
 
           {/* Right: Chat Terminal Console with BorderGlow */}
           <BorderGlow
-            borderRadius={32}
+            borderRadius={28}
             backgroundColor="#0a0c12"
             colors={['#f97316', '#38bdf8', '#fb923c']}
           >
-            <div className="flex flex-col h-[600px] bg-[#0c0e14] rounded-[32px] overflow-hidden">
+            <div className="flex flex-col h-[480px] xs:h-[520px] sm:h-[580px] lg:h-[600px] bg-[#0c0e14] rounded-[28px] overflow-hidden">
               
               {/* Header */}
-              <div className="p-4 px-6 bg-[#12151d] border-b border-white/5 flex items-center justify-between">
+              <div className="p-3.5 sm:p-4 px-4 sm:px-6 bg-[#12151d] border-b border-white/5 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-2xl bg-electric-orange flex items-center justify-center text-white shadow-lg shadow-electric-orange/30 relative">
-                    <Bot size={20} />
-                    <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#0c0e14] animate-pulse" />
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-electric-orange flex items-center justify-center text-white shadow-lg shadow-electric-orange/30 relative shrink-0">
+                    <Bot size={18} />
+                    <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#0c0e14] animate-pulse" />
                   </div>
                   <div>
-                    <div className="text-sm font-bold text-white flex items-center gap-1.5">
-                      Thabang_Twin <Sparkle size={12} className="text-electric-orange fill-electric-orange" />
+                    <div className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
+                      Thabang_Twin <Sparkle size={11} className="text-electric-orange fill-electric-orange" />
                     </div>
-                    <div className="text-[10px] font-mono text-gray-400 uppercase tracking-widest">
+                    <div className="text-[9px] sm:text-[10px] font-mono text-gray-400 uppercase tracking-widest">
                       Developer Autonomous Agent
                     </div>
                   </div>
@@ -294,7 +294,7 @@ const DigitalTwin: React.FC = () => {
 
                 <button
                   onClick={clearChat}
-                  className="p-2 text-gray-400 hover:text-red-400 hover:bg-white/5 rounded-xl transition-all"
+                  className="p-2 text-gray-400 hover:text-red-400 hover:bg-white/5 rounded-xl transition-all cursor-pointer"
                   title="Reset Conversation"
                   aria-label="Clear chat"
                 >
@@ -303,19 +303,19 @@ const DigitalTwin: React.FC = () => {
               </div>
 
               {/* Messages viewport */}
-              <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-5 bg-[#07080d]">
+              <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-5 bg-[#07080d]">
                 {messages.map((m, i) => (
                   <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`flex items-start gap-3 max-w-[88%] ${m.role === 'user' ? 'flex-row-reverse' : ''}`}>
-                      <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5 ${
+                    <div className={`flex items-start gap-2.5 sm:gap-3 max-w-[92%] sm:max-w-[88%] ${m.role === 'user' ? 'flex-row-reverse' : ''}`}>
+                      <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5 ${
                         m.role === 'user'
                           ? 'bg-electric-orange/20 text-electric-orange border border-electric-orange/30'
                           : 'bg-white/10 text-white'
                       }`}>
-                        {m.role === 'user' ? <User size={15} /> : <Terminal size={15} />}
+                        {m.role === 'user' ? <User size={13} /> : <Terminal size={13} />}
                       </div>
 
-                      <div className={`p-4 rounded-2xl text-xs md:text-sm leading-relaxed shadow-lg ${
+                      <div className={`p-3 sm:p-4 rounded-2xl text-xs sm:text-sm leading-relaxed shadow-lg ${
                         m.role === 'user'
                           ? 'bg-electric-orange text-white font-medium rounded-tr-none'
                           : 'bg-white/[0.03] text-gray-200 border border-white/5 rounded-tl-none whitespace-pre-wrap'
@@ -329,17 +329,17 @@ const DigitalTwin: React.FC = () => {
 
                 {isTyping && (
                   <div className="flex justify-start">
-                    <div className="flex items-start gap-3 max-w-[85%]">
-                      <div className="w-8 h-8 rounded-xl flex items-center justify-center bg-white/10 text-white shrink-0 mt-0.5">
-                        <Terminal size={15} />
+                    <div className="flex items-start gap-2.5 sm:gap-3 max-w-[88%]">
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center bg-white/10 text-white shrink-0 mt-0.5">
+                        <Terminal size={13} />
                       </div>
-                      <div className="p-3.5 px-5 rounded-2xl bg-white/[0.02] border border-white/5 text-gray-400 font-mono text-xs flex items-center gap-3">
+                      <div className="p-3 sm:p-3.5 px-4 sm:px-5 rounded-2xl bg-white/[0.02] border border-white/5 text-gray-400 font-mono text-xs flex items-center gap-2.5">
                         <div className="flex gap-1">
                           <span className="w-1.5 h-1.5 rounded-full bg-electric-orange animate-bounce" />
                           <span className="w-1.5 h-1.5 rounded-full bg-electric-orange animate-bounce [animation-delay:0.2s]" />
                           <span className="w-1.5 h-1.5 rounded-full bg-electric-orange animate-bounce [animation-delay:0.4s]" />
                         </div>
-                        <span>Synthesizing response stream...</span>
+                        <span className="text-[11px]">Synthesizing response...</span>
                       </div>
                     </div>
                   </div>
@@ -347,13 +347,13 @@ const DigitalTwin: React.FC = () => {
               </div>
 
               {/* Quick Presets Horizontal Bar */}
-              <div className="px-4 py-2 bg-[#0e1118] border-t border-white/5 flex gap-2 overflow-x-auto whitespace-nowrap scrollbar-none">
+              <div className="px-3 sm:px-4 py-2 bg-[#0e1118] border-t border-white/5 flex gap-1.5 sm:gap-2 overflow-x-auto whitespace-nowrap scrollbar-none touch-pan-x">
                 {presetQuestions.map((q, idx) => (
                   <button
                     key={idx}
                     onClick={() => handleSendMessage(q.query)}
                     disabled={isTyping}
-                    className="inline-flex items-center px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 text-xs text-gray-300 transition-colors shrink-0 cursor-pointer disabled:opacity-50"
+                    className="inline-flex items-center px-2.5 sm:px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 text-[11px] sm:text-xs text-gray-300 transition-colors shrink-0 cursor-pointer disabled:opacity-50"
                   >
                     {q.label}
                   </button>
@@ -361,22 +361,23 @@ const DigitalTwin: React.FC = () => {
               </div>
 
               {/* Input bar */}
-              <div className="p-4 bg-[#12151d] border-t border-white/5">
+              <div className="p-3 sm:p-4 bg-[#12151d] border-t border-white/5">
                 <form onSubmit={(e) => handleSendMessage(input, e)} className="relative">
                   <input
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     disabled={isTyping}
-                    placeholder="Ask about Thabang's projects, React skills, backend, or CV..."
-                    className="w-full bg-white/[0.04] rounded-2xl pl-5 pr-14 py-3.5 border border-white/10 text-white placeholder:text-gray-500 text-xs md:text-sm focus:border-electric-orange outline-none transition-all disabled:opacity-50"
+                    placeholder="Ask about projects, React, backend, or CV..."
+                    className="w-full bg-white/[0.04] rounded-2xl pl-4 sm:pl-5 pr-12 sm:pr-14 py-3 sm:py-3.5 border border-white/10 text-white placeholder:text-gray-500 text-xs sm:text-sm focus:border-electric-orange outline-none transition-all disabled:opacity-50"
                   />
                   <button
                     type="submit"
                     disabled={isTyping || !input.trim()}
-                    className="absolute right-2 top-2 w-9 h-9 rounded-xl bg-electric-orange text-white flex items-center justify-center hover:bg-orange-600 disabled:opacity-40 transition-colors"
+                    className="absolute right-1.5 sm:right-2 top-1.5 sm:top-2 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-electric-orange text-white flex items-center justify-center hover:bg-orange-600 disabled:opacity-40 transition-colors cursor-pointer"
+                    aria-label="Send query"
                   >
-                    <CornerDownLeft size={16} />
+                    <CornerDownLeft size={15} />
                   </button>
                 </form>
               </div>

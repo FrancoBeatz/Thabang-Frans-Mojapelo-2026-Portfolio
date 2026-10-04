@@ -6,7 +6,7 @@ const Terminal: React.FC = () => {
   const [history, setHistory] = useState<string[]>([
     "Thabang OS v2026.1 (x86_64-node-production)",
     "System runtime initialized: 100% functional.",
-    "Type 'help' or click quick commands below to inspect developer profile."
+    "Type 'help' or tap quick commands below to inspect developer profile."
   ]);
   const [input, setInput] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -58,35 +58,35 @@ const Terminal: React.FC = () => {
   const quickPills = ['bio', 'stack', 'projects', 'certifications', 'contact', 'cv', 'clear'];
 
   return (
-    <section className="py-24 relative z-10 border-t border-white/5 overflow-hidden">
-      <div className="container mx-auto px-6 max-w-4xl space-y-6">
+    <section className="py-16 sm:py-24 relative z-10 border-t border-white/5 overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 max-w-4xl space-y-6">
         
         {/* Terminal Window */}
-        <div className="rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] bg-[#090b10]">
+        <div className="rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] bg-[#090b10]">
           
           {/* Header Bar */}
-          <div className="bg-[#12151d] px-6 py-4 flex items-center justify-between border-b border-white/5">
-            <div className="flex items-center gap-2.5">
-              <TerminalIcon size={16} className="text-electric-orange" />
-              <span className="text-xs font-mono font-bold text-gray-300">
+          <div className="bg-[#12151d] px-4 sm:px-6 py-3.5 flex items-center justify-between border-b border-white/5">
+            <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+              <TerminalIcon size={16} className="text-electric-orange shrink-0" />
+              <span className="text-[11px] sm:text-xs font-mono font-bold text-gray-300 truncate">
                 thabang@developer-node: ~/portfolio
               </span>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-red-500/60" />
-              <span className="w-3 h-3 rounded-full bg-yellow-500/60" />
-              <span className="w-3 h-3 rounded-full bg-green-500/60" />
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+              <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/60" />
+              <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500/60" />
+              <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500/60" />
             </div>
           </div>
 
           {/* Quick command buttons */}
-          <div className="px-6 py-2.5 bg-[#0e1118] border-b border-white/5 flex flex-wrap items-center gap-2">
+          <div className="px-4 sm:px-6 py-2.5 bg-[#0e1118] border-b border-white/5 flex flex-wrap items-center gap-1.5 sm:gap-2">
             <span className="text-[10px] font-mono uppercase text-gray-500 font-bold">Quick Run:</span>
             {quickPills.map((pill) => (
               <button
                 key={pill}
                 onClick={() => executeCommand(pill)}
-                className="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-electric-orange/20 hover:text-electric-orange hover:border-electric-orange/30 border border-white/5 text-[11px] font-mono text-gray-400 transition-colors cursor-pointer"
+                className="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-electric-orange/20 hover:text-electric-orange hover:border-electric-orange/30 border border-white/5 text-[10px] sm:text-[11px] font-mono text-gray-300 transition-colors cursor-pointer"
               >
                 ${pill}
               </button>
@@ -96,7 +96,7 @@ const Terminal: React.FC = () => {
           {/* Body Log Output */}
           <div
             ref={scrollRef}
-            className="p-6 md:p-8 h-72 overflow-y-auto font-mono text-xs md:text-sm space-y-2 text-emerald-400 bg-[#06070a]"
+            className="p-4 sm:p-6 md:p-8 h-64 sm:h-72 overflow-y-auto font-mono text-xs md:text-sm space-y-2 text-emerald-400 bg-[#06070a]"
           >
             {history.map((line, i) => (
               <div
@@ -115,18 +115,19 @@ const Terminal: React.FC = () => {
           </div>
 
           {/* Input Line */}
-          <form onSubmit={handleSubmit} className="p-4 bg-[#0e1118] border-t border-white/5 flex items-center gap-3">
-            <ChevronRight size={18} className="text-electric-orange shrink-0" />
+          <form onSubmit={handleSubmit} className="p-3 sm:p-4 bg-[#0e1118] border-t border-white/5 flex items-center gap-2 sm:gap-3">
+            <ChevronRight size={16} className="text-electric-orange shrink-0" />
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type 'bio', 'stack', 'projects', 'contact'..."
-              className="w-full bg-transparent text-white font-mono text-xs md:text-sm outline-none placeholder:text-gray-600"
+              className="w-full bg-transparent text-white font-mono text-xs sm:text-sm outline-none placeholder:text-gray-600"
             />
             <button
               type="submit"
-              className="px-3 py-1.5 rounded-lg bg-electric-orange text-white text-xs font-bold font-mono hover:bg-orange-600 transition-colors shrink-0"
+              className="px-3 py-1.5 rounded-lg bg-electric-orange text-white text-xs font-bold font-mono hover:bg-orange-600 transition-colors shrink-0 cursor-pointer flex items-center justify-center min-w-[36px] min-h-[36px]"
+              aria-label="Execute command"
             >
               <CornerDownLeft size={14} />
             </button>

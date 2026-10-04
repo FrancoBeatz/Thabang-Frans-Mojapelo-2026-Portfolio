@@ -1,12 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <link rel="icon" type="image/png" href="https://i.ibb.co/Vc26YYXx/71fbabe1-d110-4701-81d9-f7062408f93f.png">
-    <title>Thabang Frans Mojapelo | Software Developer & Architect</title>
-    <meta name="description" content="Professional portfolio of Thabang Frans Mojapelo. Expert in high-performance React architectures, Node.js systems, and enterprise-grade software engineering.">
+    <title>Thabang Frans Mojapelo | Pro Software Developer</title>
+    <meta name="description" content="Professional developer portfolio of Thabang Frans Mojapelo. Junior Full-Stack Developer specializing in high-performance React applications, Node.js REST APIs, and MongoDB architectures.">
+    
+    <!-- OpenGraph / Social Share Meta -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Thabang Frans Mojapelo | Pro Software Developer">
+    <meta property="og:description" content="Junior Full-Stack Developer specializing in high-performance React applications, Node.js REST APIs, and MongoDB architectures.">
+    <meta property="og:image" content="https://i.ibb.co/Vc26YYXx/71fbabe1-d110-4701-81d9-f7062408f93f.png">
+
     <script>
       // Polyfill 'process' for browser environment
       window.process = window.process || { env: {} };
@@ -30,10 +36,14 @@
               heading: ['Poppins', 'sans-serif'],
               display: ['Space+Grotesk', 'sans-serif'],
             },
+            screens: {
+              'xs': '375px',
+            },
             animation: {
               'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
               'glow-line': 'glow-line 3s linear infinite',
               'float': 'float 6s ease-in-out infinite',
+              'spin-slow': 'spin 12s linear infinite',
             },
             keyframes: {
               'glow-line': {
@@ -50,14 +60,29 @@
       }
     </script>
     <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
       body {
         background-color: #050505;
         color: #ffffff;
         font-family: 'Inter', sans-serif;
         overflow-x: hidden;
+        min-width: 320px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
       [id] {
-        scroll-margin-top: 100px;
+        scroll-margin-top: 90px;
+      }
+      @media (max-width: 640px) {
+        [id] {
+          scroll-margin-top: 75px;
+        }
       }
       .glass-nav {
         background: rgba(5, 5, 5, 0.85);
@@ -78,12 +103,13 @@
       }
       ::-webkit-scrollbar {
         width: 6px;
+        height: 6px;
       }
       ::-webkit-scrollbar-track {
         background: #050505;
       }
       ::-webkit-scrollbar-thumb {
-        background: #222;
+        background: #262626;
         border-radius: 10px;
       }
       ::-webkit-scrollbar-thumb:hover {
@@ -95,9 +121,14 @@
         left: 0;
         height: 2px;
         background: #f97316;
-        z-index: 100;
+        z-index: 100000;
         width: 0%;
         transition: width 0.1s ease-out;
+        pointer-events: none;
+      }
+      /* Prevent mobile tap delay */
+      button, a, input, textarea {
+        touch-action: manipulation;
       }
     </style>
 </head>
@@ -109,9 +140,12 @@
       window.addEventListener('scroll', () => {
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
-        document.getElementById('scroll-progress').style.width = scrolled + '%';
-      });
+        if (height > 0) {
+          const scrolled = (winScroll / height) * 100;
+          const prog = document.getElementById('scroll-progress');
+          if (prog) prog.style.width = Math.min(100, Math.max(0, scrolled)) + '%';
+        }
+      }, { passive: true });
     </script>
 </body>
 </html>

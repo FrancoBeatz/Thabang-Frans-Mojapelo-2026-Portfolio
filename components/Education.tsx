@@ -6,8 +6,6 @@ import DecryptedText from './effects/DecryptedText';
 import SpotlightCard from './effects/SpotlightCard';
 
 const Education: React.FC = () => {
-  const [selectedCert, setSelectedCert] = useState<'scrimba' | 'fcc' | null>(null);
-
   const credentials = [
     {
       id: 'scrimba',
@@ -40,41 +38,41 @@ const Education: React.FC = () => {
   ];
 
   return (
-    <section id="education" className="py-32 relative z-10 border-t border-white/5 overflow-hidden">
+    <section id="education" className="py-20 sm:py-28 lg:py-32 relative z-10 border-t border-white/5 overflow-hidden">
       
       {/* Background glow */}
-      <div className="absolute top-1/2 right-[-10%] w-[500px] h-[500px] bg-electric-orange/5 blur-[160px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 right-[-10%] w-[400px] sm:w-[500px] h-[400px] sm:h-[500px] bg-electric-orange/5 blur-[160px] rounded-full pointer-events-none" />
 
-      <div className="container mx-auto px-6 space-y-16">
+      <div className="container mx-auto px-4 sm:px-6 space-y-10 sm:space-y-16">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <div className="space-y-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8">
+          <div className="space-y-3 sm:space-y-4">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-electric-orange/10 border border-electric-orange/20 text-electric-orange text-xs font-bold uppercase tracking-[0.2em]">
               <Award size={14} />
               <span>Verified Credentials & Learning</span>
             </div>
-            <h2 className="text-4xl md:text-6xl font-display font-extrabold leading-tight text-white">
+            <h2 className="text-3xl xs:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold leading-tight text-white">
               Education & <span className="text-electric-orange">Certifications</span>
             </h2>
           </div>
-          <p className="text-gray-400 max-w-md text-base leading-relaxed">
+          <p className="text-gray-400 max-w-md text-xs sm:text-sm md:text-base leading-relaxed">
             Hands-on technical development curriculum validated through rigorous algorithmic coursework and project certifications.
           </p>
         </div>
 
         {/* Credentials Grid */}
-        <div className="grid md:grid-cols-2 gap-10">
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-10">
           {credentials.map((item) => (
             <SpotlightCard
               key={item.id}
               tiltIntensity={5}
               spotlightColor="rgba(249, 115, 22, 0.18)"
-              className="rounded-[2.5rem] h-full"
+              className="rounded-[2rem] sm:rounded-[2.5rem] h-full"
             >
-              <div className="p-8 md:p-10 rounded-[2.5rem] bg-[#0c0e14] border border-white/5 space-y-8 flex flex-col justify-between h-full">
+              <div className="p-6 sm:p-8 md:p-10 rounded-[2rem] sm:rounded-[2.5rem] bg-[#0c0e14] border border-white/5 space-y-6 flex flex-col justify-between h-full">
                 
-                <div className="space-y-6">
+                <div className="space-y-4 sm:space-y-6">
                   {/* Top Bar */}
                   <div className="flex items-center justify-between">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-electric-orange/10 text-electric-orange font-mono text-xs font-bold uppercase">
@@ -86,18 +84,18 @@ const Education: React.FC = () => {
 
                   {/* Title & Provider */}
                   <div>
-                    <h3 className="text-2xl md:text-3xl font-display font-bold text-white">
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-white">
                       <DecryptedText text={item.provider} animateOn="hover" />
                     </h3>
-                    <div className="text-sm font-semibold text-electric-orange mt-1">{item.role}</div>
-                    <div className="text-xs text-gray-400 font-mono mt-0.5">{item.focus}</div>
+                    <div className="text-xs sm:text-sm font-semibold text-electric-orange mt-1">{item.role}</div>
+                    <div className="text-[11px] sm:text-xs text-gray-400 font-mono mt-0.5">{item.focus}</div>
                   </div>
 
-                  <p className="text-gray-300 text-sm leading-relaxed font-light">
+                  <p className="text-gray-300 text-xs sm:text-sm leading-relaxed font-light">
                     {item.description}
                   </p>
 
-                  <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 space-y-2 text-xs font-mono">
+                  <div className="p-3.5 sm:p-4 rounded-2xl bg-white/[0.02] border border-white/5 space-y-1.5 text-xs font-mono">
                     <div className="flex justify-between text-gray-400">
                       <span>Curriculum Load:</span>
                       <span className="text-white font-bold">{item.hours}</span>
@@ -110,14 +108,15 @@ const Education: React.FC = () => {
                 </div>
 
                 {/* Actions */}
-                <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-white/5">
+                <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-4 border-t border-white/5">
                   <button
                     onClick={() => {
                       window.dispatchEvent(new CustomEvent('open-resume-modal'));
                     }}
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-xs hover:bg-electric-orange hover:border-electric-orange transition-all duration-300"
+                    className="flex-1 min-w-[140px] inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-xs hover:bg-electric-orange hover:border-electric-orange transition-all duration-200 cursor-pointer"
                   >
-                    <FileText size={14} /> View Certificate Modal
+                    <FileText size={14} />
+                    <span>View Certificate</span>
                   </button>
 
                   {item.link && (
@@ -125,7 +124,7 @@ const Education: React.FC = () => {
                       href={item.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 font-bold text-xs hover:bg-green-500/20 transition-all duration-300"
+                      className="inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 font-bold text-xs hover:bg-green-500/20 transition-all duration-200"
                     >
                       <span>Online Verify</span>
                       <ExternalLink size={13} />

@@ -128,33 +128,33 @@ const App: React.FC = () => {
         <Testimonials />
         
         {/* Strong Final Call to Action */}
-        <section className="py-32 relative overflow-hidden border-t border-white/5">
+        <section className="py-20 sm:py-28 lg:py-32 relative overflow-hidden border-t border-white/5">
           <div className="absolute inset-0 opacity-15 pointer-events-none">
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-electric-orange/20 via-transparent to-transparent" />
           </div>
           
-          <div className="container mx-auto px-6 text-center relative z-10 space-y-10 max-w-4xl mx-auto">
+          <div className="container mx-auto px-4 sm:px-6 text-center relative z-10 space-y-6 sm:space-y-10 max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-electric-orange/10 border border-electric-orange/20 text-electric-orange text-xs font-bold uppercase tracking-[0.2em]">
               <span>Let's Collaborate</span>
             </div>
 
-            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-display font-extrabold leading-[1.1] text-white">
+            <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-extrabold leading-[1.1] text-white">
               Have an Idea? <br /> I’ll <span className="text-electric-orange">Engineer</span> It Into Reality.
             </h2>
 
-            <p className="text-gray-400 text-base sm:text-lg max-w-xl mx-auto leading-relaxed font-light">
+            <p className="text-gray-400 text-xs sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed font-light">
               Available for junior software developer opportunities, contract engagements, and custom full-stack solutions.
             </p>
 
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-5 pt-2">
-              <Magnetic strength={0.35}>
-                <ClickSpark sparkColor="#f97316">
-                  <StarBorder speed="4s" color="#f97316" className="rounded-2xl">
+            <div className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 sm:gap-5 pt-2 max-w-md sm:max-w-none mx-auto">
+              <Magnetic strength={0.35} className="w-full sm:w-auto">
+                <ClickSpark sparkColor="#f97316" className="w-full sm:w-auto">
+                  <StarBorder speed="4s" color="#f97316" className="rounded-2xl w-full sm:w-auto">
                     <a 
                       href="https://wa.me/27723481158"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block px-10 py-5 bg-electric-orange text-white font-extrabold text-base rounded-2xl hover:bg-orange-600 transition-all duration-300 shadow-xl shadow-electric-orange/30"
+                      className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-10 py-4 sm:py-5 bg-electric-orange text-white font-extrabold text-xs sm:text-base rounded-2xl hover:bg-orange-600 transition-all duration-300 shadow-xl shadow-electric-orange/30"
                     >
                       <DecryptedText text="Let’s Build Something Serious" animateOn="hover" />
                     </a>
@@ -162,11 +162,11 @@ const App: React.FC = () => {
                 </ClickSpark>
               </Magnetic>
 
-              <Magnetic strength={0.35}>
-                <ClickSpark sparkColor="#38bdf8">
+              <Magnetic strength={0.35} className="w-full sm:w-auto">
+                <ClickSpark sparkColor="#38bdf8" className="w-full sm:w-auto">
                   <button 
                     onClick={() => setIsResumeOpen(true)}
-                    className="inline-block px-10 py-5 bg-white/5 border border-white/10 text-white font-bold text-base rounded-2xl hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+                    className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-10 py-4 sm:py-5 bg-white/5 border border-white/10 text-white font-bold text-xs sm:text-base rounded-2xl hover:bg-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer"
                   >
                     Download Resume
                   </button>
