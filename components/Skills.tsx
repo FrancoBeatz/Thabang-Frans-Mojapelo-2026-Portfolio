@@ -284,7 +284,7 @@ bus.on('deploy:success', (payload) => {
             </div>
 
             {/* Code Selector Pills */}
-            <div className="flex items-center gap-1.5">
+            <div className="flex flex-wrap items-center gap-1.5">
               {[
                 { id: 'react', label: 'React.tsx' },
                 { id: 'express', label: 'Express.ts' },

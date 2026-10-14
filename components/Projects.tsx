@@ -264,22 +264,22 @@ const Projects: React.FC = () => {
             ))}
           </div>
 
-          <div className="hidden sm:flex items-center gap-1.5 bg-[#0e111a] p-1 rounded-xl border border-white/10">
+          <div className="flex items-center gap-1 bg-[#0e111a] p-1 rounded-xl border border-white/10">
             <button
               onClick={() => setViewMode('stack')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all cursor-pointer ${
+              className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-mono transition-all cursor-pointer ${
                 viewMode === 'stack' ? 'bg-white/10 text-white font-bold' : 'text-gray-400 hover:text-white'
               }`}
             >
-              Stacked View
+              Stacked
             </button>
             <button
               onClick={() => setViewMode('grid')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all cursor-pointer ${
+              className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-mono transition-all cursor-pointer ${
                 viewMode === 'grid' ? 'bg-white/10 text-white font-bold' : 'text-gray-400 hover:text-white'
               }`}
             >
-              Grid View
+              Grid
             </button>
           </div>
         </div>

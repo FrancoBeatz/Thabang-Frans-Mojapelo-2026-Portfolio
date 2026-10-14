@@ -55,7 +55,7 @@ const Dock: React.FC<DockProps> = ({ items, className = '' }) => {
 
   return (
     <div
-      onMouseMove={(e) => mouseX.set(e.pageX)}
+      onMouseMove={(e) => mouseX.set(e.clientX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-end gap-3 px-4 py-3 rounded-3xl bg-black/60 border border-white/15 backdrop-blur-xl shadow-2xl ${className}`}
     >
