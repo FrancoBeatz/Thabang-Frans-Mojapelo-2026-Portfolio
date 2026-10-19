@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   Layout, 
   Database, 
@@ -16,10 +16,12 @@ import {
   Braces
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { gsap, useGSAP, prefersReducedMotion } from '../src/lib/gsap';
 import LogoLoop, { LogoItem } from './effects/LogoLoop';
 import BorderGlow from './effects/BorderGlow';
 import DecryptedText from './effects/DecryptedText';
 import SpotlightCard from './effects/SpotlightCard';
+import GsapButton from './effects/GsapButton';
 
 const Skills: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'all' | 'frontend' | 'backend' | 'tools'>('all');
@@ -147,8 +149,42 @@ bus.on('deploy:success', (payload) => {
     ? skillCategories
     : skillCategories.filter(c => c.id === activeTab);
 
+  const containerRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (!containerRef.current || prefersReducedMotion()) return;
+
+      const headerItems = containerRef.current.querySelectorAll('.gsap-skill-header-item');
+      if (headerItems.length > 0) {
+        gsap.fromTo(
+          headerItems,
+          { opacity: 0, y: 25 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.75,
+            stagger: 0.1,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: 'top 85%',
+              once: true,
+            },
+          }
+        );
+      }
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <section id="skills" className="py-20 sm:py-28 lg:py-32 relative z-10 border-t border-white/5 overflow-hidden">
+    <section
+      ref={containerRef}
+      id="skills"
+      className="py-20 sm:py-28 lg:py-32 relative z-10 border-t border-white/5 overflow-hidden"
+    >
       
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[700px] h-[400px] sm:h-[500px] bg-electric-orange/5 blur-[160px] rounded-full pointer-events-none" />
@@ -157,7 +193,7 @@ bus.on('deploy:success', (payload) => {
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8">
-          <div className="space-y-3 sm:space-y-4">
+          <div className="gsap-skill-header-item space-y-3 sm:space-y-4">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-electric-orange/10 border border-electric-orange/20 text-electric-orange text-xs font-bold uppercase tracking-[0.2em]">
               <Cpu size={14} />
               <span>Technical Stack & Architecture</span>
@@ -166,7 +202,7 @@ bus.on('deploy:success', (payload) => {
               Tools & <span className="text-electric-orange">Technologies</span>
             </h2>
           </div>
-          <p className="text-gray-400 max-w-md text-xs sm:text-sm md:text-base leading-relaxed">
+          <p className="gsap-skill-header-item text-gray-400 max-w-md text-xs sm:text-sm md:text-base leading-relaxed">
             I leverage modern JavaScript, React, Node.js, and MongoDB tools to engineer resilient, high-speed software solutions.
           </p>
         </div>

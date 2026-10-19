@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   ExternalLink, 
   Github, 
@@ -21,12 +21,14 @@ import {
   X
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { gsap, useGSAP, prefersReducedMotion } from '../src/lib/gsap';
 import BorderGlow from './effects/BorderGlow';
 import DecryptedText from './effects/DecryptedText';
 import SpotlightCard from './effects/SpotlightCard';
 import ClickSpark from './effects/ClickSpark';
 import Magnetic from './effects/Magnetic';
 import ScrollStack from './effects/ScrollStack';
+import GsapButton from './effects/GsapButton';
 
 export interface Project {
   title: string;
@@ -212,8 +214,42 @@ const Projects: React.FC = () => {
     ? projects
     : projects.filter(p => p.category === filter);
 
+  const containerRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (!containerRef.current || prefersReducedMotion()) return;
+
+      const headerElements = containerRef.current.querySelectorAll('.gsap-project-header-item');
+      if (headerElements.length > 0) {
+        gsap.fromTo(
+          headerElements,
+          { opacity: 0, y: 25 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.75,
+            stagger: 0.12,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: 'top 85%',
+              once: true,
+            },
+          }
+        );
+      }
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <section id="projects" className="py-20 sm:py-28 lg:py-32 relative z-10 border-t border-white/5 overflow-hidden">
+    <section
+      ref={containerRef}
+      id="projects"
+      className="py-20 sm:py-28 lg:py-32 relative z-10 border-t border-white/5 overflow-hidden"
+    >
       
       {/* Dynamic Lighting */}
       <div className="absolute top-[25%] left-[-10%] w-[600px] h-[600px] bg-electric-orange/5 blur-[170px] rounded-full pointer-events-none" />
@@ -222,7 +258,7 @@ const Projects: React.FC = () => {
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8">
-          <div className="space-y-3 sm:space-y-4">
+          <div className="gsap-project-header-item space-y-3 sm:space-y-4">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-electric-orange/10 border border-electric-orange/20 text-electric-orange text-xs font-bold uppercase tracking-[0.2em]">
               <Layers size={14} />
               <span>Selected Engineering Portfolio</span>
@@ -231,7 +267,7 @@ const Projects: React.FC = () => {
               Featured <span className="text-electric-orange">Projects</span>
             </h2>
           </div>
-          <div className="flex flex-col gap-2 max-w-md">
+          <div className="gsap-project-header-item flex flex-col gap-2 max-w-md">
             <p className="text-gray-400 text-xs sm:text-sm md:text-base leading-relaxed">
               Every system here is engineered for performance, clean architecture, and real business value.
             </p>
@@ -476,22 +512,26 @@ const Projects: React.FC = () => {
                       </div>
 
                       <div className="flex items-center gap-2 pt-4 border-t border-white/5">
-                        <a
-                          href={project.liveLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 py-3 rounded-xl bg-electric-orange text-white text-xs font-bold text-center hover:bg-orange-600 transition-colors flex items-center justify-center gap-1.5"
-                        >
-                          <Zap size={13} />
-                          <span>Live Demo</span>
-                          <ArrowUpRight size={13} />
-                        </a>
-                        <button
-                          onClick={() => setActiveModalProject(project)}
-                          className="px-3.5 py-3 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-gray-300 hover:text-white cursor-pointer"
-                        >
-                          Blueprint
-                        </button>
+                        <GsapButton scaleOnHover={1.03} className="flex-1">
+                          <a
+                            href={project.liveLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full py-3 rounded-xl bg-electric-orange text-white text-xs font-bold text-center hover:bg-orange-600 transition-colors flex items-center justify-center gap-1.5 shadow-md shadow-electric-orange/20"
+                          >
+                            <Zap size={13} />
+                            <span>Live Demo</span>
+                            <ArrowUpRight size={13} />
+                          </a>
+                        </GsapButton>
+                        <GsapButton scaleOnHover={1.03}>
+                          <button
+                            onClick={() => setActiveModalProject(project)}
+                            className="px-3.5 py-3 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-gray-300 hover:text-white cursor-pointer"
+                          >
+                            Blueprint
+                          </button>
+                        </GsapButton>
                       </div>
 
                     </div>

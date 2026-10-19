@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Gauge, ShieldCheck, Accessibility, Search, Smartphone, Cpu, CheckCircle } from 'lucide-react';
+import { gsap, useGSAP, prefersReducedMotion } from '../src/lib/gsap';
 import SpotlightCard from './effects/SpotlightCard';
 import DecryptedText from './effects/DecryptedText';
+import GsapCounter from './effects/GsapCounter';
 
 const DevMetrics: React.FC = () => {
+  const containerRef = useRef<HTMLElement>(null);
+
   const metrics = [
     { label: "Performance", score: 99, sub: "Fast First Paint", icon: <Gauge className="text-emerald-400" size={22} />, color: "bg-emerald-500/10", glow: "rgba(52, 211, 153, 0.2)" },
     { label: "Accessibility", score: 100, sub: "WCAG Compliant", icon: <Accessibility className="text-sky-400" size={22} />, color: "bg-sky-500/10", glow: "rgba(56, 189, 248, 0.2)" },
@@ -11,13 +15,45 @@ const DevMetrics: React.FC = () => {
     { label: "SEO Optimization", score: 100, sub: "Search Ranked", icon: <Search className="text-amber-400" size={22} />, color: "bg-amber-500/10", glow: "rgba(251, 191, 36, 0.2)" },
   ];
 
+  useGSAP(
+    () => {
+      if (!containerRef.current || prefersReducedMotion()) return;
+
+      const cards = containerRef.current.querySelectorAll('.gsap-metric-card');
+      if (cards.length > 0) {
+        gsap.fromTo(
+          cards,
+          { opacity: 0, y: 25, scale: 0.96 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.75,
+            stagger: 0.1,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: 'top 85%',
+              once: true,
+            },
+          }
+        );
+      }
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <section className="py-16 sm:py-24 relative z-10 border-t border-white/5 overflow-hidden">
+    <section
+      ref={containerRef}
+      className="py-16 sm:py-24 relative z-10 border-t border-white/5 overflow-hidden"
+    >
       <div className="container mx-auto px-4 sm:px-6 space-y-8 sm:space-y-12">
         
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {/* Headline box */}
-          <div className="sm:col-span-2">
+          <div className="sm:col-span-2 gsap-metric-card">
             <SpotlightCard
               tiltIntensity={4}
               spotlightColor="rgba(249, 115, 22, 0.15)"
@@ -45,29 +81,30 @@ const DevMetrics: React.FC = () => {
             </SpotlightCard>
           </div>
           
-          {/* Metric cards */}
+          {/* Metric cards with GSAP Animated Counters & Stagger */}
           {metrics.map((m, i) => (
-            <SpotlightCard
-              key={i}
-              tiltIntensity={6}
-              spotlightColor={m.glow}
-              className="rounded-[1.5rem] sm:rounded-[2rem] h-full"
-            >
-              <div className="p-5 sm:p-6 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] bg-[#0c0e14] border border-white/5 flex flex-col items-center justify-center space-y-3 sm:space-y-4 group hover:border-white/15 transition-all h-full text-center">
-                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-2xl ${m.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0`}>
-                  {m.icon}
-                </div>
-                <div className="text-3xl sm:text-4xl md:text-5xl font-display font-black text-white">
-                  {m.score}
-                </div>
-                <div>
-                  <div className="text-xs font-bold text-gray-200 uppercase tracking-wider">
-                    <DecryptedText text={m.label} animateOn="hover" />
+            <div key={i} className="gsap-metric-card">
+              <SpotlightCard
+                tiltIntensity={6}
+                spotlightColor={m.glow}
+                className="rounded-[1.5rem] sm:rounded-[2rem] h-full"
+              >
+                <div className="p-5 sm:p-6 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] bg-[#0c0e14] border border-white/5 flex flex-col items-center justify-center space-y-3 sm:space-y-4 group hover:border-white/15 transition-all h-full text-center">
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-2xl ${m.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0`}>
+                    {m.icon}
                   </div>
-                  <div className="text-[10px] text-gray-500 font-mono mt-0.5">{m.sub}</div>
+                  <div className="text-3xl sm:text-4xl md:text-5xl font-display font-black text-white">
+                    <GsapCounter value={m.score} suffix="%" duration={1.8} />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-gray-200 uppercase tracking-wider">
+                      <DecryptedText text={m.label} animateOn="hover" />
+                    </div>
+                    <div className="text-[10px] text-gray-500 font-mono mt-0.5">{m.sub}</div>
+                  </div>
                 </div>
-              </div>
-            </SpotlightCard>
+              </SpotlightCard>
+            </div>
           ))}
         </div>
 

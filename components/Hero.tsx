@@ -1,20 +1,97 @@
-import React from 'react';
-import { ChevronRight, Sparkles, Terminal, FileText, Bot, ArrowDown, Code, Zap, ShieldCheck } from 'lucide-react';
-import { motion } from 'motion/react';
+import React, { useRef } from 'react';
+import { ChevronRight, FileText, Bot, ArrowDown, Code, Zap, ShieldCheck } from 'lucide-react';
+import { gsap, useGSAP, prefersReducedMotion } from '../src/lib/gsap';
 import RotatingText from './effects/RotatingText';
 import DecryptedText from './effects/DecryptedText';
 import ElectricBorder from './effects/ElectricBorder';
 import SpotlightCard from './effects/SpotlightCard';
 import Magnetic from './effects/Magnetic';
 import ClickSpark from './effects/ClickSpark';
+import GsapButton from './effects/GsapButton';
 
 const Hero: React.FC = () => {
+  const containerRef = useRef<HTMLElement>(null);
+  const hudCardRef = useRef<HTMLDivElement>(null);
+
   const handleOpenResume = () => {
     window.dispatchEvent(new CustomEvent('open-resume-modal'));
   };
 
+  useGSAP(
+    () => {
+      if (!containerRef.current) return;
+
+      if (prefersReducedMotion()) {
+        gsap.set('.gsap-hero-item', { opacity: 1, clearProps: 'all' });
+        return;
+      }
+
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      // Staggered entrance for hero elements
+      tl.fromTo(
+        '.gsap-hero-badge',
+        { opacity: 0, y: -20, scale: 0.95 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.4)' }
+      )
+        .fromTo(
+          '.gsap-hero-title',
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.8 },
+          '-=0.4'
+        )
+        .fromTo(
+          '.gsap-hero-desc',
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.7 },
+          '-=0.5'
+        )
+        .fromTo(
+          '.gsap-hero-metric-item',
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 },
+          '-=0.4'
+        )
+        .fromTo(
+          '.gsap-hero-actions',
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.6, ease: 'back.out(1.2)' },
+          '-=0.3'
+        )
+        .fromTo(
+          hudCardRef.current,
+          { opacity: 0, scale: 0.92, y: 40 },
+          { opacity: 1, scale: 1, y: 0, duration: 0.9, ease: 'power2.out' },
+          '-=0.7'
+        )
+        .fromTo(
+          '.gsap-scroll-indicator',
+          { opacity: 0, y: -10 },
+          { opacity: 1, y: 0, duration: 0.6 },
+          '-=0.2'
+        );
+
+      // Subtle ambient hover floating animation on HUD
+      if (hudCardRef.current) {
+        gsap.to(hudCardRef.current, {
+          y: '-=8',
+          duration: 3.5,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+          delay: 1.2,
+        });
+      }
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <section id="home" className="relative min-h-[92vh] flex items-center pt-24 xs:pt-28 sm:pt-32 lg:pt-36 pb-16 lg:pb-24 overflow-hidden">
+    <section
+      ref={containerRef}
+      id="home"
+      className="relative min-h-[92vh] flex items-center pt-24 xs:pt-28 sm:pt-32 lg:pt-36 pb-16 lg:pb-24 overflow-hidden"
+    >
       {/* Dynamic Ambient Mesh Glows */}
       <div className="absolute top-[15%] right-[5%] -z-10 w-[45vw] h-[45vw] max-w-[550px] max-h-[550px] bg-electric-orange/10 blur-[140px] rounded-full pointer-events-none animate-pulse-slow" />
       <div className="absolute bottom-[10%] left-[5%] -z-10 w-[35vw] h-[35vw] max-w-[450px] max-h-[450px] bg-sky-500/8 blur-[130px] rounded-full pointer-events-none" />
@@ -25,12 +102,7 @@ const Hero: React.FC = () => {
         <div className="space-y-6 sm:space-y-8 relative z-10">
           
           {/* Status Badge with ElectricBorder */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-block max-w-full"
-          >
+          <div className="gsap-hero-badge inline-block max-w-full">
             <ElectricBorder color="#f97316" speed={0.8} chaos={0.08} borderRadius={999}>
               <div className="flex items-center gap-2.5 sm:gap-3 px-3.5 sm:px-5 py-1.5 sm:py-2 bg-[#090b10]/90 rounded-full text-[11px] sm:text-xs font-semibold tracking-wide border border-white/10 backdrop-blur-md">
                 <span className="relative flex h-2 sm:h-2.5 w-2 sm:w-2.5 shrink-0">
@@ -42,16 +114,11 @@ const Hero: React.FC = () => {
                 </span>
               </div>
             </ElectricBorder>
-          </motion.div>
+          </div>
 
           {/* Main Headline */}
           <div className="space-y-3 sm:space-y-4">
-            <motion.h1
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-extrabold leading-[1.1] tracking-tight text-white"
-            >
+            <h1 className="gsap-hero-title text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-extrabold leading-[1.1] tracking-tight text-white">
               I Engineer <br />
               <RotatingText
                 texts={[
@@ -67,97 +134,86 @@ const Hero: React.FC = () => {
               />
               <br />
               That Work. Fast & Reliable.
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-sm xs:text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl leading-relaxed font-light"
-            >
+            <p className="gsap-hero-desc text-sm xs:text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl leading-relaxed font-light">
               Hi, I’m <span className="text-white font-semibold"><DecryptedText text="Thabang Frans Mojapelo" animateOn="hover" className="text-white font-bold" /></span>. 
               I build production-grade web applications and modern business portals using{' '}
               <span className="text-white font-semibold">React</span>,{' '}
               <span className="text-white font-semibold">Node.js</span>,{' '}
               <span className="text-white font-semibold">Express.js</span>, and{' '}
               <span className="text-white font-semibold">MongoDB</span> with meticulous attention to performance, UX architecture, and clean maintainable code.
-            </motion.p>
+            </p>
           </div>
 
           {/* Quick Metrics Bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="flex flex-wrap items-center gap-3 sm:gap-6 py-2.5 border-y border-white/10"
-          >
-            <div className="flex items-center gap-2 text-xs font-mono text-gray-300">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-6 py-2.5 border-y border-white/10">
+            <div className="gsap-hero-metric-item flex items-center gap-2 text-xs font-mono text-gray-300">
               <Zap size={14} className="text-electric-orange shrink-0" />
               <span>100% Perf Audits</span>
             </div>
-            <div className="flex items-center gap-2 text-xs font-mono text-gray-300">
+            <div className="gsap-hero-metric-item flex items-center gap-2 text-xs font-mono text-gray-300">
               <Code size={14} className="text-blue-400 shrink-0" />
               <span>Full-Stack MERN Architecture</span>
             </div>
-            <div className="flex items-center gap-2 text-xs font-mono text-gray-300">
+            <div className="gsap-hero-metric-item flex items-center gap-2 text-xs font-mono text-gray-300">
               <ShieldCheck size={14} className="text-green-400 shrink-0" />
               <span>Verified Scrimba & FCC</span>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Action Triggers */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="flex flex-wrap items-stretch sm:items-center gap-3 pt-1"
-          >
+          {/* Action Triggers with GSAP interactive button physics */}
+          <div className="gsap-hero-actions flex flex-wrap items-stretch sm:items-center gap-3 pt-1">
             <Magnetic strength={0.3} className="w-full sm:w-auto">
               <ClickSpark sparkColor="#f97316" className="w-full sm:w-auto">
-                <a
-                  href="#projects"
-                  className="w-full sm:w-auto group flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 bg-white text-black font-extrabold text-sm rounded-2xl hover:bg-electric-orange hover:text-white transition-all duration-300 shadow-xl hover:shadow-[0_0_35px_rgba(249,115,22,0.4)]"
-                >
-                  <span>🚀 Explore Projects</span>
-                  <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                </a>
+                <GsapButton scaleOnHover={1.04} className="w-full sm:w-auto">
+                  <a
+                    href="#projects"
+                    className="w-full sm:w-auto group flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 bg-white text-black font-extrabold text-sm rounded-2xl hover:bg-electric-orange hover:text-white transition-all duration-300 shadow-xl hover:shadow-[0_0_35px_rgba(249,115,22,0.4)]"
+                  >
+                    <span>🚀 Explore Projects</span>
+                    <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  </a>
+                </GsapButton>
               </ClickSpark>
             </Magnetic>
 
             <div className="flex gap-2.5 w-full sm:w-auto">
               <Magnetic strength={0.3} className="flex-1 sm:flex-none">
                 <ClickSpark sparkColor="#38bdf8" className="w-full">
-                  <a
-                    href="#ai-assistant"
-                    className="w-full inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3.5 sm:py-4 bg-white/5 border border-white/10 text-white font-bold text-xs sm:text-sm rounded-2xl hover:border-electric-orange/50 hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
-                  >
-                    <Bot size={16} className="text-electric-orange" />
-                    <span>Chat AI Twin</span>
-                  </a>
+                  <GsapButton scaleOnHover={1.03} className="w-full">
+                    <a
+                      href="#ai-assistant"
+                      className="w-full inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3.5 sm:py-4 bg-white/5 border border-white/10 text-white font-bold text-xs sm:text-sm rounded-2xl hover:border-electric-orange/50 hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
+                    >
+                      <Bot size={16} className="text-electric-orange" />
+                      <span>Chat AI Twin</span>
+                    </a>
+                  </GsapButton>
                 </ClickSpark>
               </Magnetic>
 
               <Magnetic strength={0.3} className="flex-1 sm:flex-none">
                 <ClickSpark sparkColor="#a855f7" className="w-full">
-                  <button
-                    onClick={handleOpenResume}
-                    className="w-full inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3.5 sm:py-4 bg-white/5 border border-white/10 text-gray-300 hover:text-white font-bold text-xs sm:text-sm rounded-2xl hover:bg-white/10 transition-all duration-300 cursor-pointer"
-                  >
-                    <FileText size={16} className="text-purple-400" />
-                    <span>Download CV</span>
-                  </button>
+                  <GsapButton scaleOnHover={1.03} className="w-full">
+                    <button
+                      onClick={handleOpenResume}
+                      className="w-full inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3.5 sm:py-4 bg-white/5 border border-white/10 text-gray-300 hover:text-white font-bold text-xs sm:text-sm rounded-2xl hover:bg-white/10 transition-all duration-300 cursor-pointer"
+                    >
+                      <FileText size={16} className="text-purple-400" />
+                      <span>Download CV</span>
+                    </button>
+                  </GsapButton>
                 </ClickSpark>
               </Magnetic>
             </div>
-          </motion.div>
+          </div>
 
         </div>
 
-        {/* Right Column: Interactive Developer Telemetry HUD */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.2 }}
+        {/* Right Column: Interactive Developer Telemetry HUD with GSAP floating effect */}
+        <div
+          ref={hudCardRef}
           className="relative max-w-sm sm:max-w-md mx-auto lg:max-w-none w-full"
         >
           <SpotlightCard
@@ -213,23 +269,20 @@ const Hero: React.FC = () => {
 
             </div>
           </SpotlightCard>
-        </motion.div>
+        </div>
 
       </div>
 
-      {/* Scroll Down Prompt */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 1 }}
-        className="absolute bottom-3 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-1.5 text-gray-500 hover:text-white transition-colors cursor-pointer"
+      {/* Scroll Down Prompt with GSAP entrance */}
+      <div
+        className="gsap-scroll-indicator absolute bottom-3 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-1.5 text-gray-500 hover:text-white transition-colors cursor-pointer"
         onClick={() => {
           document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
         }}
       >
         <span className="text-[9px] uppercase tracking-[0.3em] font-mono">Scroll to explore</span>
         <ArrowDown size={14} className="animate-bounce text-electric-orange" />
-      </motion.div>
+      </div>
     </section>
   );
 };

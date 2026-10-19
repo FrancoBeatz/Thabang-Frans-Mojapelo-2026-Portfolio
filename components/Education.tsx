@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Award, ShieldCheck, Cpu, Database, ExternalLink, FileText, CheckCircle2, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { gsap, useGSAP, prefersReducedMotion } from '../src/lib/gsap';
 import BorderGlow from './effects/BorderGlow';
 import DecryptedText from './effects/DecryptedText';
 import SpotlightCard from './effects/SpotlightCard';
+import GsapButton from './effects/GsapButton';
 
 const Education: React.FC = () => {
   const credentials = [
@@ -37,8 +39,63 @@ const Education: React.FC = () => {
     }
   ];
 
+  const containerRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (!containerRef.current || prefersReducedMotion()) return;
+
+      const header = containerRef.current.querySelector('.gsap-edu-header');
+      const cards = containerRef.current.querySelectorAll('.gsap-edu-card');
+
+      if (header) {
+        gsap.fromTo(
+          header,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: header,
+              start: 'top 85%',
+              once: true,
+            },
+          }
+        );
+      }
+
+      if (cards.length > 0) {
+        gsap.fromTo(
+          cards,
+          { opacity: 0, y: 35 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.85,
+            stagger: 0.16,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: cards[0],
+              start: 'top 80%',
+              once: true,
+            },
+          }
+        );
+      }
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <section id="education" className="py-20 sm:py-28 lg:py-32 relative z-10 border-t border-white/5 overflow-hidden">
+    <section
+      ref={containerRef}
+      id="education"
+      className="py-20 sm:py-28 lg:py-32 relative z-10 border-t border-white/5 overflow-hidden"
+    >
       
       {/* Background glow */}
       <div className="absolute top-1/2 right-[-10%] w-[400px] sm:w-[500px] h-[400px] sm:h-[500px] bg-electric-orange/5 blur-[160px] rounded-full pointer-events-none" />
@@ -46,7 +103,7 @@ const Education: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 space-y-10 sm:space-y-16">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8">
+        <div className="gsap-edu-header flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8">
           <div className="space-y-3 sm:space-y-4">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-electric-orange/10 border border-electric-orange/20 text-electric-orange text-xs font-bold uppercase tracking-[0.2em]">
               <Award size={14} />
@@ -64,6 +121,7 @@ const Education: React.FC = () => {
         {/* Credentials Grid */}
         <div className="grid md:grid-cols-2 gap-6 sm:gap-10">
           {credentials.map((item) => (
+            <div key={item.id} className="gsap-edu-card h-full">
             <SpotlightCard
               key={item.id}
               tiltIntensity={5}
@@ -109,31 +167,36 @@ const Education: React.FC = () => {
 
                 {/* Actions */}
                 <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-4 border-t border-white/5">
-                  <button
-                    onClick={() => {
-                      window.dispatchEvent(new CustomEvent('open-resume-modal'));
-                    }}
-                    className="flex-1 min-w-[140px] inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-xs hover:bg-electric-orange hover:border-electric-orange transition-all duration-200 cursor-pointer"
-                  >
-                    <FileText size={14} />
-                    <span>View Certificate</span>
-                  </button>
+                  <GsapButton scaleOnHover={1.03} className="flex-1 min-w-[140px]">
+                    <button
+                      onClick={() => {
+                        window.dispatchEvent(new CustomEvent('open-resume-modal'));
+                      }}
+                      className="w-full inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-xs hover:bg-electric-orange hover:border-electric-orange transition-all duration-200 cursor-pointer"
+                    >
+                      <FileText size={14} />
+                      <span>View Certificate</span>
+                    </button>
+                  </GsapButton>
 
                   {item.link && (
-                    <a
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 font-bold text-xs hover:bg-green-500/20 transition-all duration-200"
-                    >
-                      <span>Online Verify</span>
-                      <ExternalLink size={13} />
-                    </a>
+                    <GsapButton scaleOnHover={1.04}>
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 font-bold text-xs hover:bg-green-500/20 transition-all duration-200"
+                      >
+                        <span>Online Verify</span>
+                        <ExternalLink size={13} />
+                      </a>
+                    </GsapButton>
                   )}
                 </div>
 
               </div>
             </SpotlightCard>
+            </div>
           ))}
         </div>
 

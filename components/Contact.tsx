@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle2, MessageSquare, FileText, ArrowUpRight, Sparkles } from 'lucide-react';
+import { gsap, useGSAP, prefersReducedMotion } from '../src/lib/gsap';
 import BorderGlow from './effects/BorderGlow';
 import DecryptedText from './effects/DecryptedText';
 import ClickSpark from './effects/ClickSpark';
 import Magnetic from './effects/Magnetic';
+import GsapButton from './effects/GsapButton';
 
 interface FormData {
   name: string;
@@ -62,8 +64,64 @@ const Contact: React.FC = () => {
     }
   };
 
+  const containerRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (!containerRef.current || prefersReducedMotion()) return;
+
+      const header = containerRef.current.querySelector('.gsap-contact-header');
+      const infoBox = containerRef.current.querySelector('.gsap-contact-info');
+      const formBox = containerRef.current.querySelector('.gsap-contact-form');
+
+      if (header) {
+        gsap.fromTo(
+          header,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: 'top 85%',
+              once: true,
+            },
+          }
+        );
+      }
+
+      if (infoBox && formBox) {
+        gsap.fromTo(
+          [infoBox, formBox],
+          { opacity: 0, y: 35 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.85,
+            stagger: 0.15,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: 'top 80%',
+              once: true,
+            },
+          }
+        );
+      }
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <section id="contact" className="py-20 sm:py-28 lg:py-32 relative z-10 border-t border-white/5 overflow-hidden">
+    <section
+      ref={containerRef}
+      id="contact"
+      className="py-20 sm:py-28 lg:py-32 relative z-10 border-t border-white/5 overflow-hidden"
+    >
       
       {/* Background glow */}
       <div className="absolute top-[20%] right-[-10%] w-[400px] sm:w-[500px] h-[400px] sm:h-[500px] bg-electric-orange/5 blur-[160px] rounded-full pointer-events-none" />
@@ -71,7 +129,7 @@ const Contact: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 space-y-10 sm:space-y-16">
         
         {/* Section Header */}
-        <div className="text-center space-y-3 sm:space-y-4 max-w-3xl mx-auto">
+        <div className="gsap-contact-header text-center space-y-3 sm:space-y-4 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-electric-orange/10 border border-electric-orange/20 text-electric-orange text-xs font-bold uppercase tracking-[0.2em]">
             <MessageSquare size={14} />
             <span>Connect & Inquire</span>
@@ -87,7 +145,7 @@ const Contact: React.FC = () => {
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 sm:gap-12 items-start max-w-6xl mx-auto">
           
           {/* Contact Direct Info */}
-          <div className="space-y-6 sm:space-y-8">
+          <div className="gsap-contact-info space-y-6 sm:space-y-8">
             
             <div className="p-6 sm:p-8 rounded-3xl bg-[#0c0e14] border border-white/5 space-y-6">
               <h3 className="text-lg sm:text-xl font-display font-bold text-white">Direct Communication</h3>
@@ -149,11 +207,12 @@ const Contact: React.FC = () => {
           </div>
 
           {/* Interactive Form Card */}
-          <BorderGlow
-            borderRadius={28}
-            backgroundColor="#0a0c12"
-            colors={['#f97316', '#38bdf8', '#fb923c']}
-          >
+          <div className="gsap-contact-form w-full">
+            <BorderGlow
+              borderRadius={28}
+              backgroundColor="#0a0c12"
+              colors={['#f97316', '#38bdf8', '#fb923c']}
+            >
             <div className="p-6 sm:p-8 md:p-10 space-y-5 sm:space-y-6">
               
               {isSuccess ? (
@@ -222,20 +281,23 @@ const Contact: React.FC = () => {
                   </div>
 
                   <ClickSpark sparkColor="#f97316" className="w-full">
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full py-4 sm:py-4.5 rounded-2xl bg-electric-orange text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider hover:bg-orange-600 transition-all duration-300 shadow-xl shadow-electric-orange/30 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
-                    >
-                      <Send size={15} />
-                      <span>{isSubmitting ? 'Transmitting...' : 'Send Message & Dispatch'}</span>
-                    </button>
+                    <GsapButton scaleOnHover={1.03} className="w-full">
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full py-4 sm:py-4.5 rounded-2xl bg-electric-orange text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider hover:bg-orange-600 transition-all duration-300 shadow-xl shadow-electric-orange/30 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                      >
+                        <Send size={15} />
+                        <span>{isSubmitting ? 'Transmitting...' : 'Send Message & Dispatch'}</span>
+                      </button>
+                    </GsapButton>
                   </ClickSpark>
                 </form>
               )}
 
             </div>
           </BorderGlow>
+          </div>
 
         </div>
 

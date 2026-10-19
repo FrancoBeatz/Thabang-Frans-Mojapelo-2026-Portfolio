@@ -27,6 +27,7 @@ import ClickSpark from './components/effects/ClickSpark';
 import DecryptedText from './components/effects/DecryptedText';
 import Dock, { DockItemData } from './components/effects/Dock';
 import FadeInSection from './components/effects/FadeInSection';
+import GsapButton from './components/effects/GsapButton';
 
 const App: React.FC = () => {
   const [showWelcome, setShowWelcome] = useState(true);
@@ -178,27 +179,31 @@ const App: React.FC = () => {
               <div className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 sm:gap-5 pt-2 max-w-md sm:max-w-none mx-auto">
                 <Magnetic strength={0.35} className="w-full sm:w-auto">
                   <ClickSpark sparkColor="#f97316" className="w-full sm:w-auto">
-                    <StarBorder speed="4s" color="#f97316" className="rounded-2xl w-full sm:w-auto">
-                      <a 
-                        href="https://wa.me/27723481158"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-10 py-4 sm:py-5 bg-electric-orange text-white font-extrabold text-xs sm:text-base rounded-2xl hover:bg-orange-600 transition-all duration-300 shadow-xl shadow-electric-orange/30"
-                      >
-                        <DecryptedText text="Let’s Build Something Serious" animateOn="hover" />
-                      </a>
-                    </StarBorder>
+                    <GsapButton scaleOnHover={1.04} className="w-full sm:w-auto">
+                      <StarBorder speed="4s" color="#f97316" className="rounded-2xl w-full sm:w-auto">
+                        <a 
+                          href="https://wa.me/27723481158"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-10 py-4 sm:py-5 bg-electric-orange text-white font-extrabold text-xs sm:text-base rounded-2xl hover:bg-orange-600 transition-all duration-300 shadow-xl shadow-electric-orange/30"
+                        >
+                          <DecryptedText text="Let’s Build Something Serious" animateOn="hover" />
+                        </a>
+                      </StarBorder>
+                    </GsapButton>
                   </ClickSpark>
                 </Magnetic>
 
                 <Magnetic strength={0.35} className="w-full sm:w-auto">
                   <ClickSpark sparkColor="#38bdf8" className="w-full sm:w-auto">
-                    <button 
-                      onClick={() => setIsResumeOpen(true)}
-                      className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-10 py-4 sm:py-5 bg-white/5 border border-white/10 text-white font-bold text-xs sm:text-base rounded-2xl hover:bg-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer"
-                    >
-                      Download Resume
-                    </button>
+                    <GsapButton scaleOnHover={1.04} className="w-full sm:w-auto">
+                      <button 
+                        onClick={() => setIsResumeOpen(true)}
+                        className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-10 py-4 sm:py-5 bg-white/5 border border-white/10 text-white font-bold text-xs sm:text-base rounded-2xl hover:bg-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer"
+                      >
+                        Download Resume
+                      </button>
+                    </GsapButton>
                   </ClickSpark>
                 </Magnetic>
               </div>

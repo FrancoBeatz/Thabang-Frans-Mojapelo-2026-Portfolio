@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Target, Briefcase, CheckCircle2, Globe, Server, Layers, ArrowUpRight, Zap, Code, ShieldCheck } from 'lucide-react';
 import { motion } from 'motion/react';
+import { gsap, useGSAP, prefersReducedMotion } from '../src/lib/gsap';
 import BorderGlow from './effects/BorderGlow';
 import DecryptedText from './effects/DecryptedText';
 import SpotlightCard from './effects/SpotlightCard';
+import GsapButton from './effects/GsapButton';
 
 const About: React.FC = () => {
   const stats = [
@@ -38,15 +40,130 @@ const About: React.FC = () => {
     "Improved application performance, caching, and server response time."
   ];
 
+  const containerRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (!containerRef.current || prefersReducedMotion()) return;
+
+      const header = containerRef.current.querySelector('.gsap-about-header');
+      const objective = containerRef.current.querySelector('.gsap-about-objective');
+      const experience = containerRef.current.querySelector('.gsap-about-exp');
+      const statCards = containerRef.current.querySelectorAll('.gsap-about-stat');
+      const solutionCards = containerRef.current.querySelectorAll('.gsap-about-solution');
+
+      if (header) {
+        gsap.fromTo(
+          header,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.75,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: header,
+              start: 'top 85%',
+              once: true,
+            },
+          }
+        );
+      }
+
+      if (objective) {
+        gsap.fromTo(
+          objective,
+          { opacity: 0, y: 35, scale: 0.98 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.85,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: objective,
+              start: 'top 85%',
+              once: true,
+            },
+          }
+        );
+      }
+
+      if (experience && statCards.length > 0) {
+        gsap.fromTo(
+          experience,
+          { opacity: 0, x: -30 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: experience,
+              start: 'top 80%',
+              once: true,
+            },
+          }
+        );
+
+        gsap.fromTo(
+          statCards,
+          { opacity: 0, x: 30 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            stagger: 0.12,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: statCards[0],
+              start: 'top 80%',
+              once: true,
+            },
+          }
+        );
+      }
+
+      if (solutionCards.length > 0) {
+        gsap.fromTo(
+          solutionCards,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+            scrollTrigger: {
+              trigger: solutionCards[0],
+              start: 'top 85%',
+              once: true,
+            },
+          }
+        );
+      }
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <section id="about" className="py-20 sm:py-28 lg:py-32 relative z-10 border-t border-white/5 overflow-hidden">
+    <section
+      ref={containerRef}
+      id="about"
+      className="py-20 sm:py-28 lg:py-32 relative z-10 border-t border-white/5 overflow-hidden"
+    >
       {/* Background ambient lighting */}
       <div className="absolute top-[20%] right-[-10%] w-[400px] sm:w-[500px] h-[400px] sm:h-[500px] bg-electric-orange/5 blur-[150px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 space-y-12 sm:space-y-16 lg:space-y-20">
         
         {/* Section Heading */}
-        <div className="text-center space-y-3 sm:space-y-4 max-w-3xl mx-auto">
+        <div className="gsap-about-header text-center space-y-3 sm:space-y-4 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-electric-orange/10 border border-electric-orange/20 text-electric-orange text-xs font-bold uppercase tracking-[0.2em]">
             <Target size={14} />
             <span>Professional Profile</span>
@@ -57,6 +174,7 @@ const About: React.FC = () => {
         </div>
 
         {/* Career Objective Banner with BorderGlow */}
+        <div className="gsap-about-objective">
         <BorderGlow
           borderRadius={28}
           backgroundColor="#0a0c12"
@@ -77,59 +195,63 @@ const About: React.FC = () => {
             </p>
           </div>
         </BorderGlow>
+        </div>
 
         {/* Grid: Professional Experience vs Key Metrics */}
         <div className="grid lg:grid-cols-[1.3fr_0.7fr] gap-6 sm:gap-10 items-start">
           
           {/* Left: Professional Experience Breakdown */}
-          <SpotlightCard
-            tiltIntensity={4}
-            spotlightColor="rgba(249, 115, 22, 0.15)"
-            className="rounded-[2rem] sm:rounded-[2.5rem]"
-          >
-            <div className="p-6 sm:p-8 md:p-10 rounded-[2rem] sm:rounded-[2.5rem] bg-[#0c0e14] border border-white/5 space-y-6 sm:space-y-8 h-full">
-              <div className="flex items-center gap-3.5 sm:gap-4">
-                <div className="p-3 sm:p-3.5 rounded-2xl bg-electric-orange/10 border border-electric-orange/20 text-electric-orange shrink-0">
-                  <Briefcase size={22} />
-                </div>
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-display font-bold text-white">
-                    <DecryptedText text="Professional Experience" animateOn="hover" />
-                  </h3>
-                  <div className="text-[11px] sm:text-xs text-gray-400 font-mono">
-                    Self-Employed / Independent Development Projects (2023 – Present)
+          <div className="gsap-about-exp h-full">
+            <SpotlightCard
+              tiltIntensity={4}
+              spotlightColor="rgba(249, 115, 22, 0.15)"
+              className="rounded-[2rem] sm:rounded-[2.5rem] h-full"
+            >
+              <div className="p-6 sm:p-8 md:p-10 rounded-[2rem] sm:rounded-[2.5rem] bg-[#0c0e14] border border-white/5 space-y-6 sm:space-y-8 h-full">
+                <div className="flex items-center gap-3.5 sm:gap-4">
+                  <div className="p-3 sm:p-3.5 rounded-2xl bg-electric-orange/10 border border-electric-orange/20 text-electric-orange shrink-0">
+                    <Briefcase size={22} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl sm:text-2xl font-display font-bold text-white">
+                      <DecryptedText text="Professional Experience" animateOn="hover" />
+                    </h3>
+                    <div className="text-[11px] sm:text-xs text-gray-400 font-mono">
+                      Self-Employed / Independent Development Projects (2023 – Present)
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="space-y-3 pt-1">
-                {experienceBullets.map((bullet, idx) => (
-                  <div key={idx} className="flex items-start gap-3 text-gray-300 text-xs sm:text-sm md:text-base leading-relaxed">
-                    <CheckCircle2 size={16} className="text-electric-orange shrink-0 mt-1" />
-                    <span>{bullet}</span>
-                  </div>
-                ))}
+                <div className="space-y-3 pt-1">
+                  {experienceBullets.map((bullet, idx) => (
+                    <div key={idx} className="flex items-start gap-3 text-gray-300 text-xs sm:text-sm md:text-base leading-relaxed">
+                      <CheckCircle2 size={16} className="text-electric-orange shrink-0 mt-1" />
+                      <span>{bullet}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          </SpotlightCard>
+            </SpotlightCard>
+          </div>
 
           {/* Right: Key Stats & Positioning */}
           <div className="grid sm:grid-cols-3 lg:grid-cols-1 gap-4 sm:gap-6">
             {stats.map((stat, idx) => (
-              <BorderGlow
-                key={idx}
-                borderRadius={20}
-                backgroundColor="#0b0d13"
-                colors={['#f97316', '#38bdf8', '#ffffff']}
-              >
-                <div className="p-5 sm:p-6 md:p-8 space-y-1 sm:space-y-2 text-center lg:text-left">
-                  <div className="text-3xl sm:text-4xl md:text-5xl font-display font-black text-white">
-                    {stat.value}
+              <div key={idx} className="gsap-about-stat">
+                <BorderGlow
+                  borderRadius={20}
+                  backgroundColor="#0b0d13"
+                  colors={['#f97316', '#38bdf8', '#ffffff']}
+                >
+                  <div className="p-5 sm:p-6 md:p-8 space-y-1 sm:space-y-2 text-center lg:text-left">
+                    <div className="text-3xl sm:text-4xl md:text-5xl font-display font-black text-white">
+                      {stat.value}
+                    </div>
+                    <div className="text-xs sm:text-sm font-bold text-gray-200">{stat.label}</div>
+                    <div className="text-[10px] sm:text-xs text-gray-500 font-mono">{stat.sub}</div>
                   </div>
-                  <div className="text-xs sm:text-sm font-bold text-gray-200">{stat.label}</div>
-                  <div className="text-[10px] sm:text-xs text-gray-500 font-mono">{stat.sub}</div>
-                </div>
-              </BorderGlow>
+                </BorderGlow>
+              </div>
             ))}
           </div>
 
@@ -144,10 +266,11 @@ const About: React.FC = () => {
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
             
             {/* Card 1: Business Websites */}
+            <div className="gsap-about-solution h-full">
             <SpotlightCard
               tiltIntensity={5}
               spotlightColor="rgba(249, 115, 22, 0.18)"
-              className="rounded-[2rem] sm:rounded-[2.5rem]"
+              className="rounded-[2rem] sm:rounded-[2.5rem] h-full"
             >
               <div className="p-6 sm:p-8 md:p-10 rounded-[2rem] sm:rounded-[2.5rem] bg-[#0c0e14] border border-white/5 space-y-5 sm:space-y-6 h-full">
                 <div className="flex items-center gap-3.5 sm:gap-4">
@@ -172,12 +295,14 @@ const About: React.FC = () => {
                 </div>
               </div>
             </SpotlightCard>
+            </div>
 
             {/* Card 2: Full-Stack Web Apps */}
+            <div className="gsap-about-solution h-full">
             <SpotlightCard
               tiltIntensity={5}
               spotlightColor="rgba(56, 189, 248, 0.18)"
-              className="rounded-[2rem] sm:rounded-[2.5rem]"
+              className="rounded-[2rem] sm:rounded-[2.5rem] h-full"
             >
               <div className="p-6 sm:p-8 md:p-10 rounded-[2rem] sm:rounded-[2.5rem] bg-[#0c0e14] border border-white/5 space-y-5 sm:space-y-6 h-full">
                 <div className="flex items-center gap-3.5 sm:gap-4">
@@ -202,6 +327,7 @@ const About: React.FC = () => {
                 </div>
               </div>
             </SpotlightCard>
+            </div>
 
           </div>
         </div>
